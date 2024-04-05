@@ -1,0 +1,53 @@
+.navBarContainer {
+    display: flex;
+    /* flex */
+    flex-shrink: 0;
+    /* shrink-0 */
+    align-items: center;
+    /* items-end */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    background-color: rgb(234, 233, 222);
+    padding: 1rem;
+    /* p-4 */
+    height: 5.25rem;
+    /* h-25 */
+    text-wrap: nowrap;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+@media (min-width: 860px) {
+
+    /* md: */
+    .navBarContainer {
+        height: fit-content;
+        height: 6rem;
+        /* h-52 */
+    }
+
+    .active {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.menuIcon {
+    font-size: 36px;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+@media (max-width: 860px) {
+
+    /* Adjust the max-width value to your desired medium screen breakpoint */
+    .menuIcon {
+        display: flex;
+    }
+}
