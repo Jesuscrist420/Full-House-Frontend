@@ -1,0 +1,17 @@
+.fullHouseLogo{
+    display: none;
+}
+
+.fullHouseLogoMobile{
+    display: flex;
+}
+
+@media (min-width: 860px) { /* md: */
+    .fullHouseLogo{
+        display: flex;
+    }
+    
+    .fullHouseLogoMobile{
+        display: none;
+    }
+}
