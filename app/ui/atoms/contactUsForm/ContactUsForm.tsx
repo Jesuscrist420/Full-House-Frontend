@@ -1,5 +1,5 @@
 'use client'
-import styles from "./contactUsForm.module.scss";
+import styles from "./ContactUsForm.module.scss";
 
 
 const ContactUsForm = () => {
@@ -29,9 +29,9 @@ const ContactUsForm = () => {
 
     return (
         <form className={styles.formContainer} onSubmit={handleSubmit}>
-            <input className={styles.input} type='text' name='name' placeholder='¿Cuál es tu nombre?' />
-            <input className={styles.input} type='email' name='email' placeholder='¿Cuál es tu correo?' />
-            <textarea  className={styles.input} name='message' placeholder='Déjanos saber tu mensaje' />
+            <input required className={styles.input} type='text' name='name' placeholder='¿Cuál es tu nombre?' />
+            <input required className={styles.input} type='email' name='email' placeholder='¿Cuál es tu correo?' />
+            <textarea required className={styles.input} name='message' placeholder='Déjanos saber tu mensaje' />
             <button className={styles.submitButton} type="submit">Enviar</button>
         </form>
     )

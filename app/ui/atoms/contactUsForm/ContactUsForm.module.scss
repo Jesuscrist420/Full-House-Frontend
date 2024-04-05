@@ -1,5 +1,7 @@
 .formContainer{
-    width: 100%;
+    width: 50%;
+    min-width: 330px;
+    margin: auto;
     padding: 1rem;
     display: flex;
     box-sizing: border-box;
@@ -32,7 +34,6 @@
     padding: 5px 15px;
     border-radius: 50px;
     margin: auto;
-    width: 5rem;
     font-size: 18px;
     font-weight: bolder;
     text-align: center;
