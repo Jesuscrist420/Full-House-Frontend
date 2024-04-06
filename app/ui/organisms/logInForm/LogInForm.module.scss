@@ -1,0 +1,79 @@
+.borderBox{
+    box-sizing: border-box;
+}
+
+.logInForm {
+    background-color: rgb(234, 233, 222);;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+.logInFormContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    transition: all 0.6s ease-in-out;
+    z-index: 2;
+}
+
+.logInFormTitle {
+    font-weight: bold;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.logInFormInput {
+    background-color: #eee;
+    border: groove;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.logInFormSpan {
+    font-size: 12px;
+}
+
+.logInFormButton {
+    border-radius: 20px;
+    border: 2px solid rgba(146, 59, 48);
+    background-color: rgba(146, 59, 48);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+.logInFormButton:hover{
+    color: rgba(146, 59, 48);
+    background-color: rgb(234, 233, 222);
+    transition: 0.5s;
+}
+
+.logInFormButton:active {
+    transform: scale(0.95);
+}
+
+.logInFormButton:focus {
+    outline: none;
+}
+
+.formContainer {
+    @extend .borderBox;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
