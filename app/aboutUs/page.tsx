@@ -1,10 +1,6 @@
 import HomeHeader from "../ui/molecules/homeHeader/HomeHeader";
 import PresentationCard from "../ui/molecules/presentationCard/PresentationCard";
 import styles from "./aboutUs.module.scss";
-import juan from "@/public/devs/juan.jpg";
-import xamir from "@/public/devs/xamir.jpg";
-import jesus from "@/public/devs/jesus.jpg";
-
 
 export default function Page() {
     return (
@@ -22,21 +18,21 @@ export default function Page() {
 
                 <div className={styles.presentationCardsContainer}>
                     <PresentationCard
-                        img={juan}
+                        img={"/devs/juan.jpg"}
                         name={"Manuel Perez"}
                         position={"Backend Dev"}
                         github={"https://github.com/"}
                         linkedin={"https://www.linkedin.com/in/juanmperezor"}
                     />
                     <PresentationCard
-                        img={jesus}
+                        img={"/devs/jesus.jpg"}
                         name={"Jesús Quiñones"}
                         position={"Frontend Dev"}
                         github={"https://github.com/Jesuscrist420"}
                         linkedin={"https://www.linkedin.com/in/jesus-q"}
                     />
                     <PresentationCard
-                        img={xamir}
+                        img={"/devs/xamir.jpg"}
                         name={"Xamir Rojas"}
                         position={"Backend Dev"}
                         github={"https://github.com/xerojasga"}
