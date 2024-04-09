@@ -18,7 +18,7 @@ export default function Page() {
 
                 <div className={styles.presentationCardsContainer}>
                     <PresentationCard
-                        img={"/devs/juan.jpg"}
+                        img={"/devs/juan.JPG"}
                         name={"Manuel Perez"}
                         position={"Backend Dev"}
                         github={"https://github.com/"}
@@ -32,7 +32,7 @@ export default function Page() {
                         linkedin={"https://www.linkedin.com/in/jesus-q"}
                     />
                     <PresentationCard
-                        img={"/devs/xamir.jpg"}
+                        img={"/devs/xamir.JPG"}
                         name={"Xamir Rojas"}
                         position={"Backend Dev"}
                         github={"https://github.com/xerojasga"}
