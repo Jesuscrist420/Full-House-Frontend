@@ -4,7 +4,7 @@ import SocialLogosTeam from '../../atoms/socialLogosTeam/SocialLogosTeam';
 import { UrlObject } from 'url';
 
 type PresentationCardProps = {
-    img: StaticImageData;
+    img: string;
     name: string;
     position: string;
     github: string;
