@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import styles from '@/app/home.module.scss';
-import { lato, lusitana } from '@/src/app/ui/fonts';
+import { lato, lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 import HomeHeader from './ui/molecules/homeHeader/HomeHeader';
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import OverlayLeft from '@/src/app/ui/atoms/overlay/OverlayLeft';
-import OverlayRight from '@/src/app/ui/atoms/overlay/OverlayRight';
+import OverlayLeft from '@/app/ui/atoms/overlay/OverlayLeft';
+import OverlayRight from '@/app/ui/atoms/overlay/OverlayRight';
 import styles from '@/app/authentication/authentication.module.scss';
 
 type OverlayProps = {

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import logo from '@/public/logo/Logo-Full-House.jpg';
-import logoMobile from '@/public/logo/Logo-Full-House-Mobile.png';
+import logo from '/public/logo/Logo-Full-House.jpg';
+import logoMobile from '/public/logo/Logo-Full-House-Mobile.png';
 import styles from './fullHouseLogo.module.scss';
 import Link from 'next/link';
 
