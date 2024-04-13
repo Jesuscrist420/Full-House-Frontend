@@ -17,6 +17,8 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        custom: 'rgb(234, 233, 222)',
+        custom2: 'rgba(146, 59, 48)'
       },
     },
     keyframes: {
