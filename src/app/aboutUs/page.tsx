@@ -1,3 +1,4 @@
+import Footer from "../ui/molecules/footer/Footer";
 import HomeHeader from "../ui/molecules/homeHeader/HomeHeader";
 import PresentationCard from "../ui/molecules/presentationCard/PresentationCard";
 import styles from "./aboutUs.module.scss";
@@ -39,8 +40,8 @@ export default function Page() {
                         linkedin={"https://www.linkedin.com/in/xamir-r"}
                     />
                 </div>
-
             </div>
+            <Footer />
         </>
     )
 }
