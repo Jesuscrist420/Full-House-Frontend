@@ -4,7 +4,11 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  DocumentArrowUpIcon,
 } from '@heroicons/react/24/outline';
+
+import { MdOutlineTableBar } from "react-icons/md";
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -15,11 +19,10 @@ import { UrlObject } from 'url';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  {
-    name: 'Invoices',
-    href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
-  },
+  { name: 'Menu', href: '/menu', icon: DocumentArrowUpIcon },
+  { name: 'Empleados', href: '/employees', icon: UserGroupIcon },
+  { name: 'Mesas', href: '/tables', icon: MdOutlineTableBar },
+  { name: 'Facturas', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
 ];
 
@@ -36,12 +39,13 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-custom2 hover:text-custom md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium hover:bg-custom2 hover:text-custom md:flex-none md:justify-start md:p-2 md:px-3',
               {
                 'bg-custom2 text-custom': pathname === link.href,
+                'bg-gray-50' : pathname !== link.href,
               },
             )}          >
-            <LinkIcon className="w-6" />
+            <LinkIcon size={25} className="w-6" />
             <p className="hidden md:block">{link.name}</p>
           </Link>
         );
