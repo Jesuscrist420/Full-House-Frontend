@@ -2,7 +2,7 @@
 
 import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
-import EmptyPage from "@/app/components/molecules/emptyPage/EmptyPage";
+import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import { useState } from "react";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import styles from '@/app/dashboard/dashboard.module.scss';
