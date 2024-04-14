@@ -1,0 +1,21 @@
+.invoicesHeader{
+    position: relative;
+    width: -webkit-fill-available;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    border-bottom: 2px solid rgba(146, 59, 48);
+}
+
+.title{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    font-style: normal;
+    margin: 1em;
+    padding: 0px;
+    color: rgb(26, 39, 50);
+    text-transform: none;
+}

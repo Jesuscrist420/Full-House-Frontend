@@ -19,9 +19,9 @@ import { UrlObject } from 'url';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Menu', href: '/menu', icon: DocumentArrowUpIcon },
-  { name: 'Empleados', href: '/employees', icon: UserGroupIcon },
-  { name: 'Mesas', href: '/tables', icon: MdOutlineTableBar },
+  { name: 'Menu', href: '/dashboard/menu', icon: DocumentArrowUpIcon },
+  { name: 'Empleados', href: '/dashboard/employees', icon: UserGroupIcon },
+  { name: 'Mesas', href: '/dashboard/tables', icon: MdOutlineTableBar },
   { name: 'Facturas', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
 ];
