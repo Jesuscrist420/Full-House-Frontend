@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={styles.html}>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased ${styles.body}`}>
         <main className={styles.mainContent}>
           {children}
         </main>

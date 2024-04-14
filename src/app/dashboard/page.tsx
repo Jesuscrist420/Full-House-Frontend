@@ -3,17 +3,16 @@ import RevenueChart from '@/app/components/dashboard/revenue-chart';
 import LatestInvoices from '@/app/components/dashboard/latest-invoices';
 import { lusitana } from '@/app/components/fonts';
 import { fetchRevenue } from '@/app/lib/data';
-import SettingsHeader from '@/app/components/atoms/settingsHeader/SettingsHeader';
 import SettingsForm from '@/app/components/atoms/settingsForm/SettingsForm';
-
+import CommonHeader from '../components/atoms/commonHeader/CommonHeader';
 
 export default async function Page() {
 
     //const revenue = await fetchRevenue();
 
     return (
-        <main>
-            <SettingsHeader />
+        <>
+            <CommonHeader title='Dashboard' />
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 p-2">
                 <Card title="Collected" value={"totalPaidInvoices"} type="collected" />
                 <Card title="Pending" value={"totalPendingInvoices"} type="pending" />
@@ -25,6 +24,6 @@ export default async function Page() {
                 {/* <RevenueChart revenue={revenue}  /> */}
                 {/* <LatestInvoices latestInvoices={latestInvoices} /> */}
             </div>
-        </main>
+        </>
     );
 }

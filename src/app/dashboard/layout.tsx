@@ -4,7 +4,7 @@ import classNames from 'classnames';
  
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-  const rightPanelStyles = classNames(styles.noScrollbar, "flex-grow p-6 md:overflow-y-auto md:p-6");
+  const rightPanelStyles = classNames(styles.noScrollbar, styles.body,  "flex-grow pb-4 pl-4 pr-4 overflow-auto");
 
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">

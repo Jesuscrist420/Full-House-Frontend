@@ -3,6 +3,11 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+    height: -webkit-fill-available;
+}
+
+.body {
+    height: -webkit-fill-available;
 }
 
 .html::-webkit-scrollbar {
@@ -12,7 +17,8 @@
 .mainContent {
     display: flex;
     /* flex */
-    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
     /* min-h-screen */
     flex-direction: column;
     /* flex-col */

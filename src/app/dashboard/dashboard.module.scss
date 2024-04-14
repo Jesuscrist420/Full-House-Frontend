@@ -1,0 +1,24 @@
+
+.button{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    border-radius: 12px;
+    margin-left: 5px;
+    height: 36px;
+    padding: 8px 16px;
+    text-wrap: nowrap;
+    font-weight: 600;
+    font-style: normal;
+    border: 2px solid rgba(146, 59, 48);
+    transition: ease 0.5s;
+    background: linear-gradient(to left, white 50%, rgb(234, 233, 222) 50%) right;
+    background-size: 200% 100%;
+    line-height: 1.5rem;
+    box-shadow: none;
+}
+
+.button:hover{
+    background-color: white;
+    background-position: left;
+}
