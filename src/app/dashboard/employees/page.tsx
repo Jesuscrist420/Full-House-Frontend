@@ -1,4 +1,4 @@
-import EmployeesHeader from "@/app/ui/atoms/employeesHeader/EmployeesHeader";
+import EmployeesHeader from "@/app/components/atoms/employeesHeader/EmployeesHeader";
 
 const Page = () => {
     return (

@@ -1,10 +1,10 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import styles from '@/app/home.module.scss';
-import { lato, lusitana } from '@/app/ui/fonts';
+import { lato, lusitana } from '@/app/components/fonts';
 import Image from 'next/image';
-import HomeHeader from './ui/molecules/homeHeader/HomeHeader';
-import Footer from './ui/molecules/footer/Footer';
+import HomeHeader from '@/app/components/molecules/homeHeader/HomeHeader';
+import Footer from '@/app/components/molecules/footer/Footer';
 
 export default function Page() {
   return (

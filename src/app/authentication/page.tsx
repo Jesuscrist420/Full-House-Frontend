@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import LogInForm from '@/app/ui/organisms/logInForm/LogInForm';
-import SignUpForm from '@/app/ui/organisms/signUpForm/SignUpForm';
-import Overlay from '@/app/ui/atoms/overlay/Overlay';
+import LogInForm from '@/app/components/organisms/logInForm/LogInForm';
+import SignUpForm from '@/app/components/organisms/signUpForm/SignUpForm';
+import Overlay from '@/app/components/atoms/overlay/Overlay';
 // import {useSession} from "next-auth/react";
 import styles from "./authentication.module.scss";
 import { useRouter } from 'next/navigation';

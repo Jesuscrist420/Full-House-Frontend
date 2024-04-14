@@ -1,6 +1,6 @@
-import Footer from "../ui/molecules/footer/Footer";
-import HomeHeader from "../ui/molecules/homeHeader/HomeHeader";
-import PresentationCard from "../ui/molecules/presentationCard/PresentationCard";
+import Footer from "../components/molecules/footer/Footer";
+import HomeHeader from "../components/molecules/homeHeader/HomeHeader";
+import PresentationCard from "../components/molecules/presentationCard/PresentationCard";
 import styles from "./aboutUs.module.scss";
 
 export default function Page() {

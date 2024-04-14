@@ -1,5 +1,5 @@
-import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+import '@/app/components/global.css';
+import { inter } from '@/app/components/fonts';
 import styles from './home.module.scss';
 
 export default function RootLayout({

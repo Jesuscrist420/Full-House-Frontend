@@ -1,4 +1,4 @@
-import MenuHeader from "@/app/ui/atoms/menuHeader/MenuHeader";
+import MenuHeader from "@/app/components/atoms/menuHeader/MenuHeader";
 
 const Page = () => {
     return (

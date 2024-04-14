@@ -1,7 +1,7 @@
-import ContactUsForm from "../ui/atoms/contactUsForm/ContactUsForm";
-import ContactCardInfo from "../ui/molecules/contactCardInfo/ContactCardInfo";
-import Footer from "../ui/molecules/footer/Footer";
-import HomeHeader from "../ui/molecules/homeHeader/HomeHeader";
+import ContactUsForm from "../components/atoms/contactUsForm/ContactUsForm";
+import ContactCardInfo from "../components/molecules/contactCardInfo/ContactCardInfo";
+import Footer from "../components/molecules/footer/Footer";
+import HomeHeader from "../components/molecules/homeHeader/HomeHeader";
 import styles from "./contactUs.module.scss";
 
 export default function Page() {

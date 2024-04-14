@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import NavLinks from '@/app/ui/atoms/navLinks/navLinks';
-import AcmeLogo from '@/app/ui/acme-logo';
+import NavLinks from '@/app/components/atoms/navLinks/navLinks';
+import AcmeLogo from '@/app/components/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import FullHouseLogo from '../../atoms/logo/fullHouseLogo';
 

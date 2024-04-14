@@ -1,4 +1,4 @@
-import TablesHeader from "@/app/ui/atoms/tablesHeader/TablesHeader";
+import TablesHeader from "@/app/components/atoms/tablesHeader/TablesHeader";
 
 const Page = () => {
     return (
