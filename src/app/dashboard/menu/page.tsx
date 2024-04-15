@@ -1,10 +1,11 @@
 'use client'
 
-import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
-import RightBar from "@/app/components/atoms/rightBar/RightBar";
-import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
-import { useState } from "react";
 import CommonHeaderButton from "@/app/components/atoms/commonHeaderButton/CommonHeaderButton";
+import AddCategoryForm from "@/app/components/molecules/addCategoryForm/AddCategoryForm";
+import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
+import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
+import RightBar from "@/app/components/atoms/rightBar/RightBar";
+import { useState } from "react";
 
 const Page = () => {
 
@@ -30,7 +31,7 @@ const Page = () => {
             </CommonHeader>
             <EmptyPage handleClick={handleAddCategory} emptyPage="Categorías" />
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
-                {/* <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} /> */}
+                <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Producto'>
                 {/* <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} /> */}
