@@ -10,11 +10,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={styles.html}>
-      <body className={`${inter.className} antialiased ${styles.body}`}>
-        <main className={styles.mainContent}>
+      <body className={`${inter.className} antialiased ${styles.body} absolute`}>
+        <main className={`${styles.mainContent} relative`}>
           {children}
         </main>
-        <div className='p-6'>
+        <div className='pb-6 pr-6 pl-6 relative'>
           <Footer />
         </div>
       </body>

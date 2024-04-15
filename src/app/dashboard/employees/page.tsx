@@ -20,7 +20,6 @@ const Page = () => {
                 <CommonHeaderButton text="Empleado" handleClick={handleAddEmployee} />
             </CommonHeader>
             <EmptyPage handleClick={handleAddEmployee} emptyPage="Empleados" />
-            <p>Employees Page</p>
             <RightBar isOpen={addEmployeeIsOpen} setIsOpen={setAddEmployeeIsOpen} title='Crear Empleado'>
                 {/* <AddEmployeeForm setAddEmployeeIsOpen={setAddEmployeeIsOpen} /> */}
             </RightBar>

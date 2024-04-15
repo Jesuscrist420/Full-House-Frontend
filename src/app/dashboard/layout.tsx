@@ -4,11 +4,11 @@ import classNames from 'classnames';
  
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-  const rightPanelStyles = classNames(styles.noScrollbar, styles.body,  "flex-grow pb-4 pl-4 pr-4 overflow-auto");
+  const rightPanelStyles = classNames(styles.noScrollbar, styles.body, styles.pageContainer,"flex-grow pb-4 pl-4 pr-4 overflow-y-auto");
 
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full flex-none md:w-64">
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden relative">
+      <div className="w-full flex-none md:w-64 relative">
         <SideNav />
       </div>
       <div className={rightPanelStyles}>{children}</div>

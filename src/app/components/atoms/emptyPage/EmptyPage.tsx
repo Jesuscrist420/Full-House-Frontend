@@ -7,8 +7,8 @@ type menuEmptyProps = {
     emptyPage: string,
 }
 
-const EmptyPage = ({handleClick, emptyPage}:menuEmptyProps) => {
-    
+const EmptyPage = ({ handleClick, emptyPage }: menuEmptyProps) => {
+
     const containerStyles = classNames(styles.container, 'mt-16 sm:mt-16 md:mt-0')
 
     return (
