@@ -6,6 +6,7 @@ import { lusitana } from '@/app/components/fonts';
 import { InvoicesTableSkeleton } from '@/app/components/skeletons';
 import { Suspense } from 'react';
 import InvoicesHeader from '@/app/components/atoms/invoicesHeader/InvoicesHeader';
+import CommonHeader from '@/app/components/atoms/commonHeader/CommonHeader';
 
 export default async function Page({
     searchParams
@@ -20,7 +21,8 @@ export default async function Page({
     const currentPage = Number(searchParams?.page) || 1;
     return (
         <div className="w-full">
-            <InvoicesHeader />
+            <CommonHeader title='Facturas' >
+            </CommonHeader>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Search invoices..." />
                 <CreateInvoice />
