@@ -1,12 +1,11 @@
-import Pagination from '@/app/components/invoices/pagination';
-import Search from '@/app/components/search';
-import Table from '@/app/components/invoices/table';
-import { CreateInvoice } from '@/app/components/invoices/buttons';
-import { lusitana } from '@/app/components/fonts';
-import { InvoicesTableSkeleton } from '@/app/components/skeletons';
-import { Suspense } from 'react';
-import InvoicesHeader from '@/app/components/atoms/invoicesHeader/InvoicesHeader';
 import CommonHeader from '@/app/components/atoms/commonHeader/CommonHeader';
+import { InvoicesTableSkeleton } from '@/app/components/skeletons';
+import { CreateInvoice } from '@/app/components/invoices/buttons';
+import Pagination from '@/app/components/invoices/pagination';
+import Table from '@/app/components/invoices/table';
+import { lusitana } from '@/app/components/fonts';
+import Search from '@/app/components/search';
+import { Suspense } from 'react';
 
 export default async function Page({
     searchParams
