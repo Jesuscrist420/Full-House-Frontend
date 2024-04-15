@@ -1,13 +1,15 @@
 .header{
     position: relative;
     width: -webkit-fill-available;
-    height: 72px;
+    height: fit-content;
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 20px;
     border-bottom: 2px solid rgba(146, 59, 48);
 }
+
 
 .title{
     font-size: 1.5rem;
@@ -25,4 +27,14 @@
     width: 1px;
     background: rgb(195, 204, 213);
     margin-left: 5px;
+}
+
+@media (max-width: 860px) {
+    /* Adjust the max-width value to your desired medium screen breakpoint */
+    .header {
+        justify-content: center;
+    }
+    .divider {
+        display: none;
+    }
 }
