@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef, type ReactNode } from 'react';
-import styles from './RightBar.module.scss';
 import { IoIosCloseCircle } from "react-icons/io";
+import styles from './RightBar.module.scss';
 
 type rightBarProps = {
     children?: ReactNode,
