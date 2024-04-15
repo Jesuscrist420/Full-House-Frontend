@@ -33,7 +33,7 @@ const Footer = () => {
                 </div>
                 <div className={styles.socialMedia}>
                     <h3 className="text-base font-bold mb-2">Redes:</h3>
-                    <SocialLogosCompany facebook={""} twitter={""} instagram={""} />
+                    <SocialLogosCompany />
                 </div>
             </div>
         </footer>

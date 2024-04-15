@@ -6,7 +6,7 @@ const ContactCardInfo = () => {
         <div className={styles.contactCard}>
             <h1 className={styles.title}>Información de contacto</h1>
             <p>stocked.tables@gmail.com</p>
-            <SocialLogosCompany facebook={""} twitter={""} instagram={""} />
+            <SocialLogosCompany />
         </div>
     )
 }

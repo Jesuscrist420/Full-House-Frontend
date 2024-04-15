@@ -1,6 +1,7 @@
 import '@/app/components/global.css';
 import { inter } from '@/app/components/fonts';
 import styles from './home.module.scss';
+import Footer from './components/molecules/footer/Footer';
 
 export default function RootLayout({
   children,
@@ -13,6 +14,9 @@ export default function RootLayout({
         <main className={styles.mainContent}>
           {children}
         </main>
+        <div className='p-6'>
+          <Footer />
+        </div>
       </body>
     </html>
   );
