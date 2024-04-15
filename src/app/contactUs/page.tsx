@@ -14,7 +14,6 @@ export default function Page() {
                 <ContactUsForm />
                 <ContactCardInfo />
             </div>
-            <Footer />
         </>
     );
 }
