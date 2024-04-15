@@ -4,8 +4,7 @@ import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import { useState } from "react";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import styles from '@/app/dashboard/dashboard.module.scss';
+import CommonHeaderButton from "@/app/components/atoms/commonHeaderButton/CommonHeaderButton";
 
 const Page = () => {
 
@@ -18,10 +17,7 @@ const Page = () => {
     return (
         <>
             <CommonHeader title='Empleados' >
-                <button className={styles.button} onClick={handleAddEmployee}>
-                    <IoMdAddCircleOutline size={20} className='mr-1' />
-                    Empleado
-                </button>
+                <CommonHeaderButton text="Empleado" handleClick={handleAddEmployee} />
             </CommonHeader>
             <EmptyPage handleClick={handleAddEmployee} emptyPage="Empleados" />
             <p>Employees Page</p>

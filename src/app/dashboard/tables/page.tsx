@@ -1,11 +1,10 @@
 'use client'
 
+import CommonHeaderButton from "@/app/components/atoms/commonHeaderButton/CommonHeaderButton";
 import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
-import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
+import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useState } from "react";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import styles from '@/app/dashboard/dashboard.module.scss';
 
 const Page = () => {
 
@@ -18,10 +17,7 @@ const Page = () => {
     return (
         <>
             <CommonHeader title='Mesas'>
-                <button className={styles.button} onClick={handleAddTables}>
-                    <IoMdAddCircleOutline size={20} className='mr-1' />
-                    Mesa
-                </button>
+                <CommonHeaderButton text="Mesa" handleClick={handleAddTables}/>
             </CommonHeader>
             <EmptyPage handleClick={handleAddTables} emptyPage="Mesas" />
             <RightBar isOpen={addTablesIsOpen} setIsOpen={setAddTablesIsOpen} title='Crear Mesa'>

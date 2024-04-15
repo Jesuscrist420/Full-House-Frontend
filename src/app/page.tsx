@@ -24,7 +24,6 @@ export default function Page() {
         </div>
         <HomeImages />
       </div>
-      <Footer />
     </>
   );
 }

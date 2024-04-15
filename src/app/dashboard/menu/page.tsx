@@ -4,8 +4,7 @@ import CommonHeader from "@/app/components/atoms/commonHeader/CommonHeader";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import { useState } from "react";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import styles from '@/app/dashboard/dashboard.module.scss';
+import CommonHeaderButton from "@/app/components/atoms/commonHeaderButton/CommonHeaderButton";
 
 const Page = () => {
 
@@ -26,14 +25,8 @@ const Page = () => {
     return (
         <>
             <CommonHeader title='Menu'>
-                <button className={styles.button} onClick={handleAddCategory}>
-                    <IoMdAddCircleOutline size={20} className='mr-1' />
-                    Categoría
-                </button>
-                <button className={styles.button} onClick={handleAddProduct}>
-                    <IoMdAddCircleOutline size={20} className='mr-1' />
-                    Producto
-                </button>
+                <CommonHeaderButton text='Categoría' handleClick={handleAddCategory} />
+                <CommonHeaderButton text='Producto' handleClick={handleAddProduct} />
             </CommonHeader>
             <EmptyPage handleClick={handleAddCategory} emptyPage="Categorías" />
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
