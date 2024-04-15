@@ -1,10 +1,12 @@
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import styles from '@/app/home.module.scss';
-import { lato, lusitana } from '@/app/components/fonts';
-import Image from 'next/image';
+'use client'
+
 import HomeHeader from '@/app/components/molecules/homeHeader/HomeHeader';
+import HomeImages from './components/atoms/homeImages/HomeImages';
 import Footer from '@/app/components/molecules/footer/Footer';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { lato, lusitana } from '@/app/components/fonts';
+import styles from '@/app/home.module.scss';
+import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -16,30 +18,11 @@ export default function Page() {
             <strong>Bienvenido a FullHouse.</strong> Acabas de encontrar el App perfecta para optimizar{' '}
             tu <strong>Restaurante!</strong>
           </p>
-          <Link
-            href="/authentication"
-            className="flex items-center gap-5 self-start rounded-lg bg-custom2 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+          <Link href="/authentication" className={styles.loginButton} >
+            <span>Comenzar</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <Image
-            src="/hero-desktop.png"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/hero-mobile.png"
-            width={560}
-            height={620}
-            className="block md:hidden"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-        </div>
+        <HomeImages />
       </div>
       <Footer />
     </>

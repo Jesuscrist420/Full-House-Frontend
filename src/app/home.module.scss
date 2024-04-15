@@ -4,6 +4,7 @@
     scrollbar-width: none;
     /* Firefox */
     height: -webkit-fill-available;
+    min-width: 490px;
 }
 
 .body {
@@ -36,4 +37,25 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+}
+
+.loginButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    gap: 5px;
+    color: #ffffff;
+    border: 2px solid rgba(146, 59, 48);
+    background: rgba(146, 59, 48);
+    padding: 5px 15px;
+    border-radius: 50px;
+    min-width: 120px;
+    width: fit-content;
+}
+
+.loginButton:hover {
+    color: rgba(146, 59, 48);
+    background: #ffffff;
 }
