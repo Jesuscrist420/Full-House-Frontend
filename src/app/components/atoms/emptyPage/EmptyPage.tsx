@@ -5,7 +5,7 @@ import Image from 'next/image';
 type menuEmptyProps = {
     handleClick: () => void,
     emptyPage: string,
-    hidden: boolean,
+    hidden?: boolean,
 }
 
 const EmptyPage = ({ handleClick, emptyPage, hidden }: menuEmptyProps) => {

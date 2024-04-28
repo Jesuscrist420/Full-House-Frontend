@@ -8,7 +8,10 @@ import {
 import styles from "./CategoriesAccordion.module.scss";
 
 type categoriesAccordionProps = {
-    categoriesList: {}[],
+    categoriesList: {
+        id: string,
+        name: string,
+    }[],
 }
 
 const CategoriesAccordion = ({ categoriesList }: categoriesAccordionProps) => {
