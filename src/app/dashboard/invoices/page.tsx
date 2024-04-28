@@ -20,8 +20,7 @@ export default async function Page({
     const currentPage = Number(searchParams?.page) || 1;
     return (
         <div className="w-full">
-            <CommonHeader title='Facturas' >
-            </CommonHeader>
+            <CommonHeader title='Facturas' ></CommonHeader>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Search invoices..." />
                 <CreateInvoice />
