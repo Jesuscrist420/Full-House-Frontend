@@ -6,33 +6,43 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 type addCategoryFormProps = {
-    setAddCategoryIsOpen: (val: boolean) => void
+    setAddCategoryIsOpen: (val: boolean) => void,
+    categoriesList: {}[],
 }
 
-const AddCategoryForm = ({setAddCategoryIsOpen}: addCategoryFormProps) => {
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+})
 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+const AddCategoryForm = ({setAddCategoryIsOpen, categoriesList}: addCategoryFormProps) => {
 
     const [categoryName, setCategoryName] = useState('');
 
     const handleAddCategorySubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         // const res = await addCategory(categoryName);
+        categoriesList.push(
+            {
+                id: "656393458e0bb84c89a01fcg",
+                name: categoryName,
+                userId: "653c0608195e0930f96230f7",
+                createdAt: "2023-11-26T18:49:41.082Z",
+                updatedAt: "2023-11-26T18:49:41.082Z"
+            },
+        )
         let data;
 
-        /* if (res.status !== 500) {
-            data = await res.json()
-            if (!res.ok) {
+        if ( /* res.status !== 500 */ true ) {
+            // data = await res.json()
+            if ( /* !res.ok */ false) {
                 void Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -43,7 +53,7 @@ const AddCategoryForm = ({setAddCategoryIsOpen}: addCategoryFormProps) => {
             data = {
                 error: 'Category Already Exists'
             }
-            if (!res.ok) {
+            if (/* !res.ok */ false) {
                 void Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -52,14 +62,14 @@ const AddCategoryForm = ({setAddCategoryIsOpen}: addCategoryFormProps) => {
             }
         }
 
-        if ((res).ok) {
+        if (/* (res).ok */ true) {
             void Toast.fire({
                 icon: 'success',
                 title: 'Category created successfully'
             })
             setCategoryName('');
             setAddCategoryIsOpen(false);
-        } */
+        }
     };
 
     return (

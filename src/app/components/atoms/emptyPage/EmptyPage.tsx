@@ -5,11 +5,14 @@ import Image from 'next/image';
 type menuEmptyProps = {
     handleClick: () => void,
     emptyPage: string,
+    categoriesList: {}[],
 }
 
-const EmptyPage = ({ handleClick, emptyPage }: menuEmptyProps) => {
+const EmptyPage = ({ handleClick, emptyPage, categoriesList }: menuEmptyProps) => {
 
-    const containerStyles = classNames(styles.container, 'mt-16 sm:mt-16 md:mt-0')
+    const containerStyles = classNames(styles.container, 'mt-16 sm:mt-16 md:mt-0', {
+        [styles.hidden]: categoriesList !== null,
+    })
 
     return (
         <div className={containerStyles}>
