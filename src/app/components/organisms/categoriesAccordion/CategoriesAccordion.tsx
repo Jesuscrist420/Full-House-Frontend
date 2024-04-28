@@ -14,7 +14,7 @@ type categoriesAccordionProps = {
 const CategoriesAccordion = ({ categoriesList }: categoriesAccordionProps) => {
     return (
         <Accordion type="single" collapsible className="w-full flex-column px-1 py-2">
-            {categoriesList.map((category) => {
+            {categoriesList?.map((category) => {
                 return (
                     <AccordionItem className={styles.accordionItem} key={category.id} value={category.name}>
                         <AccordionTrigger>{category.name}</AccordionTrigger>

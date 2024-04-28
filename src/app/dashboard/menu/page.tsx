@@ -7,9 +7,9 @@ import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import CategoriesAccordion from "@/app/components/organisms/categoriesAccordion/CategoriesAccordion";
+import ProductForm from "@/app/components/molecules/addProductForm/AddProductForm";
 
 const Page = () => {
-
 
     const [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
     const [addProductIsOpen, setAddProductIsOpen] = useState(false);
@@ -61,12 +61,12 @@ const Page = () => {
                 <CommonHeaderButton text='Categoría' handleClick={handleOpenAddCategory} />
                 <CommonHeaderButton text='Producto' handleClick={handleOpenAddProduct} />
             </CommonHeader>
-            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" categoriesList={categoriesList} />
+            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList.length !== 0} />
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} /* Optional Remove later*/ categoriesList={categoriesList} />
             </RightBar>
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Producto'>
-                {/* <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} /> */}
+                <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
             <RightBar isOpen={editCategoryIsOpen} setIsOpen={setEditCategoryIsOpen} title='Editar Categoría'>
                 {/* <EditCategoryPanel setAddCategoryIsOpen={setAddCategoryIsOpen} setEditCategoryIsOpen={setEditCategoryIsOpen} categoriesList={categoriesList} /> */}
