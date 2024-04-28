@@ -3,7 +3,6 @@ import RevenueChart from '@/app/components/dashboard/revenue-chart';
 import LatestInvoices from '@/app/components/dashboard/latest-invoices';
 import { lusitana } from '@/app/components/fonts';
 import { fetchRevenue } from '@/app/lib/data';
-import SettingsForm from '@/app/components/atoms/settingsForm/SettingsForm';
 import CommonHeader from '../components/atoms/commonHeader/CommonHeader';
 
 export default async function Page() {
@@ -19,7 +18,6 @@ export default async function Page() {
                 <Card title="Total Invoices" value={"numberOfInvoices"} type="invoices" />
                 <Card title="Total Customers" value={"numberOfCustomers"} type="customers" /> 
             </div>
-            <SettingsForm />
             <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
                 {/* <RevenueChart revenue={revenue}  /> */}
                 {/* <LatestInvoices latestInvoices={latestInvoices} /> */}
