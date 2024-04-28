@@ -78,6 +78,7 @@ const AddCategoryForm = ({setAddCategoryIsOpen, categoriesList}: addCategoryForm
             <input 
                 onChange={(e) => { setCategoryName(e.target.value); }} 
                 className={styles.newInput} 
+                value={categoryName}
                 type='text' 
                 placeholder='Nombre de la nueva categoría' 
                 required 

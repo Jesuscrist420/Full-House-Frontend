@@ -1,0 +1,75 @@
+.form{
+    display: contents;
+}
+.newInput{
+    flex: 0 1;
+    width: 100%;
+    color: rgb(26, 39, 50);
+    border-radius: 0.25rem;
+    border: 0.5px solid rgb(135, 153, 171);
+    padding: 8px 16px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    font-style: normal;
+}
+.newTextArea{
+    flex: 1 1;
+    width: 100%;
+    min-height: 120px;
+    max-height: 220px;
+    color: rgb(26, 39, 50);
+    border-radius: 0.25rem;
+    border: 0.5px solid rgb(135, 153, 171);
+    padding: 8px 16px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.selectCategory{
+    text-align: center;
+    padding: 4px 16px;
+    border-radius: 0.25rem;
+    border: 0.5px solid rgb(135, 153, 171);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.newCategorySubmitButton{
+    border-radius: 12px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 48px;
+    padding: 12px 24px;
+    background-color: #743EE5;
+    color: white;
+}
+
+.newCategorySubmitButton:disabled{
+    background-color: rgb(221, 226, 232);
+    color: black;
+}
+
+.goBackButton{
+    border-radius: 12px;
+    box-shadow: none;
+    margin: 0;
+    height: 48px;
+    width: 100%;
+    padding: 12px 24px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(26, 39, 50);
+}
+
+.goBackButton:hover{
+    background-color: ghostwhite;
+}
