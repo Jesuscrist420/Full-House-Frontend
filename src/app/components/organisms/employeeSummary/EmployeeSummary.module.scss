@@ -1,0 +1,115 @@
+.imgContainer{
+    padding: 16px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img{
+    border-radius: 8px;
+    background: rgb(255, 255, 255);
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.infoRow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.infoTitle{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    font-style: normal;
+    margin: 1em;
+    padding: 0px;
+    color: rgb(92, 115, 137);
+    text-transform: none;
+}
+.titleInfoContainer{
+    display: flex;
+    align-items: center;
+    color: rgb(92, 115, 137);
+}
+.infoText{
+    font-size: 0.850rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    font-style: normal;
+    margin: 1em;
+    padding: 0px;
+    color: rgb(26, 39, 50);
+    text-transform: none;
+}
+
+.price{
+    color: rgb(26, 39, 50);
+    margin: 0px 0px 8px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.employeeName{
+    color: rgb(26, 39, 50);
+    font-weight: 600;
+    margin: 0px 0px 4px;
+    text-align: center;
+    word-break: break-word;
+    hyphens: auto;
+    -webkit-line-clamp: 2;
+}
+
+.stock{
+    font-size: small;
+    text-align: center;
+    margin: 0px;
+}
+
+.sectionInfo{
+    margin-top: 16px;
+    padding: 16px;
+    background-color: rgb(243, 245, 247);
+    border: 1px solid rgb(195, 204, 213);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 8px;
+    gap: 16px;
+}
+
+.deleteButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    align-items: center;
+    color: rgb(204, 62, 51);
+    border-color: transparent;
+    background-color: rgb(243, 245, 247);
+    padding: 8px 16px;
+    border-radius: 6px;
+    white-space: nowrap;
+    gap: 8px;
+}
+
+.editButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    align-items: center;
+    color: rgb(26, 39, 50);
+    border-color: transparent;
+    background-color: rgb(243, 245, 247);
+    padding: 8px 16px;
+    border-radius: 6px;
+    white-space: nowrap;
+    gap: 8px;
+}
