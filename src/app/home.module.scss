@@ -30,7 +30,12 @@
     flex-direction: column;
     /* flex-col */
     padding: 1rem;
+    overflow-y: auto;
     /* p-6 */
+}
+
+.mainContent::-webkit-scrollbar{
+    display: none;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .noScrollbar::-webkit-scrollbar {
