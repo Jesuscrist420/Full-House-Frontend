@@ -1,12 +1,38 @@
+import { z } from 'zod'
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
+
+export const SignupFormSchema = z.object({
+  email: z.string().email({ message: 'Email inválido' }).trim(),
+  password: z
+    .string()
+    .min(6, { message: 'Al menos 6 carácteres' })
+    .regex(/[a-zA-Z]/, { message: 'Debe contener al menos una letra.' })
+    .regex(/[0-9]/, { message: 'Debe contener al menos un número.' })
+    .regex(/[^a-zA-Z0-9]/, {
+      message: 'Debe contener un carácter Especial.',
+    })
+    .trim(),
+})
+
+export type FormState =
+  | {
+    errors?: {
+      email?: string[]
+      password?: string[]
+    }
+    message?: string
+  }
+  | undefined
+
 export type User = {
   id: string;
-  name: string;
   email: string;
   password: string;
+  role: string;
+  restaurantId: string;
 };
 
 export type Customer = {
