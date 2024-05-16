@@ -2,36 +2,26 @@
 import React , {useState} from 'react';
 import styles from './LogInForm.module.scss';
 import styles2 from '@/app/authentication/authentication.module.scss';
-//import { loginUser } from '@/services/login.service'
+import { loginUser } from '@/services/login.service'
 import Swal from 'sweetalert2';
 import FullHouseLogo from '../../atoms/logo/fullHouseLogo';
 import classNames from 'classnames';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function LogInForm(): JSX.Element{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+
+    const {data: session, status} = useSession();
 
     const handleSubmit = async(event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        //const res = await loginUser(email , password);
-        /* if ((res).ok){
-            void Toast.fire({
-                icon:'success',
-                title: 'Signed in successfully'
-            })
-        } */
+        try{
+            const res = await loginUser(email , password);
+        }catch(err){
+            return
+        }   
     }
 
     const formStyles = classNames(styles.formContainer, styles2.signInContainer);
