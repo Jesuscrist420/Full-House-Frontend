@@ -12,23 +12,30 @@ const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-    const [error, setError] = useState([]);
+    const [errorsEmail, setErrorsEmail] = useState([]);
+    const [errorsPass, setErrorsPass] = useState([]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        try{
+        try {
             const res = await registerUser(email, password, role);
-        if (res.ok) {
-            setEmail('');
-            setPassword('');
-            setRole('');
-            setError([]);
-        }else{
-            if(res.errors){
-                setError(res.errors.password);
+            console.log('Res: ', res);
+            if (res.ok) {
+                setEmail('');
+                setPassword('');
+                setRole('');
+                setErrorsEmail([]);
+                setErrorsPass([]);
+            } else {
+                if (res.errors) {
+                    if (res.errors.email) {
+                        setErrorsEmail(res.errors.email);
+                    } else if (res.errors.password){
+                        setErrorsPass(res.errors.password);
+                    }
+                }
             }
-        }
-        }catch(err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -47,8 +54,13 @@ const SignUpForm = () => {
                     placeholder="Email"
                     value={email}
                     required
-                    onChange={(e) => { setEmail(e.target.value); }}
+                    onChange={(e) => { setEmail(e.target.value); setErrorsEmail([]) }}
                 />
+                {errorsEmail?.map((errorEmail) => {
+                    return (
+                        <p key={errorEmail} className={styles.error}>{errorEmail}</p>
+                    )
+                })}
                 <input
                     id="passwordInputSignUpForm"
                     className={styles.signUpFormInput}
@@ -56,11 +68,11 @@ const SignUpForm = () => {
                     placeholder="Password"
                     value={password}
                     required
-                    onChange={(e) => { setPassword(e.target.value); setError([]) }}
+                    onChange={(e) => { setPassword(e.target.value); setErrorsPass([]) }}
                 />
-                {error?.map( (error) => {
-                    return(
-                        <p key={error} className={styles.error}>{error}</p>
+                {errorsPass?.map((errorPass) => {
+                    return (
+                        <p key={errorPass} className={styles.error}>{errorPass}</p>
                     )
                 })}
                 <select
