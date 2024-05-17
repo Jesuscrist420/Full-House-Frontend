@@ -16,7 +16,8 @@ const SignUpForm = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        const res = await registerUser(email, password, role);
+        try{
+            const res = await registerUser(email, password, role);
         if (res.ok) {
             setEmail('');
             setPassword('');
@@ -26,6 +27,9 @@ const SignUpForm = () => {
             if(res.errors){
                 setError(res.errors.password);
             }
+        }
+        }catch(err){
+            console.log(err);
         }
     };
 
