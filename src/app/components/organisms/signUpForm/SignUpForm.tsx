@@ -23,7 +23,9 @@ const SignUpForm = () => {
             setRole('');
             setError([]);
         }else{
-            setError(res.errors.password);
+            if(res.errors){
+                setError(res.errors.password);
+            }
         }
     };
 
