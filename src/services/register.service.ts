@@ -30,6 +30,8 @@ export async function registerUser(email: string, password: string, role: string
         }
     }
 
+    console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, {
         method: "POST",
         headers: {
