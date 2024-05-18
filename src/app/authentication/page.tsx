@@ -1,25 +1,24 @@
 'use client'
+import classNames from 'classnames';
+import {useSession} from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import styles from "./authentication.module.scss";
 import React, { useEffect, useState } from 'react';
+import Overlay from '@/app/components/atoms/overlay/Overlay';
 import LogInForm from '@/app/components/organisms/logInForm/LogInForm';
 import SignUpForm from '@/app/components/organisms/signUpForm/SignUpForm';
-import Overlay from '@/app/components/atoms/overlay/Overlay';
-// import {useSession} from "next-auth/react";
-import styles from "./authentication.module.scss";
-import { useRouter } from 'next/navigation';
-import classNames from 'classnames';
 
 const Authentication = () => {
 
-    // const {data: session, status} = useSession();
+    const {data: session, status} = useSession();
     const router = useRouter();
     const [rightPanelActive, setRightPanelActive] = useState(false);
 
-    // console.log({session, status});
-    /* useEffect(() => {
+    useEffect(() => {
         if(status === 'authenticated'){
-            router.push("/")
+            router.push("/dashboard")
         }
-    }, [status, router]); */
+    }, [status, router]);
 
     const containerStyles = classNames(styles.container, {[styles.rightPanelActive]:rightPanelActive});
 

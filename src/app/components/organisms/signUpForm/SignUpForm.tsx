@@ -1,41 +1,43 @@
 'use client'
+
+import classNames from 'classnames';
 import React, { useState } from 'react';
 import styles from './SignUpForm.module.scss';
-import styles2 from '@/app/authentication/authentication.module.scss';
-//import { registerUser } from '@/services/register.service';
-import Swal from 'sweetalert2';
+import { registerUser } from '@/services/register.service';
 import FullHouseLogo from '../../atoms/logo/fullHouseLogo';
-import classNames from 'classnames';
+import styles2 from '@/app/authentication/authentication.module.scss';
 
- const SignUpForm = () => {
+const SignUpForm = () => {
 
-    // const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+    const [errorsEmail, setErrorsEmail] = useState([]);
+    const [errorsPass, setErrorsPass] = useState([]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        //const res = await registerUser(username, email, password);
-
-        /* if ((res).ok) {
-            void Toast.fire({
-                icon: 'success',
-                title: 'User created successfully'
-            })
-        } */
+        try {
+            const res = await registerUser(email, password, role);
+            console.log('Res: ', res);
+            if (res.ok) {
+                setEmail('');
+                setPassword('');
+                setRole('');
+                setErrorsEmail([]);
+                setErrorsPass([]);
+            } else {
+                if (res.errors) {
+                    if (res.errors.email) {
+                        setErrorsEmail(res.errors.email);
+                    } else if (res.errors.password){
+                        setErrorsPass(res.errors.password);
+                    }
+                }
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const formStyles = classNames(styles.formContainer, styles2.signUpContainer);
@@ -45,33 +47,35 @@ import classNames from 'classnames';
             <form className={styles.signUpForm} action="#" onSubmit={handleSubmit}>
                 <FullHouseLogo />
                 <h1 className={styles.signUpFormTitle}>Create Account</h1>
-                {/*<input 
-                    id="usernameInputSignUpForm" 
-                    className={styles.signUpFormInput} 
-                    type="text" 
-                    placeholder="Username" 
-                    value={username} 
-                    onChange={(e) => { setUsername(e.target.value); }} 
-                /> */}
-                <input 
-                    id="emailInputSignUpForm" 
-                    className={styles.signUpFormInput} 
-                    type="email" 
-                    placeholder="Email" 
+                <input
+                    id="emailInputSignUpForm"
+                    className={styles.signUpFormInput}
+                    type="email"
+                    placeholder="Email"
                     value={email}
-                    required 
-                    onChange={(e) => { setEmail(e.target.value); }} 
-                />
-                <input 
-                    id="passwordInputSignUpForm" 
-                    className={styles.signUpFormInput} 
-                    type="password" 
-                    placeholder="Password" 
-                    value={password} 
                     required
-                    onChange={(e) => { setPassword(e.target.value); }} 
+                    onChange={(e) => { setEmail(e.target.value); setErrorsEmail([]) }}
                 />
-                <select 
+                {errorsEmail?.map((errorEmail) => {
+                    return (
+                        <p key={errorEmail} className={styles.error}>{errorEmail}</p>
+                    )
+                })}
+                <input
+                    id="passwordInputSignUpForm"
+                    className={styles.signUpFormInput}
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    required
+                    onChange={(e) => { setPassword(e.target.value); setErrorsPass([]) }}
+                />
+                {errorsPass?.map((errorPass) => {
+                    return (
+                        <p key={errorPass} className={styles.error}>{errorPass}</p>
+                    )
+                })}
+                <select
                     id="roleInputSignUpForm"
                     name="role"
                     className={styles.signUpFormInput}
