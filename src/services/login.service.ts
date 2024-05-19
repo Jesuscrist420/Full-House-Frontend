@@ -33,14 +33,14 @@ export async function loginUser(email: string, password: string): Promise<Respon
         }
         void Toast.fire({
             icon:'success',
-            title: 'Signed in successfully'
+            title: 'Inicio de Sesión Exitoso'
         })
-        return object.user;
+        return object;
     }else{
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Wrong Email or Password!'
+            text: 'Email y contraseña inválidos!'
         })
     }
     return undefined;

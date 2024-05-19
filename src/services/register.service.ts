@@ -48,7 +48,7 @@ export async function registerUser(email: string, password: string, role: string
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong'
+            text: 'Algo salió mal'
         })
         return res;
     }
@@ -56,7 +56,7 @@ export async function registerUser(email: string, password: string, role: string
     if (res.ok) {
         void Toast.fire({
             icon: 'success',
-            title: 'User created successfully'
+            title: 'Usuario creado con éxito'
         })
     }
 
