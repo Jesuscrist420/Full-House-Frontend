@@ -22,11 +22,11 @@ const handler = NextAuth({
                 })
 
                 const response = await res.json()
-                console.log('User: ', response.user);
+                console.log('Authorization: ', response);
 
                 // If no error and we have user data, return it
                 if (res.ok && (Boolean(response.user))) {
-                    return response.user
+                    return response
                 }
                 // Return null if user data could not be retrieved
                 return null

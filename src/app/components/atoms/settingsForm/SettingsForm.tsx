@@ -1,33 +1,124 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import styles from './SettingsForm.module.scss';
+import { createRestaurant } from '@/services/createRestaurant.service';
+import { useSession } from 'next-auth/react';
 
 const SettingsForm = () => {
 
-    const citiesList = ['Bogota', 'Paris', 'New York', 'Medellin'];
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [errorsName, setErrorsName] = useState([]);
+    const [errorsAddress, setErrorsAddress] = useState([]);
+    const [errorsSave, setErrorsSave] = useState('');
+    const [errorsPhoneNumber, setErrorsPhoneNumber] = useState([]);
+
+    const { data: session, status } = useSession();
+    const token = session?.user?.token;
+
+    const restaurantId = session?.user?.user?.restaurant_id;
+
+    console.log('Restaurant id: ', restaurantId)
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            if (!restaurantId) {
+                const res = await createRestaurant({ name, address, phoneNumber, token });
+                console.log('Res:', res);
+                if (res.ok) {
+                    setName('');
+                    setAddress('');
+                    setPhoneNumber('');
+                    setErrorsName([]);
+                    setErrorsAddress([]);
+                    setErrorsPhoneNumber([]);
+                } else {
+                    if (res.errors) {
+                        if (res.errors.name) {
+                            setErrorsName(res.errors.name);
+                        } else if (res.errors.address) {
+                            setErrorsAddress(res.errors.address);
+                        } else if (res.errors.phoneNumber) {
+                            setErrorsPhoneNumber(res.errors.phoneNumber)
+                        }
+                    }
+                }
+            } else {
+                setErrorsSave('Ya tienes un restaurante');
+            }
+            // const res = await updateRestaurant(name , address, phoneNumber);
+        } catch (err) {
+            console.log(err);
+            return
+        }
+    }
 
     return (
         <div className={styles.container}>
             <section className={styles.formContainer}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <fieldset>
                         <h1 className={styles.title}>Datos del negocio</h1>
                         <div className={styles.row}>
                             <div>
                                 <label className={styles.label}>Nombre*</label>
-                                <input className={styles.input} type='text' placeholder='Nombre del restaurante' />
+                                <input
+                                    id='RestaurantNameInput'
+                                    className={styles.input}
+                                    type='text'
+                                    placeholder='Nombre del restaurante'
+                                    maxLength={20}
+                                    value={name}
+                                    onChange={(e) => { setName(e.target.value); setErrorsName([]); setErrorsSave('') }}
+                                />
+                                {errorsName?.map((errorName) => {
+                                    return (
+                                        <p key={errorName} className={styles.error}>{errorName}</p>
+                                    )
+                                })}
                             </div>
                             <div>
                                 <label className={styles.label}>Dirección *</label>
-                                <input className={styles.input} type='text' placeholder='¿Dónde estan ubicados?' />
+                                <input
+                                    id='RestaurantAddressInput'
+                                    className={styles.input}
+                                    type='text'
+                                    placeholder='¿Dónde estan ubicados?'
+                                    value={address}
+                                    onChange={(e) => { setAddress(e.target.value); setErrorsAddress([]); setErrorsSave('') }}
+                                />
+                                {errorsAddress?.map((errorAddress) => {
+                                    return (
+                                        <p key={errorAddress} className={styles.error}>{errorAddress}</p>
+                                    )
+                                })}
                             </div>
                         </div>
                         <div className={styles.row}>
                             <div>
                                 <label className={styles.label}>Teléfono *</label>
-                                <input className={styles.input} type='number' placeholder='0000000000' />
+                                <input
+                                    id='RestaurantPhoneInput'
+                                    className={styles.input}
+                                    type='text'
+                                    inputMode='numeric'
+                                    pattern='[0-9]{7}{10}'
+                                    placeholder='0000000000'
+                                    maxLength={10}
+                                    value={phoneNumber}
+                                    onChange={(e) => { setPhoneNumber(e.target.value); setErrorsPhoneNumber([]); setErrorsSave('') }}
+                                />
+                                {errorsPhoneNumber?.map((errorPhoneNumber) => {
+                                    return (
+                                        <p key={errorPhoneNumber} className={styles.error}>{errorPhoneNumber}</p>
+                                    )
+                                })}
                             </div>
-
                             <button className={styles.button}>Guardar</button>
+                            <p className={styles.error}>{errorsSave}</p>
                         </div>
                     </fieldset>
                 </form>

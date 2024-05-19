@@ -28,11 +28,11 @@ export type FormState =
   | undefined
 
 export type User = {
-  id: string;
-  email: string;
-  password: string;
-  role: string;
-  restaurantId: string;
+  id?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+  restaurantId?: string;
 };
 
 export type Customer = {
