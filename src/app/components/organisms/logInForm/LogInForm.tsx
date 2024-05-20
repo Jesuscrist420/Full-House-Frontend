@@ -34,7 +34,8 @@ export default function LogInForm(): JSX.Element{
                 <input 
                     id="emailInputSignInForm" 
                     className={styles.logInFormInput} 
-                    type="email" placeholder="Email" 
+                    type="email" 
+                    placeholder="Email" 
                     value={email} 
                     onChange={(e) => {setEmail(e.target.value)}} 
                 />

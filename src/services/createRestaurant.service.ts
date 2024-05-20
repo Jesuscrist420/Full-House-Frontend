@@ -1,6 +1,5 @@
+import { z } from 'zod';
 import Swal from 'sweetalert2'
-import { signIn } from "next-auth/react";
-import { FormState, SignupFormSchema } from '@/app/lib/definitions';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -14,17 +13,28 @@ const Toast = Swal.mixin({
     }
 })
 
-export async function registerUser(email: string, password: string): Promise<Response | any> {
+type restaurantProps = {
+    name: string,
+    address: string,
+    phoneNumber: string,
+    token: string | unknown,
+}
+
+export const CreateRestaurantFormSchema = z.object({
+    name: z.string().min(1).max(18, {message: 'Máximo 18 Cáracteres'}),
+    address: z.string(),
+    phoneNumber: z.string().min(7, { message: 'Mínimo 7 Dígitos' }).max(10, {message: 'Máximo 10 Dígitos'})
+  })
+
+export async function createRestaurant({name, address, phoneNumber, token}: restaurantProps): Promise<Response | any> {
 
     // Validate form fields
-    const validatedFields = SignupFormSchema.safeParse({
-        email: email,
-        password: password,
+    const validatedFields = CreateRestaurantFormSchema.safeParse({
+        name: name,
+        address: address,
+        phoneNumber: phoneNumber
     })
-
-    const role = 'admin'
     
-    console.log('Validated Fields: ',validatedFields);
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
         return {
@@ -32,17 +42,16 @@ export async function registerUser(email: string, password: string): Promise<Res
         }
     }
 
-    console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/register`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/restaurants`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            email,
-            password,
-            role
+            name,
+            address,
+            phoneNumber
         }),
     });
 
@@ -58,7 +67,7 @@ export async function registerUser(email: string, password: string): Promise<Res
     if (res.ok) {
         void Toast.fire({
             icon: 'success',
-            title: 'Usuario creado con éxito'
+            title: 'Restaurante creado con éxito'
         })
     }
 
