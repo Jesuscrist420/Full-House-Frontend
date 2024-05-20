@@ -17,7 +17,7 @@ type restaurantProps = {
     name: string,
     address: string,
     phoneNumber: string,
-    token: string,
+    token: string | unknown,
 }
 
 export const CreateRestaurantFormSchema = z.object({
@@ -35,15 +35,12 @@ export async function createRestaurant({name, address, phoneNumber, token}: rest
         phoneNumber: phoneNumber
     })
     
-    console.log('Validated Fields: ',validatedFields);
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
         return {
             errors: validatedFields.error.flatten().fieldErrors,
         }
     }
-
-    console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/restaurants`, {
         method: "POST",
