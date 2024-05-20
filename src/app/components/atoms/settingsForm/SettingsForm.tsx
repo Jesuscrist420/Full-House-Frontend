@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import styles from './SettingsForm.module.scss';
 import { createRestaurant } from '@/services/createRestaurant.service';
-import { useSession } from 'next-auth/react';
 
 const SettingsForm = () => {
 
@@ -15,19 +15,17 @@ const SettingsForm = () => {
     const [errorsSave, setErrorsSave] = useState('');
     const [errorsPhoneNumber, setErrorsPhoneNumber] = useState([]);
 
-    const { data: session, status } = useSession();
-    const token = session?.user?.token;
-
-    const restaurantId = session?.user?.user?.restaurant_id;
-
-    console.log('Restaurant id: ', restaurantId)
+    const { data: session, status , update} = useSession();
+    
+    const token = session?.token;
+    const restaurantId = session?.user?.restaurant_id;
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             if (!restaurantId) {
                 const res = await createRestaurant({ name, address, phoneNumber, token });
-                console.log('Res:', res);
+                const response = await res.json();
                 if (res.ok) {
                     setName('');
                     setAddress('');
@@ -35,6 +33,7 @@ const SettingsForm = () => {
                     setErrorsName([]);
                     setErrorsAddress([]);
                     setErrorsPhoneNumber([]);
+                    update();
                 } else {
                     if (res.errors) {
                         if (res.errors.name) {
@@ -73,6 +72,7 @@ const SettingsForm = () => {
                                     maxLength={20}
                                     value={name}
                                     onChange={(e) => { setName(e.target.value); setErrorsName([]); setErrorsSave('') }}
+                                    required
                                 />
                                 {errorsName?.map((errorName) => {
                                     return (
@@ -89,6 +89,7 @@ const SettingsForm = () => {
                                     placeholder='¿Dónde estan ubicados?'
                                     value={address}
                                     onChange={(e) => { setAddress(e.target.value); setErrorsAddress([]); setErrorsSave('') }}
+                                    required
                                 />
                                 {errorsAddress?.map((errorAddress) => {
                                     return (
@@ -110,6 +111,7 @@ const SettingsForm = () => {
                                     maxLength={10}
                                     value={phoneNumber}
                                     onChange={(e) => { setPhoneNumber(e.target.value); setErrorsPhoneNumber([]); setErrorsSave('') }}
+                                    required
                                 />
                                 {errorsPhoneNumber?.map((errorPhoneNumber) => {
                                     return (

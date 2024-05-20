@@ -15,7 +15,7 @@ export default function Page() {
     const { data: session, status } = useSession();
     const router = useRouter();
 
-    const user = session?.user?.user;
+    const user = session?.user;
     const userId = user?.id;
     const restaurantId = user?.restaurant_id;
 
