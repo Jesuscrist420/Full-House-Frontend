@@ -1,3 +1,4 @@
+import { getUser } from "@/services/getUser.service"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -22,7 +23,6 @@ const handler = NextAuth({
                 })
 
                 const response = await res.json()
-                console.log('Authorization: ', response);
 
                 // If no error and we have user data, return it
                 if (res.ok && (Boolean(response.user))) {
@@ -34,11 +34,17 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
-            return { ...token, ...user };
+        async jwt({ token, trigger }) {
+            if(trigger === "update"){
+                const userInfo = token.user as any;
+                const user = await getUser(userInfo.id);
+                token.user = user;
+            }
+            return { ...token };
         },
         async session({ session, token }) {
-            session.user = token as any;
+            session.user = token.user as any;
+            session.token = token.token;
             return session;
         }
     },
