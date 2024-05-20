@@ -14,13 +14,15 @@ const Toast = Swal.mixin({
     }
 })
 
-export async function registerUser(email: string, password: string, role: string): Promise<Response | any> {
+export async function registerUser(email: string, password: string): Promise<Response | any> {
 
     // Validate form fields
     const validatedFields = SignupFormSchema.safeParse({
         email: email,
         password: password,
     })
+
+    const role = 'admin'
     
     console.log('Validated Fields: ',validatedFields);
     // If any form fields are invalid, return early
