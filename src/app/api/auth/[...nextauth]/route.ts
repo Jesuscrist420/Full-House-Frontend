@@ -34,13 +34,13 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
-        async jwt({ token, trigger }) {
+        async jwt({ token, trigger, user }) {
             if(trigger === "update"){
                 const userInfo = token.user as any;
                 const user = await getUser(userInfo.id);
                 token.user = user;
             }
-            return { ...token };
+            return { ...token, ...user };
         },
         async session({ session, token }) {
             session.user = token.user as any;
