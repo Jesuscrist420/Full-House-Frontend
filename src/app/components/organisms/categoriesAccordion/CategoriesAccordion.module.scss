@@ -9,3 +9,49 @@
 .accordionItem:hover{
     background-color: rgb(234, 233, 222, 0.3);
 }
+
+.buttonsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 8px;
+    padding: 0 8px;
+    gap: 16px;
+}
+
+.deleteButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    align-items: center;
+    color: rgb(204, 62, 51);
+    border-color: transparent;
+    background-color: rgb(243, 245, 247);
+    padding: 8px 16px;
+    border-radius: 6px;
+    white-space: nowrap;
+    gap: 8px;
+}
+.deleteButton:hover{
+    background-color: #fecaca;
+}
+
+.editButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    align-items: center;
+    color: rgb(26, 39, 50);
+    border-color: transparent;
+    background-color: rgb(243, 245, 247);
+    padding: 8px 16px;
+    border-radius: 6px;
+    white-space: nowrap;
+    gap: 8px;
+}
+
+.editButton:hover{
+    background-color: #e7e5e4;
+}
