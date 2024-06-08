@@ -17,13 +17,18 @@ type tablesAccordionProps = {
         seats: number,
         available: boolean
     }[],
-    setTableDeleteIsOpen: (val: boolean) => void
+    setTableDelete: (table: any) => void,
+    setTableEdit: (table: any) => void
 }
 
-const TablesAccordion = ({ tablesList, setTableDeleteIsOpen }: tablesAccordionProps) => {
+const TablesAccordion = ({ tablesList, setTableDelete, setTableEdit }: tablesAccordionProps) => {
 
-    const handleDelete = (): void => {
-        setTableDeleteIsOpen(true);
+    const handleDelete = (table: any): void => {
+        setTableDelete(table);
+    }
+
+    const handleEdit = (table: any): void => {
+        setTableEdit(table);
     }
 
     return (
@@ -39,8 +44,8 @@ const TablesAccordion = ({ tablesList, setTableDeleteIsOpen }: tablesAccordionPr
                             <p>Asientos: {table.seats}</p>
                             <p>Disponible: {table.available === true ? "Si" : "No"}</p>
                             <div className={styles.buttonsContainer}>
-                                <button className={styles.editButton}><FaPencilAlt />Editar</button>
-                                <button onClick={handleDelete} className={styles.deleteButton}><MdDelete />Eliminar</button>
+                                <button className={styles.editButton} onClick={() => handleEdit(table)}><FaPencilAlt />Editar</button>
+                                <button onClick={() => handleDelete(table)} className={styles.deleteButton}><MdDelete />Eliminar</button>
                             </div>
                         </AccordionContent>
                     </AccordionItem>

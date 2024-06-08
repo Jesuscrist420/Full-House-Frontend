@@ -6,6 +6,8 @@ import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import AddTableForm from "@/app/components/molecules/addTableForm/AddTableForm";
+import UpdateTableForm from "@/app/components/molecules/updateTableForm/updateTableFrom";
+import DeleteTableForm from "@/app/components/molecules/deleteTableForm/DeleteTableForm";
 import CategoriesAccordion from "@/app/components/organisms/categoriesAccordion/CategoriesAccordion";
 import { useSession } from "next-auth/react";
 import { getTables } from "@/services/getTables.service";
@@ -15,8 +17,20 @@ const Page = () => {
 
     const [addTablesIsOpen, setAddTablesIsOpen] = useState(false);
     const [deleteTableIsOpen, setDeleteTableIsOpen] = useState(false);
+    const [updateTableIsOpen, setUpdateTableIsOpen] = useState(false);
+    const [selectedTable, setSelectedTable] = useState(null);
     const handleAddTables = (): void => {
         setAddTablesIsOpen(true);
+    }
+
+    const handleEditTable = (table: any): void => {
+        setSelectedTable(table);
+        setUpdateTableIsOpen(true);
+    }
+
+    const handleDeleteTable = (table: any): void => {
+        setSelectedTable(table);
+        setDeleteTableIsOpen(true);
     }
 
     const [tablesList, setTablesList] = useState([]);
@@ -47,10 +61,13 @@ const Page = () => {
             <RightBar isOpen={addTablesIsOpen} setIsOpen={setAddTablesIsOpen} title='Crear Mesa'>
                 <AddTableForm setAddTableIsOpen={setAddTablesIsOpen} />
             </RightBar>
-            <RightBar isOpen={deleteTableIsOpen} setIsOpen={setDeleteTableIsOpen} title='Eliminar Mesa'>
-                {/* <DeleteCategoryPanel setAddCategoryIsOpen={setAddCategoryIsOpen} setEditCategoryIsOpen={setEditCategoryIsOpen} categoriesList={categoriesList} /> */}
+            <RightBar isOpen={updateTableIsOpen} setIsOpen={setUpdateTableIsOpen} title='Actualizar Mesa'>
+                <UpdateTableForm setUpdateTableIsOpen={setUpdateTableIsOpen} tableSelected={selectedTable} />
             </RightBar>
-            <TablesAccordion setTableDeleteIsOpen={setDeleteTableIsOpen} tablesList={tablesList} />
+            <RightBar isOpen={deleteTableIsOpen} setIsOpen={setDeleteTableIsOpen} title='Eliminar Mesa'>
+                <DeleteTableForm setDeleteTableIsOpen={setDeleteTableIsOpen} tableSelected={selectedTable} />
+            </RightBar>
+            <TablesAccordion setTableDelete={handleDeleteTable} tablesList={tablesList} setTableEdit={handleEditTable} />
         </>
     );
 }
