@@ -3,7 +3,6 @@ import { updateTable } from '@/services/updateTable.service';
 import FormLabel from '../../atoms/formLabel/FormLabel';
 import styles from './AddCategoryForm.module.scss';
 import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import { useSession } from 'next-auth/react';
 
 type updateTableFormProps = {
