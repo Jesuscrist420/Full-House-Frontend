@@ -8,43 +8,35 @@ import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import CategoriesAccordion from "@/app/components/organisms/categoriesAccordion/CategoriesAccordion";
 import ProductForm from "@/app/components/molecules/addProductForm/AddProductForm";
+import { useSession } from "next-auth/react";
+import { getCategories } from "@/services/getCategories.service";
 
 const Page = () => {
 
     const [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
     const [addProductIsOpen, setAddProductIsOpen] = useState(false);
     const [editCategoryIsOpen, setEditCategoryIsOpen] = useState(false);
+    const [deleteCategoryIsOpen, setDeleteCategoryIsOpen] = useState(false);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const [categoriesList, setCategoriesList] = useState([
-        {
-            id: "656393458e0bb84c89a01fce",
-            name: "Entradas",
-            userId: "653c0608195e0930f96230f7",
-            createdAt: "2023-11-26T18:49:41.082Z",
-            updatedAt: "2023-11-26T18:49:41.082Z"
-        },
-        {
-            id: "656393458e0bb84c89a01fcf",
-            name: "Platos Fuertes",
-            userId: "653c0608195e0930f96230f7",
-            createdAt: "2023-11-26T18:49:41.082Z",
-            updatedAt: "2023-11-26T18:49:41.082Z"
-        },
-        {
-            id: "656393458e0bb84c89a01fcg",
-            name: "Sopas",
-            userId: "653c0608195e0930f96230f7",
-            createdAt: "2023-11-26T18:49:41.082Z",
-            updatedAt: "2023-11-26T18:49:41.082Z"
-        },
-    ]);
+    const [categoriesList, setCategoriesList] = useState();
+    const { data: session, status } = useSession();
+    const token = session?.token;
 
+
+    const fetchCategoriesData =  async () => {
+        if(status == 'authenticated'){
+            const res = await getCategories(token);
+            if(res.length !== 0){
+                setCategoriesList(res);
+                console.log('Response: ', res);
+            }
+        }
+    }
     //setCategoriesList(categoriesListMock);
-    /* useEffect(() => {
-        // void fetchCategoriesData();
-    }, [addCategoryIsOpen, editCategoryIsOpen, addProductIsOpen, categoriesListMock]);
-    */
+    useEffect(() => {
+        void fetchCategoriesData();   
+    },[session]);
+
 
     const handleOpenAddCategory = (): void => {
         setAddCategoryIsOpen(true);
@@ -59,19 +51,22 @@ const Page = () => {
         <>
             <CommonHeader title='Menu'>
                 <CommonHeaderButton text='Categoría' handleClick={handleOpenAddCategory} />
-                <CommonHeaderButton text='Producto' handleClick={handleOpenAddProduct} />
+                <CommonHeaderButton text='Plato' handleClick={handleOpenAddProduct} />
             </CommonHeader>
-            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList.length !== 0} />
+            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList ? true : false} />
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
-                <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} /* Optional Remove later*/ categoriesList={categoriesList} />
+                <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
-            <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Producto'>
+            <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Plato'>
                 <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
             <RightBar isOpen={editCategoryIsOpen} setIsOpen={setEditCategoryIsOpen} title='Editar Categoría'>
                 {/* <EditCategoryPanel setAddCategoryIsOpen={setAddCategoryIsOpen} setEditCategoryIsOpen={setEditCategoryIsOpen} categoriesList={categoriesList} /> */}
             </RightBar>
-            <CategoriesAccordion categoriesList={categoriesList} />
+            <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
+                {/* <DeleteCategoryPanel setAddCategoryIsOpen={setAddCategoryIsOpen} setEditCategoryIsOpen={setEditCategoryIsOpen} categoriesList={categoriesList} /> */}
+            </RightBar>
+            <CategoriesAccordion setCategoryDeleteIsOpen={setDeleteCategoryIsOpen} categoriesList={categoriesList ? categoriesList : []} />
         </>
     );
 }
