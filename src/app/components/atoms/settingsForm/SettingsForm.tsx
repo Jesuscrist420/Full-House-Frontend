@@ -25,7 +25,6 @@ const SettingsForm = () => {
         try {
             if (!restaurantId) {
                 const res = await createRestaurant({ name, address, phoneNumber, token });
-                const response = await res.json();
                 if (res.ok) {
                     setName('');
                     setAddress('');

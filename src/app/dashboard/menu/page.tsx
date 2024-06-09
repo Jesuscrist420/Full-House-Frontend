@@ -18,7 +18,7 @@ const Page = () => {
     const [editCategoryIsOpen, setEditCategoryIsOpen] = useState(false);
     const [deleteCategoryIsOpen, setDeleteCategoryIsOpen] = useState(false);
 
-    const [categoriesList, setCategoriesList] = useState([]);
+    const [categoriesList, setCategoriesList] = useState();
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -26,14 +26,16 @@ const Page = () => {
     const fetchCategoriesData =  async () => {
         if(status == 'authenticated'){
             const res = await getCategories(token);
-            setCategoriesList(res);
-            console.log('Response: ', res);
+            if(res.length !== 0){
+                setCategoriesList(res);
+                console.log('Response: ', res);
+            }
         }
     }
     //setCategoriesList(categoriesListMock);
     useEffect(() => {
         void fetchCategoriesData();   
-    });
+    },[session]);
 
 
     const handleOpenAddCategory = (): void => {
@@ -51,7 +53,7 @@ const Page = () => {
                 <CommonHeaderButton text='Categoría' handleClick={handleOpenAddCategory} />
                 <CommonHeaderButton text='Plato' handleClick={handleOpenAddProduct} />
             </CommonHeader>
-            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList.length !== 0} />
+            <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList ? true : false} />
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
@@ -64,7 +66,7 @@ const Page = () => {
             <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
                 {/* <DeleteCategoryPanel setAddCategoryIsOpen={setAddCategoryIsOpen} setEditCategoryIsOpen={setEditCategoryIsOpen} categoriesList={categoriesList} /> */}
             </RightBar>
-            <CategoriesAccordion setCategoryDeleteIsOpen={setDeleteCategoryIsOpen} categoriesList={categoriesList} />
+            <CategoriesAccordion setCategoryDeleteIsOpen={setDeleteCategoryIsOpen} categoriesList={categoriesList ? categoriesList : []} />
         </>
     );
 }

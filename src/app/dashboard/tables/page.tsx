@@ -33,7 +33,7 @@ const Page = () => {
         setDeleteTableIsOpen(true);
     }
 
-    const [tablesList, setTablesList] = useState([]);
+    const [tablesList, setTablesList] = useState();
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -41,14 +41,16 @@ const Page = () => {
     const fetchTablesData = async () => {
         if (status == 'authenticated') {
             const res = await getTables(token);
-            setTablesList(res);
-            console.log('Response: ', res);
+            if(res.length !== 0){
+                setTablesList(res);
+                console.log('Response: ', res);
+            }
         }
     }
     //setCategoriesList(categoriesListMock);
     useEffect(() => {
         void fetchTablesData();
-    });
+    }, [session]);
 
 
 
@@ -57,7 +59,7 @@ const Page = () => {
             <CommonHeader title='Mesas'>
                 <CommonHeaderButton text="Mesa" handleClick={handleAddTables} />
             </CommonHeader>
-            <EmptyPage handleClick={handleAddTables} emptyPage="Mesas" hidden={tablesList.length !== 0} />
+            <EmptyPage handleClick={handleAddTables} emptyPage="Mesas" hidden={tablesList ? true : false} />
             <RightBar isOpen={addTablesIsOpen} setIsOpen={setAddTablesIsOpen} title='Crear Mesa'>
                 <AddTableForm setAddTableIsOpen={setAddTablesIsOpen} />
             </RightBar>
@@ -67,7 +69,7 @@ const Page = () => {
             <RightBar isOpen={deleteTableIsOpen} setIsOpen={setDeleteTableIsOpen} title='Eliminar Mesa'>
                 <DeleteTableForm setDeleteTableIsOpen={setDeleteTableIsOpen} tableSelected={selectedTable} />
             </RightBar>
-            <TablesAccordion setTableDelete={handleDeleteTable} tablesList={tablesList} setTableEdit={handleEditTable} />
+            <TablesAccordion setTableDelete={handleDeleteTable} tablesList={tablesList ? tablesList : []} setTableEdit={handleEditTable} />
         </>
     );
 }
