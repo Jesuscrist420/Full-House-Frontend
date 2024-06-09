@@ -8,19 +8,29 @@ import {
 import styles from "./CategoriesAccordion.module.scss";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
+import { useSession } from "next-auth/react";
 
 type categoriesAccordionProps = {
     categoriesList: {
         id: string,
         name: string,
     }[],
-    setCategoryDeleteIsOpen: (val: boolean) => void
+    setCategoryDelete: (category: any) => void,
+    setCategoryEdit: (category: any) => void,
 }
 
-const CategoriesAccordion = ({ categoriesList, setCategoryDeleteIsOpen }: categoriesAccordionProps) => {
+const CategoriesAccordion = ({ categoriesList, setCategoryDelete, setCategoryEdit }: categoriesAccordionProps) => {
 
-    const handleDelete = (): void => {
-        setCategoryDeleteIsOpen(true);
+    const { data: session, status, update } = useSession();
+
+    const handleDelete = (category: any): void => {
+        setCategoryDelete(category);
+        update();
+    }
+
+    const handleEdit = (table: any): void => {
+        setCategoryEdit(table);
+        update();
     }
 
     return (
@@ -34,8 +44,8 @@ const CategoriesAccordion = ({ categoriesList, setCategoryDeleteIsOpen }: catego
                         <AccordionContent>
                             Productos categoria {category.name}
                             <div className={styles.buttonsContainer}>
-                                <button className={styles.editButton}><FaPencilAlt />Editar</button>
-                                <button onClick={handleDelete} className={styles.deleteButton}><MdDelete />Eliminar</button>
+                                <button onClick={() => handleEdit(category)} className={styles.editButton}><FaPencilAlt />Editar</button>
+                                <button onClick={() => handleDelete(category)} className={styles.deleteButton}><MdDelete />Eliminar</button>
                             </div>
                         </AccordionContent>
                     </AccordionItem>
