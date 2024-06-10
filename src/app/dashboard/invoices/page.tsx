@@ -25,6 +25,17 @@ export default function Page() {
     const handleAddInvoice = (): void => {
         setAddInvoiceIsOpen(true);
     }
+    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+    const [deleteAccountIsOpen, setDeleteAccountIsOpen] = useState(false);
+    const [updateAccountIsOpen, setUpdateAccountIsOpen] = useState(false);
+    const handleEdit = (account: Account): void => {
+        setSelectedAccount(account);
+        setUpdateAccountIsOpen(true);
+    }
+    const handleDelete = (account: Account): void => {
+        setSelectedAccount(account);
+        setDeleteAccountIsOpen(true);
+    }
     const [accounts, setAccounts] = useState<Account[]>([]);
     const [filteredAccounts, setFilteredAccounts] = useState<Account[]>([]);
     const [totalSales, setTotalSales] = useState(0);
@@ -72,6 +83,12 @@ export default function Page() {
             <RightBar isOpen={addInvoiceIsOpen} setIsOpen={setAddInvoiceIsOpen} title='Crear Cuenta'>
                 {/* Add form or content for creating a new account */}
             </RightBar>
+            <RightBar isOpen={updateAccountIsOpen} setIsOpen={setUpdateAccountIsOpen} title='Actualizar Cuenta'>
+                {/* Add form or content for updating an account */}
+            </RightBar>
+            <RightBar isOpen={deleteAccountIsOpen} setIsOpen={setDeleteAccountIsOpen} title='Eliminar Cuenta'>
+                {/* Add form or content for deleting an account */}
+            </RightBar>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Buscar cuentas..." onSearch={handleSearch} />
             </div>
@@ -94,7 +111,7 @@ export default function Page() {
             */}
             <div className="mt-5 flex w-full justify-center">
 
-                <Table accounts={filteredAccounts} />
+                <Table accounts={filteredAccounts} handleDelete={handleDelete} handleEdit={handleEdit} />
 
             </div>
         </div>

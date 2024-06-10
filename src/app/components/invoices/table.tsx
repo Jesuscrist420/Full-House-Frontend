@@ -4,6 +4,8 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 export default function Table({
   accounts,
+  handleEdit,
+  handleDelete
 }: {
   accounts: {
     id: number;
@@ -16,6 +18,28 @@ export default function Table({
     total: number;
     user_id: number;
   }[];
+  handleEdit: (account: {
+    id: number;
+    table_id: number;
+    status: string;
+    restaurant_id: number;
+    comment: string;
+    opening_timestamp: string;
+    closing_timestamp: string;
+    total: number;
+    user_id: number;
+  }) => void;
+  handleDelete: (account: {
+    id: number;
+    table_id: number;
+    status: string;
+    restaurant_id: number;
+    comment: string;
+    opening_timestamp: string;
+    closing_timestamp: string;
+    total: number;
+    user_id: number;
+  }) => void;
 }) {
 
   return (
@@ -51,8 +75,14 @@ export default function Table({
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.user_id}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className={styles.buttonsContainer}>
-                      <button className={styles.editButton}><FaPencilAlt />Editar</button>
-                      <button className={styles.deleteButton}><MdDelete />Eliminar</button>
+                      <button className={styles.editButton} onClick={
+                        () => handleEdit(account)
+
+                      }><FaPencilAlt />Editar</button>
+                      <button className={styles.deleteButton} onClick={
+                        () => handleDelete(account)
+
+                      }><MdDelete />Eliminar</button>
                     </div>
                   </td>
                 </tr>
