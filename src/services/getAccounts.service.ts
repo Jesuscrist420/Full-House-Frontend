@@ -1,5 +1,5 @@
 export interface Account {
-    id: number;
+    "id": number;
     "closing_timestamp": string
     "comment": string
     "opening_timestamp": string
@@ -9,6 +9,11 @@ export interface Account {
     "total": number
     "user_id": number
 
+}
+export interface CreateAccount {
+    "comment": string
+    "table_id": number
+    "total": number
 }
 export async function getAccounts(token: string | unknown): Promise<Account[] | undefined> {
 
@@ -23,6 +28,24 @@ export async function getAccounts(token: string | unknown): Promise<Account[] | 
     if (res.ok) {
         const accountsList = await res.json();
         return accountsList;
+    }
+
+    return undefined;
+}
+
+export async function addAccount(token: string | unknown, account: CreateAccount): Promise<any> {
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(account)
+    })
+
+    if (res.ok) {
+        return res.json();
     }
 
     return undefined;
