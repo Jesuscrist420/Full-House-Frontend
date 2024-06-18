@@ -1,19 +1,20 @@
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { createCategory } from '@/services/categories/createCategory.service';
+import { updateCategory } from '@/services/categories/updateCategory.service';
 import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
+import styles from './UpdateCategoryForm.module.scss';
+import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
 
-type addCategoryFormProps = {
-    setAddCategoryIsOpen: (val: boolean) => void,
-    categorySelected?: any,
+type updateCategoryFormProps = {
+    setUpdateCategoryIsOpen: (val: boolean) => void,
+    categorySelected: any,
 }
 
-const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategoryFormProps) => {
+const UpdateCategoryForm = ({ setUpdateCategoryIsOpen, categorySelected }: updateCategoryFormProps) => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    
     const [errorsName, setErrorsName] = useState([]);
     const [errorsDescription, setErrorsDescription] = useState([]);
 
@@ -21,14 +22,21 @@ const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategory
 
     const token = session?.token;
 
-    const handleAddCategorySubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    useEffect(() => {
+        if (categorySelected) {
+            setName(categorySelected.name || '');
+            setDescription(categorySelected.description || '');
+        }
+    }, [categorySelected]);
+
+    const handleUpdateCategorySubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         try {
-            const res = await createCategory({ name, description, token });
+            const res = await updateCategory({ id: categorySelected.id, name, description, token });
             if (res.ok) {
                 setName('');
                 setDescription('');
-                setAddCategoryIsOpen(false);
+                setUpdateCategoryIsOpen(false);
                 setErrorsName([]);
                 setErrorsDescription([]);
                 update();
@@ -42,18 +50,17 @@ const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategory
         } catch (e) {
             console.log(e);
         }
-        let data;
     };
 
     return (
-        <form className={styles.form} onSubmit={handleAddCategorySubmit} >
-            <FormLabel text='Nombre de la categoría' required />
+        <form className={styles.form} onSubmit={handleUpdateCategorySubmit} >
+            <FormLabel text='Nombre de la Categoría' required />
             <input
-                onChange={(e) => { setName(e.target.value); setErrorsName([]);}}
+                onChange={(e) => { setName(e.target.value); setErrorsName([]); }}
                 className={styles.newInput}
                 value={name}
                 type='text'
-                placeholder='Nombre de la categoría'
+                placeholder='Nombre de la Categoría'
                 required
             />
             {errorsName?.map((errorName) => {
@@ -74,9 +81,9 @@ const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategory
                     <p key={errorDescription} className={styles.error}>{errorDescription}</p>
                 )
             })}
-            <SubmitFormButton text='Crear Categoría' />
+            <SubmitFormButton text='Actualizar Categoría' />
         </form>
     )
 }
 
-export default AddCategoryForm;
+export default UpdateCategoryForm;
