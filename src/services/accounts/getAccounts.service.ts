@@ -103,3 +103,60 @@ export async function closeAccount(token: string | unknown, account: Account): P
 
     return undefined;
 }
+
+/* add dish with POST /accounts/{account_id}/dishes
+query dish_id and quantity
+*/
+export async function addDish(token: string | unknown, account_id: number, dish_id: number, quantity: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/?dish_id=${dish_id}&quantity=${quantity}`;
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    })
+
+    if (res.ok) {
+        return res.json();
+    }
+
+    return undefined;
+}
+/* update dish in account with PUT /accounts/{account_id}/dishes/{dish_id}
+query quantity
+*/
+export async function updateDish(token: string | unknown, account_id: number, dish_id: number, quantity: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/${dish_id}?quantity=${quantity}`;
+    const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    })
+
+    if (res.ok) {
+        return res.json();
+    }
+
+    return undefined;
+}
+/* delete dish in account with DELETE /accounts/{account_id}/dishes/{dish_id}
+*/
+export async function deleteDish(token: string | unknown, account_id: number, dish_id: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/${dish_id}`;
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    })
+
+    if (res.ok) {
+        return res.json();
+    }
+
+    return undefined;
+}
