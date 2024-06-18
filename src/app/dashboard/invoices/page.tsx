@@ -5,8 +5,10 @@ import Search from '@/app/components/molecules/search/Search';
 import { Suspense, useEffect, useState } from 'react';
 import CommonHeaderButton from '@/app/components/atoms/commonHeaderButton/CommonHeaderButton';
 import RightBar from '@/app/components/atoms/rightBar/RightBar';
-import { getAccounts } from '@/services/getAccounts.service';
+import { getAccounts } from '@/services/accounts/getAccounts.service';
 import { useSession } from 'next-auth/react';
+import AddAccountForm from '@/app/components/molecules/addAccountForm/AddAccountForm'
+import DeleteAccountForm from '@/app/components/molecules/deleteAccountForm/DeleteAccountForm';
 
 export interface Account {
     id: number;
@@ -42,6 +44,7 @@ export default function Page() {
     const [accountsNumber, setAccountsNumber] = useState(0);
     const { data: session, status } = useSession();
     const token = session?.token;
+
 
     useEffect(() => {
         const fetchAccountsData = async () => {
@@ -81,13 +84,13 @@ export default function Page() {
                 <CommonHeaderButton text='Crear Cuenta' handleClick={handleAddInvoice} />
             </CommonHeader>
             <RightBar isOpen={addInvoiceIsOpen} setIsOpen={setAddInvoiceIsOpen} title='Crear Cuenta'>
-                {/* Add form or content for creating a new account */}
+                <AddAccountForm setAddAccountIsOpen={setAddInvoiceIsOpen} accounts={accounts} setAccounts={setAccounts} />
             </RightBar>
             <RightBar isOpen={updateAccountIsOpen} setIsOpen={setUpdateAccountIsOpen} title='Actualizar Cuenta'>
                 {/* Add form or content for updating an account */}
             </RightBar>
             <RightBar isOpen={deleteAccountIsOpen} setIsOpen={setDeleteAccountIsOpen} title='Eliminar Cuenta'>
-                {/* Add form or content for deleting an account */}
+                <DeleteAccountForm setDeleteAccountIsOpen={setDeleteAccountIsOpen} accountSelected={selectedAccount} />
             </RightBar>
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Buscar cuentas..." onSearch={handleSearch} />
