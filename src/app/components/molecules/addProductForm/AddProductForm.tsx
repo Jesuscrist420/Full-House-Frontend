@@ -78,6 +78,7 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, setProductSummaryIsO
             setNutritionInfo('');
             setPreparationTime(0);
             setPrice(0);
+            setErrorsName([]);
             if (setAddProductIsOpen !== undefined) {
                 setAddProductIsOpen(false);
             }
@@ -111,6 +112,11 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, setProductSummaryIsO
                 placeholder={productSelected?.name !== undefined ? productSelected?.name : 'Nombre del producto'}
                 required
             />
+            {errorsName?.map((errorName) => {
+                return (
+                    <p key={errorName} className={styles.error}>{errorName}</p>
+                )
+            })}
 
             <FormLabel text='Descripción' required />
             <textarea

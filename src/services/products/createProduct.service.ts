@@ -25,7 +25,7 @@ type productProps = {
 }
 
 export const CreateProductFormSchema = z.object({
-    name: z.string().min(1).max(14, {message: 'Máximo 14 Cáracteres'}),
+    name: z.string().min(1).max(24, {message: 'Máximo 24 Cáracteres'}),
     description: z.string(),
   })
 

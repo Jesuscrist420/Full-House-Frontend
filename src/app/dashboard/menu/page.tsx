@@ -12,17 +12,24 @@ import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { getProducts } from "@/services/products/getProducts.service";
 
 const Page = () => {
-
+    
     const [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
-    const [addProductIsOpen, setAddProductIsOpen] = useState(false);
     const [editCategoryIsOpen, setEditCategoryIsOpen] = useState(false);
     const [deleteCategoryIsOpen, setDeleteCategoryIsOpen] = useState(false);
-
+    
+    const [addProductIsOpen, setAddProductIsOpen] = useState(false);
+    const [editProductIsOpen, setEditProductIsOpen] = useState(false);
+    const [deleteProductIsOpen, setDeleteProductIsOpen] = useState(false);
+    
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const [categoriesList, setCategoriesList] = useState();
+    const [productsList, setProductsList] = useState();
+
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -36,10 +43,21 @@ const Page = () => {
             }
         }
     }
-    //setCategoriesList(categoriesListMock);
+
+    const fetchProductsData =  async () => {
+        if(status == 'authenticated'){
+            const res = await getProducts(token);
+            if(res.length !== 0){
+                setProductsList(res);
+                console.log('Response: ', res);
+            }
+        }
+    }
+
     useEffect(() => {
         void fetchCategoriesData();   
-    },[session, addProductIsOpen, editCategoryIsOpen, deleteCategoryIsOpen]);
+        void fetchProductsData();
+    },[session, addProductIsOpen, editCategoryIsOpen, deleteCategoryIsOpen, editProductIsOpen, deleteProductIsOpen]);
 
 
     const handleOpenAddCategory = (): void => {
@@ -72,6 +90,7 @@ const Page = () => {
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
+
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Plato'>
                 <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
@@ -82,11 +101,19 @@ const Page = () => {
             <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
                 <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory} />
             </RightBar>
-            
-            <CategoriesAccordion 
+
+            <RightBar isOpen={editProductIsOpen} setIsOpen={setEditProductIsOpen} title='Editar Categoría'>
+                {/* <UpdateProductForm setUpdateProductIsOpen={setEditProductIsOpen} productSelected={selectedProduct}/> */}
+            </RightBar>
+            <RightBar isOpen={deleteProductIsOpen} setIsOpen={setDeleteProductIsOpen} title='Eliminar Categoría'>
+                {/* <DeleteProductForm setDeleteProductIsOpen={setDeleteProductIsOpen} productSelected={selectedProduct} /> */} 
+            </RightBar>
+
+            <CategoriesAccordion
                 setCategoryEdit={handleOpenEditCategory} 
                 setCategoryDelete={handleDeleteCategory}
                 categoriesList={categoriesList ? categoriesList : []} 
+                productsList={productsList ? productsList : []}
             />
         </>
     );
