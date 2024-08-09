@@ -40,6 +40,9 @@ const UpdateCategoryForm = ({ setUpdateCategoryIsOpen, categorySelected }: updat
                 setErrorsName([]);
                 setErrorsDescription([]);
                 update();
+                if (setUpdateCategoryIsOpen !== undefined) {
+                    setUpdateCategoryIsOpen(false);
+                }
             } else {
                 if (res.errors) {
                     if (res.errors.name) {

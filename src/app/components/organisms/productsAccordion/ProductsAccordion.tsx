@@ -52,9 +52,9 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
-                            <p>Descripción: {product.description}</p>
+                            <p>{product.description}</p>
                             <p>En stock: {product.in_stock ? 'Si' : 'No'}</p>
-                            <p>Tiempo: {product.preparation_time ? product.preparation_time : 0} Hr</p>
+                            <p>Tiempo: {product.preparation_time ? product.preparation_time : 0} Mins</p>
                 
                             <div className={styles.buttonsContainer}>
                                 <button onClick={() => handleEdit(product)} className={styles.editButton}><FaPencilAlt /></button>

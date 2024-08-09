@@ -29,16 +29,14 @@ type categoriesAccordionProps = {
     }[],
     setCategoryDelete: (category: any) => void,
     setCategoryEdit: (category: any) => void,
+    setEditProductIsOpen: (val:boolean) => void,
+    setDeleteProductIsOpen: (val:boolean) => void,
+    setSelectedProduct: (product: any) => void,
 }
 
-const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, setCategoryEdit }: categoriesAccordionProps) => {
+const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, setCategoryEdit, setEditProductIsOpen, setDeleteProductIsOpen, setSelectedProduct}: categoriesAccordionProps) => {
 
     const { data: session, status, update } = useSession();
-    
-    const [editProductIsOpen, setEditProductIsOpen] = useState(false);
-    const [deleteProductIsOpen, setDeleteProductIsOpen] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState(null);
-
 
     const handleDelete = (category: any): void => {
         setCategoryDelete(category);

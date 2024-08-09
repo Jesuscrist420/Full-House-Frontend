@@ -13,6 +13,7 @@ import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getProducts } from "@/services/products/getProducts.service";
+import UpdateProductForm from "@/app/components/molecules/updateProductForm/UpdateProductForm";
 
 const Page = () => {
     
@@ -90,7 +91,6 @@ const Page = () => {
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
-
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Plato'>
                 <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
@@ -99,19 +99,22 @@ const Page = () => {
                 <UpdateCategoryForm setUpdateCategoryIsOpen={setEditCategoryIsOpen} categorySelected={selectedCategory}/>
             </RightBar>
             <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
-                <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory} />
+                <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory}/>
             </RightBar>
 
-            <RightBar isOpen={editProductIsOpen} setIsOpen={setEditProductIsOpen} title='Editar Categoría'>
-                {/* <UpdateProductForm setUpdateProductIsOpen={setEditProductIsOpen} productSelected={selectedProduct}/> */}
+            <RightBar isOpen={editProductIsOpen} setIsOpen={setEditProductIsOpen} title='Editar Producto'>
+                <UpdateProductForm categoriesList={categoriesList ? categoriesList : []} productSelected={selectedProduct}/>
             </RightBar>
-            <RightBar isOpen={deleteProductIsOpen} setIsOpen={setDeleteProductIsOpen} title='Eliminar Categoría'>
+            <RightBar isOpen={deleteProductIsOpen} setIsOpen={setDeleteProductIsOpen} title='Eliminar Producto'>
                 {/* <DeleteProductForm setDeleteProductIsOpen={setDeleteProductIsOpen} productSelected={selectedProduct} /> */} 
             </RightBar>
 
             <CategoriesAccordion
                 setCategoryEdit={handleOpenEditCategory} 
                 setCategoryDelete={handleDeleteCategory}
+                setEditProductIsOpen={setEditProductIsOpen}
+                setDeleteProductIsOpen={setDeleteProductIsOpen}
+                setSelectedProduct={setSelectedProduct}
                 categoriesList={categoriesList ? categoriesList : []} 
                 productsList={productsList ? productsList : []}
             />
