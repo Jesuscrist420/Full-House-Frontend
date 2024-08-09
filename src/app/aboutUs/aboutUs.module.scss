@@ -12,7 +12,7 @@
     display: none;
 }
 
-.title{
+.titleDefault{
     margin-top: 8px;
     margin-bottom: 16px;
     font-size: 28px;
@@ -20,22 +20,58 @@
     color: rgba(146, 59, 48);
     transition: 0.5s;
     display: flex;
+}
+
+.title{
+    @extend .titleDefault;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.text{
-    width: 70%;
+.titleMs{
+    @extend .titleDefault;
+    padding-left: 64px;
+    align-items: flex-start;
+    justify-content: left;
+    text-align: left;
+}
+.titleVs{
+    @extend .titleDefault;
+    padding-right: 64px;
+    align-items: flex-end;
+    justify-content: right;
+    text-align: right;
+}
+
+.textDefault{
     font-size: 20px;
     font-weight: 500;
     transition: 0.5s;
     display: flex;
+}
+
+.text{
+    @extend .textDefault;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
+.textMs{
+    @extend .textDefault;
+    width: 100%;
+    padding: 0px 64px;
+    text-align: justify;
+}
+
+.textVs{
+    @extend .textDefault;
+    width: 100%;
+    padding: 0px 64px;
+    text-align: justify;
+}
 .presentationCardsContainer{
     display: flex;
     flex-wrap: wrap;
