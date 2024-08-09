@@ -26,6 +26,13 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
     const { data: session, status, update } = useSession();
     const token = session?.token;
 
+    let currency = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    });
+    
     const handleAddProductSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         try {

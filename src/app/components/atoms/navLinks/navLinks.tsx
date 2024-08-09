@@ -23,7 +23,6 @@ const links = [
   { name: 'Empleados', href: '/dashboard/employees', icon: UserGroupIcon },
   { name: 'Mesas', href: '/dashboard/tables', icon: MdOutlineTableBar },
   { name: 'Facturas', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {

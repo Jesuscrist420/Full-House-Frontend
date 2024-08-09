@@ -29,6 +29,13 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
 
     const { data: session, status, update } = useSession();
 
+    let currency = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    });
+
     const handleDelete = (product: any): void => {
         setProductDelete(product);
         update();
@@ -48,7 +55,7 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
                         <AccordionTrigger className={styles.trigger}>
                             <div className={styles.infoContainer}>
                                 {product.name}
-                                <p className="text-custom2">${product.price}</p>
+                                <p className="text-custom2">{currency.format(product.price).replace('US$', '$')}</p>
                             </div>
                         </AccordionTrigger>
                         <AccordionContent>
