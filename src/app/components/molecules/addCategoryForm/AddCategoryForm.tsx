@@ -18,7 +18,6 @@ const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategory
     const [errorsDescription, setErrorsDescription] = useState([]);
 
     const { data: session, status, update } = useSession();
-
     const token = session?.token;
 
     const handleAddCategorySubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -42,7 +41,6 @@ const AddCategoryForm = ({ setAddCategoryIsOpen, categorySelected }: addCategory
         } catch (e) {
             console.log(e);
         }
-        let data;
     };
 
     return (

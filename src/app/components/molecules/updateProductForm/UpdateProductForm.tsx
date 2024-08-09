@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import styles from './AddProductForm.module.scss';
+import React, { useEffect, useState } from 'react';
+import styles from './UpdateProductForm.module.scss';
 import FormLabel from '../../atoms/formLabel/FormLabel';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import { createProduct } from '@/services/products/createProduct.service';
+import { updateProduct } from '@/services/products/updateProduct.service';
 import { useSession } from 'next-auth/react';
 
 type productFormProps = {
-    setAddProductIsOpen?: (val: boolean) => void,
     categoriesList: any,
-    isEdit?: boolean,
-    productSelected?: any
+    productSelected?: any,
+    setEditProductIsOpen?: (val: boolean) => void,
 }
 
-const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: productFormProps) => {
+const UpdateProductForm = ({ categoriesList, productSelected, setEditProductIsOpen }: productFormProps) => {
 
     const [categoryId, setCategoryId] = useState(0);
     const [description, setDescription] = useState('');
-    const [inStock, setInStock] = useState(true);
+    const [inStock, setInStock] = useState(false);
     const [name, setName] = useState('');
     const [nutritionInfo, setNutritionInfo] = useState('');
     const [preparationTime, setPreparationTime] = useState(0);
@@ -26,19 +26,34 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
     const { data: session, status, update } = useSession();
     const token = session?.token;
 
-    const handleAddProductSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    useEffect(() => {
+        if (productSelected) {
+            setCategoryId(productSelected.category_id || 0);
+            setDescription(productSelected.description || '');
+            setInStock(productSelected.in_stock || false);
+            setName(productSelected.name || '');
+            setNutritionInfo(productSelected.nutrition_info ||'');
+            setPreparationTime(productSelected.preparation_time || 0);
+            setPrice(productSelected.price || 0);
+            setErrorsName([]);
+        }
+    }, [productSelected]);
+
+    const handleUpdateProductSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
         try {
-            const res = await createProduct({ 
+            const res = await updateProduct({
+                id: productSelected.id,
                 category_id: categoryId,
-                description, 
-                in_stock: inStock, 
-                name, 
-                nutrition_info: nutritionInfo, 
-                preparation_time: preparationTime, 
-                price, 
-                token 
+                description,
+                in_stock: inStock,
+                name,
+                nutrition_info: nutritionInfo,
+                preparation_time: preparationTime,
+                price,
+                token
             });
+
             if (res.ok) {
                 setCategoryId(0);
                 setDescription('');
@@ -47,8 +62,10 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
                 setNutritionInfo('');
                 setPreparationTime(0);
                 setPrice(0);
-                if (setAddProductIsOpen !== undefined) {
-                    setAddProductIsOpen(false);
+                setErrorsName([]);
+
+                if (setEditProductIsOpen !== undefined) {
+                    setEditProductIsOpen(false);
                 }
             } else {
                 if (res.errors) {
@@ -60,11 +77,12 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
         } catch (e) {
             console.log(e);
         }
+
     };
 
     return (
 
-        <form className={styles.form} onSubmit={handleAddProductSubmit}>
+        <form className={styles.form} onSubmit={handleUpdateProductSubmit}>
 
             <FormLabel text='Nombre del plato' required />
             <input
@@ -127,9 +145,9 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
                     <option key={category.id} value={category.id}>{category.name}</option>
                 )}
             </select>
-            <SubmitFormButton text={'Crear Producto'} />
+            <SubmitFormButton text={'Guardar Cambios'} />
         </form>
     )
 }
 
-export default ProductForm;
+export default UpdateProductForm;

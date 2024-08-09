@@ -2,7 +2,7 @@
 import React , {useState} from 'react';
 import styles from './LogInForm.module.scss';
 import styles2 from '@/app/authentication/authentication.module.scss';
-import { loginUser } from '@/services/login.service'
+import { loginUser } from '@/services/authentication/login.service'
 import Swal from 'sweetalert2';
 import FullHouseLogo from '../../atoms/logo/fullHouseLogo';
 import classNames from 'classnames';

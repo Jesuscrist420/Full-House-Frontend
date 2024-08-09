@@ -12,17 +12,26 @@ import EmptyPage from "@/app/components/atoms/emptyPage/EmptyPage";
 import RightBar from "@/app/components/atoms/rightBar/RightBar";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { getProducts } from "@/services/products/getProducts.service";
+import UpdateProductForm from "@/app/components/molecules/updateProductForm/UpdateProductForm";
+import DeleteProductForm from "@/app/components/molecules/deleteProductForm/DeleteProductForm";
 
 const Page = () => {
-
+    
     const [addCategoryIsOpen, setAddCategoryIsOpen] = useState(false);
-    const [addProductIsOpen, setAddProductIsOpen] = useState(false);
     const [editCategoryIsOpen, setEditCategoryIsOpen] = useState(false);
     const [deleteCategoryIsOpen, setDeleteCategoryIsOpen] = useState(false);
-
+    
+    const [addProductIsOpen, setAddProductIsOpen] = useState(false);
+    const [editProductIsOpen, setEditProductIsOpen] = useState(false);
+    const [deleteProductIsOpen, setDeleteProductIsOpen] = useState(false);
+    
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const [categoriesList, setCategoriesList] = useState();
+    const [productsList, setProductsList] = useState();
+
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -32,14 +41,25 @@ const Page = () => {
             const res = await getCategories(token);
             if(res.length !== 0){
                 setCategoriesList(res);
-                console.log('Response: ', res);
+                console.log('Categories List: ', res);
             }
         }
     }
-    //setCategoriesList(categoriesListMock);
+
+    const fetchProductsData =  async () => {
+        if(status == 'authenticated'){
+            const res = await getProducts(token);
+            if(res.length !== 0){
+                setProductsList(res);
+                console.log('Products List: ', res);
+            }
+        }
+    }
+
     useEffect(() => {
         void fetchCategoriesData();   
-    },[session, addProductIsOpen, editCategoryIsOpen, deleteCategoryIsOpen]);
+        void fetchProductsData();
+    },[session, addProductIsOpen, editCategoryIsOpen, deleteCategoryIsOpen, editProductIsOpen, deleteProductIsOpen]);
 
 
     const handleOpenAddCategory = (): void => {
@@ -68,22 +88,40 @@ const Page = () => {
                 <CommonHeaderButton text='Plato' handleClick={handleOpenAddProduct} />
             </CommonHeader>
             <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList ? true : false} />
+            
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Plato'>
                 <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
+
             <RightBar isOpen={editCategoryIsOpen} setIsOpen={setEditCategoryIsOpen} title='Editar Categoría'>
                 <UpdateCategoryForm setUpdateCategoryIsOpen={setEditCategoryIsOpen} categorySelected={selectedCategory}/>
             </RightBar>
             <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
-                <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory} />
+                <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory}/>
             </RightBar>
-            <CategoriesAccordion 
+
+            <RightBar isOpen={editProductIsOpen} setIsOpen={setEditProductIsOpen} title='Editar Producto'>
+                <UpdateProductForm 
+                    categoriesList={categoriesList ? categoriesList : []} 
+                    productSelected={selectedProduct}
+                    setEditProductIsOpen={setEditProductIsOpen}
+                />
+            </RightBar>
+            <RightBar isOpen={deleteProductIsOpen} setIsOpen={setDeleteProductIsOpen} title='Eliminar Producto'>
+                <DeleteProductForm setDeleteProductIsOpen={setDeleteProductIsOpen} productSelected={selectedProduct} />
+            </RightBar>
+
+            <CategoriesAccordion
                 setCategoryEdit={handleOpenEditCategory} 
                 setCategoryDelete={handleDeleteCategory}
+                setEditProductIsOpen={setEditProductIsOpen}
+                setDeleteProductIsOpen={setDeleteProductIsOpen}
+                setSelectedProduct={setSelectedProduct}
                 categoriesList={categoriesList ? categoriesList : []} 
+                productsList={productsList ? productsList : []}
             />
         </>
     );

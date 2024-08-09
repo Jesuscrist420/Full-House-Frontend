@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import styles from './SignUpForm.module.scss';
-import { registerUser } from '@/services/register.service';
+import { registerUser } from '@/services/authentication/register.service';
 import FullHouseLogo from '../../atoms/logo/fullHouseLogo';
 import styles2 from '@/app/authentication/authentication.module.scss';
 
