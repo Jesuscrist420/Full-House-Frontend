@@ -63,7 +63,7 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
                         </AccordionContent>
                     </AccordionItem>
                     :
-                    <></>
+                    null
                 )
             })}
         </Accordion>

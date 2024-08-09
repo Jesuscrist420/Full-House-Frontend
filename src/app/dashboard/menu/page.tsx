@@ -41,7 +41,7 @@ const Page = () => {
             const res = await getCategories(token);
             if(res.length !== 0){
                 setCategoriesList(res);
-                console.log('Response: ', res);
+                console.log('Categories List: ', res);
             }
         }
     }
@@ -51,7 +51,7 @@ const Page = () => {
             const res = await getProducts(token);
             if(res.length !== 0){
                 setProductsList(res);
-                console.log('Response: ', res);
+                console.log('Products List: ', res);
             }
         }
     }

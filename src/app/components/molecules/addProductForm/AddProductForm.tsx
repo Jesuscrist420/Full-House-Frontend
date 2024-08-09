@@ -98,13 +98,6 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
                     className={styles.newCheckbox}
                     type='checkbox'
                 />
-                <input
-                    value={0}
-                    checked={!inStock}
-                    className={'opacity-0'}
-                    type='checkbox'
-                    hidden
-                />
             </div>
 
             <FormLabel text='Tiempo de preparación (Min)' required />
