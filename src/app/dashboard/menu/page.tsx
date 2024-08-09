@@ -68,18 +68,21 @@ const Page = () => {
                 <CommonHeaderButton text='Plato' handleClick={handleOpenAddProduct} />
             </CommonHeader>
             <EmptyPage handleClick={handleOpenAddCategory} emptyPage="Categorías" hidden={categoriesList ? true : false} />
+            
             <RightBar isOpen={addCategoryIsOpen} setIsOpen={setAddCategoryIsOpen} title='Añadir Categoría'>
                 <AddCategoryForm setAddCategoryIsOpen={setAddCategoryIsOpen} />
             </RightBar>
             <RightBar isOpen={addProductIsOpen} setIsOpen={setAddProductIsOpen} title='Añadir Plato'>
                 <ProductForm categoriesList={categoriesList} setAddProductIsOpen={setAddProductIsOpen} />
             </RightBar>
+
             <RightBar isOpen={editCategoryIsOpen} setIsOpen={setEditCategoryIsOpen} title='Editar Categoría'>
                 <UpdateCategoryForm setUpdateCategoryIsOpen={setEditCategoryIsOpen} categorySelected={selectedCategory}/>
             </RightBar>
             <RightBar isOpen={deleteCategoryIsOpen} setIsOpen={setDeleteCategoryIsOpen} title='Eliminar Categoría'>
                 <DeleteCategoryForm setDeleteCategoryIsOpen={setDeleteCategoryIsOpen} categorySelected={selectedCategory} />
             </RightBar>
+            
             <CategoriesAccordion 
                 setCategoryEdit={handleOpenEditCategory} 
                 setCategoryDelete={handleDeleteCategory}

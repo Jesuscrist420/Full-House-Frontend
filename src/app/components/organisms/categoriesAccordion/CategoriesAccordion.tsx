@@ -43,6 +43,7 @@ const CategoriesAccordion = ({ categoriesList, setCategoryDelete, setCategoryEdi
                         </AccordionTrigger>
                         <AccordionContent>
                             Productos categoria {category.name}
+                            {/* Grid Products */}
                             <div className={styles.buttonsContainer}>
                                 <button onClick={() => handleEdit(category)} className={styles.editButton}><FaPencilAlt />Editar</button>
                                 <button onClick={() => handleDelete(category)} className={styles.deleteButton}><MdDelete />Eliminar</button>
