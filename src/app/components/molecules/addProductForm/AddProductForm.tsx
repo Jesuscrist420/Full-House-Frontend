@@ -6,8 +6,6 @@ import { createProduct } from '@/services/products/createProduct.service';
 import { useSession } from 'next-auth/react';
 
 type productFormProps = {
-    setProductSummaryIsOpen?: (val: boolean) => void,
-    setProductEditIsOpen?: (val: boolean) => void,
     setAddProductIsOpen?: (val: boolean) => void,
     categoriesList: any,
     isEdit?: boolean,
@@ -18,7 +16,7 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
 
     const [categoryId, setCategoryId] = useState(0);
     const [description, setDescription] = useState('');
-    const [inStock, setInStock] = useState(false);
+    const [inStock, setInStock] = useState(true);
     const [name, setName] = useState('');
     const [nutritionInfo, setNutritionInfo] = useState('');
     const [preparationTime, setPreparationTime] = useState(0);
@@ -34,7 +32,7 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
             const res = await createProduct({ 
                 category_id: categoryId,
                 description, 
-                in_Stock: inStock, 
+                in_stock: inStock, 
                 name, 
                 nutrition_info: nutritionInfo, 
                 preparation_time: preparationTime, 
@@ -96,9 +94,16 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
                 <input
                     onChange={(e) => { setInStock(!inStock) }}
                     value={1}
+                    checked={inStock}
                     className={styles.newCheckbox}
                     type='checkbox'
-                    required
+                />
+                <input
+                    value={0}
+                    checked={!inStock}
+                    className={'opacity-0'}
+                    type='checkbox'
+                    hidden
                 />
             </div>
 

@@ -16,7 +16,7 @@ const Toast = Swal.mixin({
 type productProps = {
     category_id: number,
     description: string,
-    in_Stock: boolean,
+    in_stock: boolean,
     name: string,
     nutrition_info: string,
     preparation_time: number,
@@ -29,7 +29,7 @@ export const CreateProductFormSchema = z.object({
     description: z.string(),
   })
 
-export async function createProduct({category_id, description, in_Stock, name, nutrition_info, preparation_time, price, token}: productProps): Promise<Response | any> {
+export async function createProduct({category_id, description, in_stock, name, nutrition_info, preparation_time, price, token}: productProps): Promise<Response | any> {
 
     // Validate form fields
     const validatedFields = CreateProductFormSchema.safeParse({
@@ -44,6 +44,8 @@ export async function createProduct({category_id, description, in_Stock, name, n
         }
     }
 
+    console.log("In_stock?: ", in_stock);
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dish`, {
         method: "POST",
         headers: {
@@ -53,7 +55,7 @@ export async function createProduct({category_id, description, in_Stock, name, n
         body: JSON.stringify({
             category_id,
             description,
-            in_Stock,
+            in_stock,
             name,
             nutrition_info,
             preparation_time,

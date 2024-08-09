@@ -17,7 +17,7 @@ type ProductProps = {
     id: number,
     category_id: number,
     description: string,
-    in_Stock: boolean,
+    in_stock: boolean,
     name: string,
     nutrition_info: string,
     preparation_time: number,
@@ -30,7 +30,7 @@ export const UpdateProductFormSchema = z.object({
     description: z.string(),
 });
 
-export async function updateProduct({id, category_id, description, in_Stock, name, nutrition_info, preparation_time, price, token }: ProductProps): Promise<Response | any> {
+export async function updateProduct({id, category_id, description, in_stock, name, nutrition_info, preparation_time, price, token }: ProductProps): Promise<Response | any> {
 
     // Validate form fields
     const validatedFields = UpdateProductFormSchema.safeParse({
@@ -54,7 +54,7 @@ export async function updateProduct({id, category_id, description, in_Stock, nam
         body: JSON.stringify({
             category_id,
             description,
-            in_Stock,
+            in_stock,
             name,
             nutrition_info,
             preparation_time,

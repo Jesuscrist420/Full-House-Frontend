@@ -8,10 +8,11 @@ import { useSession } from 'next-auth/react';
 
 type productFormProps = {
     categoriesList: any,
-    productSelected?: any
+    productSelected?: any,
+    setEditProductIsOpen?: (val: boolean) => void,
 }
 
-const UpdateProductForm = ({ categoriesList, productSelected }: productFormProps) => {
+const UpdateProductForm = ({ categoriesList, productSelected, setEditProductIsOpen }: productFormProps) => {
 
     const [categoryId, setCategoryId] = useState(0);
     const [description, setDescription] = useState('');
@@ -45,7 +46,7 @@ const UpdateProductForm = ({ categoriesList, productSelected }: productFormProps
                 id: productSelected.id,
                 category_id: categoryId,
                 description,
-                in_Stock: inStock,
+                in_stock: inStock,
                 name,
                 nutrition_info: nutritionInfo,
                 preparation_time: preparationTime,
@@ -62,6 +63,10 @@ const UpdateProductForm = ({ categoriesList, productSelected }: productFormProps
                 setPreparationTime(0);
                 setPrice(0);
                 setErrorsName([]);
+
+                if (setEditProductIsOpen !== undefined) {
+                    setEditProductIsOpen(false);
+                }
             } else {
                 if (res.errors) {
                     if (res.errors.name) {
@@ -110,7 +115,6 @@ const UpdateProductForm = ({ categoriesList, productSelected }: productFormProps
                     checked={inStock}
                     className={styles.newCheckbox}
                     type='checkbox'
-                    required
                 />
             </div>
 

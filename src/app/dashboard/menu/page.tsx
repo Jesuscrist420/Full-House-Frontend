@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getProducts } from "@/services/products/getProducts.service";
 import UpdateProductForm from "@/app/components/molecules/updateProductForm/UpdateProductForm";
+import DeleteProductForm from "@/app/components/molecules/deleteProductForm/DeleteProductForm";
 
 const Page = () => {
     
@@ -103,10 +104,14 @@ const Page = () => {
             </RightBar>
 
             <RightBar isOpen={editProductIsOpen} setIsOpen={setEditProductIsOpen} title='Editar Producto'>
-                <UpdateProductForm categoriesList={categoriesList ? categoriesList : []} productSelected={selectedProduct}/>
+                <UpdateProductForm 
+                    categoriesList={categoriesList ? categoriesList : []} 
+                    productSelected={selectedProduct}
+                    setEditProductIsOpen={setEditProductIsOpen}
+                />
             </RightBar>
             <RightBar isOpen={deleteProductIsOpen} setIsOpen={setDeleteProductIsOpen} title='Eliminar Producto'>
-                {/* <DeleteProductForm setDeleteProductIsOpen={setDeleteProductIsOpen} productSelected={selectedProduct} /> */} 
+                <DeleteProductForm setDeleteProductIsOpen={setDeleteProductIsOpen} productSelected={selectedProduct} />
             </RightBar>
 
             <CategoriesAccordion
