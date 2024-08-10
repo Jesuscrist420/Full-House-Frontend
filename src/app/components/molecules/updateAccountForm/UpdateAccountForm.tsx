@@ -6,8 +6,11 @@ import styles from '../../organisms/tablesAccordion/CategoriesAccordion.module.s
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { getTables } from '@/services/getTables.service';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt, FaPlus } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
+import AddDishForm from './AddDishForm';
+import UpdateDishForm from './UpdateDishForm';
+import DeleteDishForm from './DeleteDishForm';
 
 type UpdateAccountFormProps = {
     setUpdateAccountIsOpen: (val: boolean) => void,
@@ -26,7 +29,7 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
     const [tables, setTables] = useState<{ id: string, name: string }[]>([]);
 
     const { data: session, status, update } = useSession();
-    const token = session?.token;
+    const token = session?.token as string;
 
     useEffect(() => {
         if (accountSelected) {
@@ -86,20 +89,54 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
         }
     };
 
+    // State to track which dish form is currently open
+    const [openForm, setOpenForm] = useState<'add' | 'update' | 'delete' | null>(null);
+    const [selectedDishId, setSelectedDishId] = useState<number | null>(null);
+    const [selectedDishQuantity, setSelectedDishQuantity] = useState<number>(1);
+
+    const toggleForm = (formType: 'add' | 'update' | 'delete') => {
+        if (openForm === formType) {
+            setOpenForm(null); // Close the form if it's already open
+        } else {
+            setOpenForm(formType); // Open the selected form
+        }
+    };
+
+    const handleUpdateDish = (dishId: number, quantity: number) => {
+        setSelectedDishId(dishId);
+        setSelectedDishQuantity(quantity);
+        toggleForm('update');
+    };
+
+    const handleDeleteDish = (dishId: number) => {
+        setSelectedDishId(dishId);
+        toggleForm('delete');
+    };
+
     return (
         <>
             <p className={styles.buttonGroupLabel}>Acciones para Platos:</p>
             <div className={styles.buttonsContainer}>
-                <button className={styles.addButton} >
-                    <FaPencilAlt />Agregar
+                <button className={styles.addButton} onClick={() => toggleForm('add')}>
+                    <FaPlus />Agregar
                 </button>
-                <button className={styles.editButton} >
+                <button className={styles.editButton} onClick={() => handleUpdateDish(selectedDishId || 0, selectedDishQuantity)}>
                     <FaPencilAlt />Editar
                 </button>
-                <button className={styles.deleteButton} >
+                <button className={styles.deleteButton} onClick={() => handleDeleteDish(selectedDishId || 0)}>
                     <MdClose /> Eliminar
                 </button>
             </div >
+            {openForm === 'add' && (
+                <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
+            {openForm === 'update' && (
+                <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
+            {openForm === 'delete' && (
+                <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
+
             <form className={formStyles.form} onSubmit={handleUpdateAccountSubmit}>
                 <FormLabel text='Comentario' required />
                 <input
