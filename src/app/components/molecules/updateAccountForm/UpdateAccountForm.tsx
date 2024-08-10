@@ -115,28 +115,6 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
 
     return (
         <>
-            <p className={styles.buttonGroupLabel}>Acciones para Platos:</p>
-            <div className={styles.buttonsContainer}>
-                <button className={styles.addButton} onClick={() => toggleForm('add')}>
-                    <FaPlus />Agregar
-                </button>
-                <button className={styles.editButton} onClick={() => handleUpdateDish(selectedDishId || 0, selectedDishQuantity)}>
-                    <FaPencilAlt />Editar
-                </button>
-                <button className={styles.deleteButton} onClick={() => handleDeleteDish(selectedDishId || 0)}>
-                    <MdClose /> Eliminar
-                </button>
-            </div >
-            {openForm === 'add' && (
-                <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
-            {openForm === 'update' && (
-                <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
-            {openForm === 'delete' && (
-                <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
-
             <form className={formStyles.form} onSubmit={handleUpdateAccountSubmit}>
                 <FormLabel text='Comentario' required />
                 <input
@@ -178,6 +156,28 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                 ))}
                 <SubmitFormButton text='Actualizar Cuenta' />
             </form>
+            <br />
+            <p className={styles.buttonGroupLabel}>Acciones para Platos:</p>
+            <div className={styles.buttonsContainer}>
+                <button className={styles.addButton} onClick={() => toggleForm('add')}>
+                    <FaPlus />Agregar
+                </button>
+                <button className={styles.editButton} onClick={() => handleUpdateDish(selectedDishId || 0, selectedDishQuantity)}>
+                    <FaPencilAlt />Editar
+                </button>
+                <button className={styles.deleteButton} onClick={() => handleDeleteDish(selectedDishId || 0)}>
+                    <MdClose /> Eliminar
+                </button>
+            </div >
+            {openForm === 'add' && (
+                <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
+            {openForm === 'update' && (
+                <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
+            {openForm === 'delete' && (
+                <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+            )}
         </>
     );
 }
