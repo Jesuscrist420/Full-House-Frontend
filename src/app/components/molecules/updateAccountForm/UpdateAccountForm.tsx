@@ -1,10 +1,13 @@
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import { Account, updateAccount } from '@/services/accounts/getAccounts.service';
 import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
+import formStyles from './AddCategoryForm.module.scss';
+import styles from '../../organisms/tablesAccordion/CategoriesAccordion.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { getTables } from '@/services/getTables.service';
+import { FaPencilAlt } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
 
 type UpdateAccountFormProps = {
     setUpdateAccountIsOpen: (val: boolean) => void,
@@ -84,47 +87,61 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
     };
 
     return (
-        <form className={styles.form} onSubmit={handleUpdateAccountSubmit}>
-            <FormLabel text='Comentario' required />
-            <input
-                onChange={(e) => { setComment(e.target.value); setErrorsComment([]); }}
-                className={styles.newInput}
-                value={comment}
-                type='text'
-                placeholder='Comentario'
-                required
-            />
-            {errorsComment.map((errorComment, index) => (
-                <p key={index} className={styles.error}>{errorComment}</p>
-            ))}
-            <FormLabel text='ID de la mesa' required />
-            <select
-                onChange={(e) => setTableId(parseInt(e.target.value))}
-                className={styles.newInput}
-                value={tableId}
-                required
-            >
-                <option value={0} disabled>Seleccione una mesa</option>
-                {tables.map((table) => (
-                    <option key={table.id} value={table.id}>
-                        {table.name}
-                    </option>
+        <>
+            <p className={styles.buttonGroupLabel}>Acciones para Platos:</p>
+            <div className={styles.buttonsContainer}>
+                <button className={styles.addButton} >
+                    <FaPencilAlt />Agregar
+                </button>
+                <button className={styles.editButton} >
+                    <FaPencilAlt />Editar
+                </button>
+                <button className={styles.deleteButton} >
+                    <MdClose /> Eliminar
+                </button>
+            </div >
+            <form className={formStyles.form} onSubmit={handleUpdateAccountSubmit}>
+                <FormLabel text='Comentario' required />
+                <input
+                    onChange={(e) => { setComment(e.target.value); setErrorsComment([]); }}
+                    className={formStyles.newInput}
+                    value={comment}
+                    type='text'
+                    placeholder='Comentario'
+                    required
+                />
+                {errorsComment.map((errorComment, index) => (
+                    <p key={index} className={formStyles.error}>{errorComment}</p>
                 ))}
-            </select>
-            <FormLabel text='Total' required />
-            <input
-                onChange={(e) => { setTotal(parseFloat(e.target.value)); setErrorsTotal([]); }}
-                className={styles.newInput}
-                value={total}
-                type='number'
-                placeholder='Total'
-                required
-            />
-            {errorsTotal.map((errorTotal, index) => (
-                <p key={index} className={styles.error}>{errorTotal}</p>
-            ))}
-            <SubmitFormButton text='Actualizar Cuenta' />
-        </form>
+                <FormLabel text='ID de la mesa' required />
+                <select
+                    onChange={(e) => setTableId(parseInt(e.target.value))}
+                    className={formStyles.newInput}
+                    value={tableId}
+                    required
+                >
+                    <option value={0} disabled>Seleccione una mesa</option>
+                    {tables.map((table) => (
+                        <option key={table.id} value={table.id}>
+                            {table.name}
+                        </option>
+                    ))}
+                </select>
+                <FormLabel text='Total' required />
+                <input
+                    onChange={(e) => { setTotal(parseFloat(e.target.value)); setErrorsTotal([]); }}
+                    className={formStyles.newInput}
+                    value={total}
+                    type='number'
+                    placeholder='Total'
+                    required
+                />
+                {errorsTotal.map((errorTotal, index) => (
+                    <p key={index} className={formStyles.error}>{errorTotal}</p>
+                ))}
+                <SubmitFormButton text='Actualizar Cuenta' />
+            </form>
+        </>
     );
 }
 
