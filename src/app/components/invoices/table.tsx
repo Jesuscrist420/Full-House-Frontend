@@ -47,9 +47,9 @@ export default function Table({
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-white shadow-md overflow-hidden">
-          <div className="max-h-96 overflow-y-auto"> {/* Added container for scrollable table */}
+          <div className="max-h-96 overflow-y-auto"> {/* Contenedor scrollable */}
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
+              <thead className="bg-gray-100 sticky top-0 z-10">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Table ID</th>
@@ -89,7 +89,7 @@ export default function Table({
                 ))}
               </tbody>
             </table>
-          </div> {/* End of scrollable container */}
+          </div> {/* Fin del contenedor scrollable */}
         </div>
       </div>
     </div>
