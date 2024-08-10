@@ -15,6 +15,12 @@ export interface CreateAccount {
     "table_id": number
     "total": number
 }
+export interface UpdateAccount {
+    "id": number
+    "comment": string
+    "table_id": number
+    "total": number
+}
 export async function getAccounts(token: string | unknown): Promise<Account[] | undefined> {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts`, {
@@ -34,14 +40,18 @@ export async function getAccounts(token: string | unknown): Promise<Account[] | 
 }
 
 export async function addAccount(token: string | unknown, account: CreateAccount): Promise<any> {
-
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(account)
+        body: JSON.stringify({
+            comment: account.comment,
+            table_id: account.table_id,
+            total: account.total,
+            status: 'open'
+        })
     })
 
     if (res.ok) {
@@ -51,18 +61,24 @@ export async function addAccount(token: string | unknown, account: CreateAccount
     return undefined;
 }
 
-export async function updateAccount(token: string | unknown, account: Account): Promise<any> {
-
+export async function updateAccount(token: string | unknown, account: UpdateAccount,): Promise<any> {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account.id}`, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(account)
+        body: JSON.stringify({
+            comment: account.comment,
+            table_id: account.table_id,
+            total: account.total,
+            status: 'open'
+        })
     })
+    console.log('res', res);
 
     if (res.ok) {
+        console.log('res ok');
         return res.json();
     }
 
