@@ -119,6 +119,7 @@ const Page = () => {
             </RightBar>
 
             <CategoriesAccordion
+                handleOpenAddProduct={handleOpenAddProduct}
                 setCategoryEdit={handleOpenEditCategory} 
                 setCategoryDelete={handleDeleteCategory}
                 setEditProductIsOpen={setEditProductIsOpen}

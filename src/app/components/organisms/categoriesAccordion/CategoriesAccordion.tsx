@@ -5,12 +5,11 @@ import {
     AccordionTrigger,
 } from "@/app/components/ui/accordion"
 
-import styles from "./CategoriesAccordion.module.scss";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import styles from "./CategoriesAccordion.module.scss";
 import ProductsAccordion from "../productsAccordion/ProductsAccordion";
-import { useState } from "react";
 
 type categoriesAccordionProps = {
     categoriesList: {
@@ -32,9 +31,10 @@ type categoriesAccordionProps = {
     setEditProductIsOpen: (val:boolean) => void,
     setDeleteProductIsOpen: (val:boolean) => void,
     setSelectedProduct: (product: any) => void,
+    handleOpenAddProduct: () => void,
 }
 
-const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, setCategoryEdit, setEditProductIsOpen, setDeleteProductIsOpen, setSelectedProduct}: categoriesAccordionProps) => {
+const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, setCategoryEdit, setEditProductIsOpen, setDeleteProductIsOpen, setSelectedProduct, handleOpenAddProduct}: categoriesAccordionProps) => {
 
     const { data: session, status, update } = useSession();
 
@@ -61,6 +61,12 @@ const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, 
     return (
         <Accordion type="single" collapsible className="w-full flex-column px-1 py-2">
             {categoriesList?.map((category) => {
+                const productsListPerCategory: any[] = []
+                productsList?.map((product) => {
+                    if(product.category_id === category.id){
+                        productsListPerCategory.push(product)
+                    }
+                })
                 return (
                     <AccordionItem className={styles.accordionItem} key={category.id} value={category.name}>
                         <AccordionTrigger>
@@ -69,10 +75,11 @@ const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, 
                         <AccordionContent>
                             {category.description}
                             <ProductsAccordion 
+                                handleOpenAddProduct={handleOpenAddProduct}
                                 setProductEdit={handleOpenEditProduct} 
                                 setProductDelete={handleDeleteProduct} 
-                                productsList={productsList ? productsList : []}
-                                categoryId={category.id}
+                                productsList={productsListPerCategory ? productsListPerCategory : []}
+                                categoryName={category.name}
                             />
                             <div className={styles.buttonsContainer}>
                                 <button onClick={() => handleEdit(category)} className={styles.editButton}><FaPencilAlt />Editar</button>
