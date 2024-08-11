@@ -1,5 +1,5 @@
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import styles from "../organisms/tablesAccordion/CategoriesAccordion.module.scss";
+import styles from "../organisms/tablesAccordion/TablesAccordion.module.scss";
 import { FaPencilAlt } from 'react-icons/fa';
 import { MdClose, MdDelete } from 'react-icons/md';
 

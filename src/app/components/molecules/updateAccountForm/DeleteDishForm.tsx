@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
+import styles from './UpdateAccountForm.module.scss';
 import { deleteDish } from '@/services/accounts/getAccounts.service';
 
 type DeleteDishFormProps = {

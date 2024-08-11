@@ -1,8 +1,8 @@
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import { Account, updateAccount } from '@/services/accounts/getAccounts.service';
 import FormLabel from '../../atoms/formLabel/FormLabel';
-import formStyles from './AddCategoryForm.module.scss';
-import styles from '../../organisms/tablesAccordion/CategoriesAccordion.module.scss';
+import formStyles from './UpdateAccountForm.module.scss';
+import styles from '../../organisms/tablesAccordion/TablesAccordion.module.scss';
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { getTables } from '@/services/getTables.service';
