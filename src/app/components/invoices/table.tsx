@@ -44,7 +44,7 @@ export default function Table({
 }) {
 
   return (
-    <div className="mt-6 flow-root">
+    <div className="mt-6">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-white shadow-md overflow-hidden">
           <div className="max-h-96 overflow-y-auto"> {/* Contenedor scrollable */}
@@ -74,11 +74,12 @@ export default function Table({
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatCurrency(account.total)}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.user_id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className={styles.buttonsContainer}>
-                        <button className={styles.editButton} onClick={() => handleEdit(account)}>
+                      <div className="flex justify-end gap-2
+                      ">
+                        <button className="flex items-center justify-center w-[120px] text-blue-500 hover:bg-blue-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleEdit(account)}>
                           <FaPencilAlt />Editar
                         </button>
-                        <button className={styles.deleteButton} onClick={() => handleDelete(account)}>
+                        <button className="flex items-center justify-center w-[120px] text-red-500 hover:bg-red-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleDelete(account)}>
                           <MdClose />  Cerrar
                         </button>
                       </div>
