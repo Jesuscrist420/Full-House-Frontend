@@ -157,27 +157,32 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                 <SubmitFormButton text='Actualizar Cuenta' />
             </form>
             <br />
-            <p className={styles.buttonGroupLabel}>Acciones para Platos:</p>
-            <div className={styles.buttonsContainer}>
-                <button className={styles.addButton} onClick={() => toggleForm('add')}>
+            <p className="text-lg font-semibold text-gray-600">Acciones para Platos:</p>
+            <div className="flex flex-wrap justify-between gap-4 mt-4">
+                <button className="flex items-center justify-center w-[120px] text-green-500 hover:bg-green-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => toggleForm('add')}>
                     <FaPlus />Agregar
                 </button>
-                <button className={styles.editButton} onClick={() => handleUpdateDish(selectedDishId || 0, selectedDishQuantity)}>
+                <button className="flex items-center justify-center w-[120px] text-blue-500 hover:bg-blue-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleUpdateDish(selectedDishId || 0, selectedDishQuantity)}>
                     <FaPencilAlt />Editar
                 </button>
-                <button className={styles.deleteButton} onClick={() => handleDeleteDish(selectedDishId || 0)}>
+                <button className="flex items-center justify-center w-[120px] text-red-500 hover:bg-red-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleDeleteDish(selectedDishId || 0)}>
                     <MdClose /> Eliminar
                 </button>
             </div >
             {openForm === 'add' && (
                 <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
-            {openForm === 'update' && (
-                <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
-            {openForm === 'delete' && (
-                <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
-            )}
+            )
+            }
+            {
+                openForm === 'update' && (
+                    <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
+                )
+            }
+            {
+                openForm === 'delete' && (
+                    <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+                )
+            }
         </>
     );
 }
