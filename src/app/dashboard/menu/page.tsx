@@ -42,6 +42,8 @@ const Page = () => {
             if(res.length !== 0){
                 setCategoriesList(res);
                 console.log('Categories List: ', res);
+            }else{
+                setCategoriesList(undefined);
             }
         }
     }
@@ -52,6 +54,8 @@ const Page = () => {
             if(res.length !== 0){
                 setProductsList(res);
                 console.log('Products List: ', res);
+            }else{
+                setProductsList(undefined);
             }
         }
     }

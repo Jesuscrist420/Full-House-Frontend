@@ -44,8 +44,6 @@ export async function createProduct({category_id, description, in_stock, name, n
         }
     }
 
-    console.log("In_stock?: ", in_stock);
-
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dish`, {
         method: "POST",
         headers: {

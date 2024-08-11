@@ -43,8 +43,8 @@ const CategoriesAccordion = ({ categoriesList, productsList, setCategoryDelete, 
         update();
     }
 
-    const handleEdit = (table: any): void => {
-        setCategoryEdit(table);
+    const handleEdit = (category: any): void => {
+        setCategoryEdit(category);
         update();
     }
 
