@@ -54,7 +54,6 @@ export default function Table({
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Table ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Restaurant ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentario</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de apertura</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de cierre</th>
@@ -69,7 +68,6 @@ export default function Table({
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{account.id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.table_id}</td>
                     <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${account.status === 'active' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.restaurant_id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.comment}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDateToLocal(account.opening_timestamp)}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDateToLocal(account.closing_timestamp)}</td>
