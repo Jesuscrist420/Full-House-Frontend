@@ -50,15 +50,17 @@ export async function updateEmployee({ id, name, email, role, token }: EmployeeP
         body: JSON.stringify({
             name,
             email,
+            password: null,
             position: role
         }),
     });
 
     if (!res.ok) {
+        const text = await res.json()
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Algo salió mal'
+            text: text.detail
         });
         return res;
     }

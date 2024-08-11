@@ -15,10 +15,11 @@ export async function deleteProduct({ id, token }: DeleteProductProps): Promise<
     });
 
     if (!res.ok) {
+        const text = await res.json()
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Algo salió mal'
+            text: text.detail
         });
         return res;
     }

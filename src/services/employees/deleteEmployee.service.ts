@@ -15,10 +15,11 @@ export async function deleteEmployee({ id, token }: DeleteEmployeeProps): Promis
     });
 
     if (!res.ok) {
+        const text = await res.json()
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Algo salió mal'
+            text: text.detail
         });
         return res;
     }

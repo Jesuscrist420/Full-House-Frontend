@@ -63,10 +63,11 @@ export async function updateProduct({id, category_id, description, in_stock, nam
     });
 
     if (!res.ok) {
+        const text = await res.json()
         void Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Algo salió mal'
+            text: text.detail
         });
         return res;
     }
