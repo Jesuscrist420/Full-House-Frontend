@@ -5,7 +5,7 @@ import {
     AccordionTrigger,
 } from "@/app/components/ui/accordion"
 
-import styles from "./CategoriesAccordion.module.scss";
+import styles from "./TablesAccordion.module.scss";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 

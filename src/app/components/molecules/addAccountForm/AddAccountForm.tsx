@@ -2,10 +2,11 @@ import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import { Account, addAccount } from '@/services/accounts/getAccounts.service';
 import FormLabel from '../../atoms/formLabel/FormLabel';
 import styles from './AddCategoryForm.module.scss';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useSession } from 'next-auth/react';
 import { set } from 'zod';
+import { getTables } from '@/services/getTables.service';
 
 
 type AddAccountFormProps = {
@@ -14,13 +15,14 @@ type AddAccountFormProps = {
     setAccounts: (val: Account[]) => void
 }
 
-const AddAccountForm = ({ setAddAccountIsOpen,accounts, setAccounts  }: AddAccountFormProps) => {
+const AddAccountForm = ({ setAddAccountIsOpen, accounts, setAccounts }: AddAccountFormProps) => {
 
     const [comment, setComment] = useState('');
     const [tableId, setTableId] = useState(0);
     const [total, setTotal] = useState(0);
     const [errorsComment, setErrorsComment] = useState([]);
     const [errorsTotal, setErrorsTotal] = useState([]);
+    const [tables, setTables] = useState<{ id: string, name: string }[]>([]);
 
     const { data: session, status, update } = useSession();
 
@@ -53,7 +55,16 @@ const AddAccountForm = ({ setAddAccountIsOpen,accounts, setAccounts  }: AddAccou
             console.log(e);
         }
     };
-
+    useEffect(() => {
+        // Fetch tables when component mounts
+        const fetchTables = async () => {
+            if (token) {
+                const tablesList = await getTables(token);
+                setTables(tablesList || []);
+            }
+        };
+        fetchTables();
+    }, [token]);
     return (
         <form className={styles.form} onSubmit={handleAddAccountSubmit}>
             <FormLabel text='Comentario' required />
@@ -69,14 +80,19 @@ const AddAccountForm = ({ setAddAccountIsOpen,accounts, setAccounts  }: AddAccou
                 <p key={errorComment} className={styles.error}>{errorComment}</p>
             ))}
             <FormLabel text='ID de la mesa' required />
-            <input
-                onChange={(e) => { setTableId(parseInt(e.target.value)); }}
+            <select
+                onChange={(e) => setTableId(parseInt(e.target.value))}
                 className={styles.newInput}
                 value={tableId}
-                type='number'
-                placeholder='ID de la mesa'
                 required
-            />
+            >
+                <option value={0} disabled>Seleccione una mesa</option>
+                {tables.map((table) => (
+                    <option key={table.id} value={table.id}>
+                        {table.name}
+                    </option>
+                ))}
+            </select>
             <FormLabel text='Total' required />
             <input
                 onChange={(e) => { setTotal(parseFloat(e.target.value)); setErrorsTotal([]); }}

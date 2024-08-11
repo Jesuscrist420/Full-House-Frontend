@@ -9,6 +9,7 @@ import { getAccounts } from '@/services/accounts/getAccounts.service';
 import { useSession } from 'next-auth/react';
 import AddAccountForm from '@/app/components/molecules/addAccountForm/AddAccountForm'
 import DeleteAccountForm from '@/app/components/molecules/deleteAccountForm/DeleteAccountForm';
+import UpdateAccountForm from '@/app/components/molecules/updateAccountForm/UpdateAccountForm';
 
 export interface Account {
     id: number;
@@ -65,7 +66,7 @@ export default function Page() {
         if (token) {
             fetchAccountsData();
         }
-    }, [token]);
+    }, [token, accounts]);
 
     const handleSearch = (term: string): void => {
         if (term === "") {
@@ -87,7 +88,7 @@ export default function Page() {
                 <AddAccountForm setAddAccountIsOpen={setAddInvoiceIsOpen} accounts={accounts} setAccounts={setAccounts} />
             </RightBar>
             <RightBar isOpen={updateAccountIsOpen} setIsOpen={setUpdateAccountIsOpen} title='Actualizar Cuenta'>
-                {/* Add form or content for updating an account */}
+                <UpdateAccountForm setUpdateAccountIsOpen={setUpdateAccountIsOpen} accountSelected={selectedAccount} setAccounts={setAccounts} accounts={accounts} />
             </RightBar>
             <RightBar isOpen={deleteAccountIsOpen} setIsOpen={setDeleteAccountIsOpen} title='Eliminar Cuenta'>
                 <DeleteAccountForm setDeleteAccountIsOpen={setDeleteAccountIsOpen} accountSelected={selectedAccount} />
