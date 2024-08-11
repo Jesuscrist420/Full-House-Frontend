@@ -20,7 +20,7 @@ type EmployeeCardProps = {
 const EmployeeCard = ({employeeSelected, img, name, position, setEmployeeSelected, setEmployeeSummaryIsOpen}: EmployeeCardProps) => {
     
     const clickHandler = (): void => {
-        setEmployeeSelected(employeeSelected)
+        setEmployeeSelected(employeeSelected);
         setEmployeeSummaryIsOpen(true);
     }
 

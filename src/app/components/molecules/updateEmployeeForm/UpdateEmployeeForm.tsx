@@ -80,7 +80,7 @@ const UpdateEmployeeForm = ({ employeeSelected, setEditEmployeeIsOpen }: employe
                 className={styles.newInput}
                 value={name}
                 type='text'
-                placeholder='Nombre del nuevo empleado'
+                placeholder='Nombre'
                 required
             />
             {errorsName?.map((errorName) => {
@@ -95,7 +95,7 @@ const UpdateEmployeeForm = ({ employeeSelected, setEditEmployeeIsOpen }: employe
                 className={styles.newInput}
                 value={email}
                 type='email'
-                placeholder='Email del nuevo empleado'
+                placeholder='Email'
                 autoComplete="off"
                 required
             />
