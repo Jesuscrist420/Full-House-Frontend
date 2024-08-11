@@ -75,7 +75,7 @@ const ProductForm = ({ categoriesList, setAddProductIsOpen, productSelected }: p
 
             <FormLabel text='Nombre del plato' required />
             <input
-                onChange={(e) => { setName(e.target.value) }}
+                onChange={(e) => { setName(e.target.value); setErrorsName([])}}
                 value={name}
                 className={styles.newInput}
                 placeholder={productSelected?.name !== undefined ? productSelected?.name : 'Nombre del producto'}

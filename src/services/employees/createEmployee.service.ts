@@ -13,30 +13,37 @@ const Toast = Swal.mixin({
     }
 })
 
-type productProps = {
-    category_id: number,
-    description: string,
-    in_stock: boolean,
+type employeeProps = {
     name: string,
-    nutrition_info: string,
-    preparation_time: number,
-    price: number,
+    email: string,
+    password: string,
+    role: string,
     token: string | unknown,
 }
 
-export const CreateProductFormSchema = z.object({
-    name: z.string().min(1).max(24, {message: 'Máximo 24 Cáracteres'}),
-    description: z.string(),
-  })
+export const CreateEmployeeFormSchema = z.object({
+    name: z.string().min(1).max(24, { message: 'Máximo 24 Cáracteres!' }),
+    email: z.string().email({ message: 'Email inválido' }).trim(),
+    password: z
+        .string()
+        .min(6, { message: 'Al menos 6 carácteres!' })
+        .regex(/[a-zA-Z]/, { message: 'Debe contener al menos una letra!' })
+        .regex(/[0-9]/, { message: 'Debe contener al menos un número!' })
+        .regex(/[^a-zA-Z0-9]/, {
+            message: 'Debe contener un carácter Especial!',
+        })
+        .trim(),
+})
 
-export async function createProduct({category_id, description, in_stock, name, nutrition_info, preparation_time, price, token}: productProps): Promise<Response | any> {
+export async function createEmployee({ name, email, password, role, token }: employeeProps): Promise<Response | any> {
 
     // Validate form fields
-    const validatedFields = CreateProductFormSchema.safeParse({
+    const validatedFields = CreateEmployeeFormSchema.safeParse({
         name: name,
-        description: description
+        email: email,
+        password: password,
     })
-    
+
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
         return {
@@ -44,20 +51,17 @@ export async function createProduct({category_id, description, in_stock, name, n
         }
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dish`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/employees`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            category_id,
-            description,
-            in_stock,
             name,
-            nutrition_info,
-            preparation_time,
-            price
+            email,
+            password,
+            position: role
         }),
     });
 
@@ -75,7 +79,7 @@ export async function createProduct({category_id, description, in_stock, name, n
     if (res.ok) {
         void Toast.fire({
             icon: 'success',
-            title: 'Producto creado con éxito'
+            title: 'Empleado creado con éxito'
         })
     }
 

@@ -1,23 +1,27 @@
-import Image, { StaticImageData } from 'next/image';
 import styles from './EmployeeCard.module.scss';
-import SocialLogosTeam from '../../atoms/socialLogosTeam/SocialLogosTeam';
-import { UrlObject } from 'url';
+import Image from 'next/image';
 
 type EmployeeCardProps = {
     id: string,
     img: string;
     name: string;
     position: string;
+    employeeSelected: {
+        name: string,
+        email: string,
+        position: string,
+        user_id: string,
+    }
+    setEmployeeSelected: (employee: any) => void,
     setEmployeeSummaryIsOpen: (val: boolean) => void,
-    setIdEmployeeSelected: (val: string) => void,
 }
 
 
-const EmployeeCard = ({id,img, name, position, setEmployeeSummaryIsOpen, setIdEmployeeSelected}: EmployeeCardProps) => {
+const EmployeeCard = ({employeeSelected, img, name, position, setEmployeeSelected, setEmployeeSummaryIsOpen}: EmployeeCardProps) => {
     
     const clickHandler = (): void => {
+        setEmployeeSelected(employeeSelected);
         setEmployeeSummaryIsOpen(true);
-        setIdEmployeeSelected(id);
     }
 
     return (

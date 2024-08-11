@@ -5,10 +5,11 @@ import {
     AccordionTrigger,
 } from "@/app/components/ui/accordion"
 
-import styles from "./ProductsAccordion.module.scss";
 import { MdDelete } from "react-icons/md";
 import { FaPencilAlt } from "react-icons/fa";
 import { useSession } from "next-auth/react";
+import styles from "./ProductsAccordion.module.scss";
+import EmptyPage from "../../atoms/emptyPage/EmptyPage";
 
 type productsAccordionProps = {
     productsList: {
@@ -22,10 +23,11 @@ type productsAccordionProps = {
     }[],
     setProductDelete: (product: any) => void,
     setProductEdit: (product: any) => void,
-    categoryId: number,
+    handleOpenAddProduct: () => void,
+    categoryName: string,
 }
 
-const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, categoryId }: productsAccordionProps) => {
+const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, handleOpenAddProduct, categoryName }: productsAccordionProps) => {
 
     const { data: session, status, update } = useSession();
 
@@ -41,16 +43,16 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
         update();
     }
 
-    const handleEdit = (table: any): void => {
-        setProductEdit(table);
+    const handleEdit = (product: any): void => {
+        setProductEdit(product);
         update();
     }
 
     return (
         <Accordion type="single" collapsible className="w-full flex-column px-1 py-2">
+            <EmptyPage handleClick={handleOpenAddProduct} emptyPage={categoryName} hidden={productsList.length === 0 ? false : true} primary={false}/>
             {productsList?.map((product) => {
                 return (
-                    product.category_id === categoryId ? 
                     <AccordionItem className={styles.accordionItem} key={product.id} value={product.name}>
                         <AccordionTrigger className={styles.trigger}>
                             <div className={styles.infoContainer}>
@@ -69,8 +71,6 @@ const ProductsAccordion = ({ productsList, setProductDelete, setProductEdit, cat
                             </div>
                         </AccordionContent>
                     </AccordionItem>
-                    :
-                    null
                 )
             })}
         </Accordion>

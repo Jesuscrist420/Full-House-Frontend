@@ -13,29 +13,25 @@ const Toast = Swal.mixin({
     }
 });
 
-type ProductProps = {
-    id: number,
-    category_id: number,
-    description: string,
-    in_stock: boolean,
+type EmployeeProps = {
+    id: string,
     name: string,
-    nutrition_info: string,
-    preparation_time: number,
-    price: number,
+    email: string,
+    role: string,
     token: string | unknown,
 }
 
-export const UpdateProductFormSchema = z.object({
-    name: z.string().min(1).max(24, { message: 'Máximo 24 Cáracteres' }),
-    description: z.string(),
+export const UpdateEmployeeFormSchema = z.object({
+    name: z.string().min(1).max(24, { message: 'Máximo 24 Cáracteres!' }),
+    email: z.string().email({ message: 'Email inválido' }).trim(),
 });
 
-export async function updateProduct({id, category_id, description, in_stock, name, nutrition_info, preparation_time, price, token }: ProductProps): Promise<Response | any> {
+export async function updateEmployee({ id, name, email, role, token }: EmployeeProps): Promise<Response | any> {
 
     // Validate form fields
-    const validatedFields = UpdateProductFormSchema.safeParse({
+    const validatedFields = UpdateEmployeeFormSchema.safeParse({
         name: name,
-        description: description,
+        email: email,
     });
 
     // If any form fields are invalid, return early
@@ -45,20 +41,17 @@ export async function updateProduct({id, category_id, description, in_stock, nam
         };
     }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dish/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/employees/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            category_id,
-            description,
-            in_stock,
             name,
-            nutrition_info,
-            preparation_time,
-            price
+            email,
+            password: null,
+            position: role
         }),
     });
 
@@ -75,7 +68,7 @@ export async function updateProduct({id, category_id, description, in_stock, nam
     if (res.ok) {
         void Toast.fire({
             icon: 'success',
-            title: 'Producto actualizado con éxito'
+            title: 'Empleado actualizado con éxito'
         });
     }
 

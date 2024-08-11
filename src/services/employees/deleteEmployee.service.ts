@@ -1,12 +1,12 @@
 import Swal from 'sweetalert2';
 
-type DeleteProductProps = {
+type DeleteEmployeeProps = {
     id: string | number,
     token: string | unknown,
 }
 
-export async function deleteProduct({ id, token }: DeleteProductProps): Promise<Response | any> {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dish/${id}`, {
+export async function deleteEmployee({ id, token }: DeleteEmployeeProps): Promise<Response | any> {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/employees/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export async function deleteProduct({ id, token }: DeleteProductProps): Promise<
     if (res.ok) {
         void Swal.fire({
             icon: 'success',
-            title: 'Producto eliminado con éxito'
+            title: 'Empleado eliminado con éxito'
         });
     }
 

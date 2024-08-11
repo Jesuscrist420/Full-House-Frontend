@@ -6,12 +6,15 @@ type menuEmptyProps = {
     handleClick: () => void,
     emptyPage: string,
     hidden?: boolean,
+    primary?: boolean
 }
 
-const EmptyPage = ({ handleClick, emptyPage, hidden }: menuEmptyProps) => {
+const EmptyPage = ({ handleClick, emptyPage, hidden, primary = true }: menuEmptyProps) => {
 
-    const containerStyles = classNames(styles.container, 'mt-16 sm:mt-16 md:mt-0', {
+    const containerStyles = classNames( 'mt-16 sm:mt-16 md:mt-0', {
         [styles.hidden]: hidden,
+        [styles.container]: primary,
+        [styles.containerSecondary]: !primary,
     })
 
     return (

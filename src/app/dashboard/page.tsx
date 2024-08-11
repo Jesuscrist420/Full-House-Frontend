@@ -21,18 +21,18 @@ export default function Page() {
     const restaurantId = user?.restaurant_id;
 
     const revenue: Revenue[] = [
-        {month: 'Ene', revenue: 10000000},
-        {month: 'Feb', revenue: 20000000},
-        {month: 'Mar', revenue: 30000000},
-        {month: 'Abr', revenue: 40000000},
-        {month: 'May', revenue: 50000000},
-        {month: 'Jun', revenue: 60000000},
-        {month: 'Jul', revenue: 70000000},
-        {month: 'Ago', revenue: 80000000},
-        {month: 'Sep', revenue: 90000000},
-        {month: 'Oct', revenue: 100000000},
-        {month: 'Nov', revenue: 110000000},
-        {month: 'Dic', revenue: 120000000}
+        { month: 'Ene', revenue: 10000000 },
+        { month: 'Feb', revenue: 20000000 },
+        { month: 'Mar', revenue: 30000000 },
+        { month: 'Abr', revenue: 40000000 },
+        { month: 'May', revenue: 50000000 },
+        { month: 'Jun', revenue: 60000000 },
+        { month: 'Jul', revenue: 70000000 },
+        { month: 'Ago', revenue: 80000000 },
+        { month: 'Sep', revenue: 90000000 },
+        { month: 'Oct', revenue: 100000000 },
+        { month: 'Nov', revenue: 110000000 },
+        { month: 'Dic', revenue: 120000000 }
     ]
 
     const latestInvoices = [
@@ -67,14 +67,14 @@ export default function Page() {
                         <Card title="Total Cuentas" value={"numberOfInvoices"} type="invoices" />
                         <Card title="Total Empleados" value={"numberOfCustomers"} type="customers" />
                     </div>
+                    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+                        <RevenueChart revenue={revenue} />
+                        <LatestInvoices latestInvoices={latestInvoices} />
+                    </div>
                 </>
                 :
                 <EmptyPage handleClick={() => router.push("/dashboard/settings")} emptyPage='Restaurante ' />
             }
-            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-                <RevenueChart revenue={revenue}  />
-                <LatestInvoices latestInvoices={latestInvoices} />
-            </div>
         </>
     );
 }
