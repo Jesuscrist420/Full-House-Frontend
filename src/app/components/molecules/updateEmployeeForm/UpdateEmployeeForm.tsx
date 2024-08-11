@@ -1,48 +1,60 @@
-'use client'
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+import styles from './UpdateEmployeeForm.module.scss';
+import FormLabel from '../../atoms/formLabel/FormLabel';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
+import { updateEmployee } from '@/services/employees/updateEmployee.service';
 
-import { useState } from "react";
-import { useSession } from "next-auth/react";
-import styles from './AddEmployeeForm.module.scss';
-import FormLabel from "../../atoms/formLabel/FormLabel";
-import { createEmployee } from "@/services/employees/createEmployee.service";
-import SubmitFormButton from "../../atoms/submitFormButton/SubmitFormButton";
-
-type addEmployeeFormProps = {
-    setAddEmployeeIsOpen: (val: boolean) => void,
+type employeeFormProps = {
+    employeeSelected?: any,
+    setEditEmployeeIsOpen?: (val: boolean) => void,
 }
 
-const AddEmployeeForm = ({ setAddEmployeeIsOpen }: addEmployeeFormProps) => {
+const UpdateEmployeeForm = ({ employeeSelected, setEditEmployeeIsOpen }: employeeFormProps) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
 
     const [errorsName, setErrorsName] = useState([]);
     const [errorsEmail, setErrorsEmail] = useState([]);
-    const [errorsPassword, setErrorsPassword] = useState([]);
 
     const { data: session, status, update } = useSession();
     const token = session?.token;
 
-    const handleAddEmployeeSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    useEffect(() => {
+        if (employeeSelected) {
+            setName(employeeSelected.name || '');
+            setEmail(employeeSelected.email || '');
+            setRole(employeeSelected.position || '');
+
+            setErrorsName([]);
+            setErrorsEmail([]);
+        }
+    }, [employeeSelected]);
+
+    const handleUpdateEmployeeSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
-        try{
-            const res = await createEmployee({
+        try {
+            const res = await updateEmployee({
+                id: employeeSelected.user_id,
                 name,
                 email,
-                password,
                 role,
                 token
             });
 
-            if(res.ok){
+            if (res.ok) {
                 setName('');
                 setEmail('');
-                setPassword('');
                 setRole('');
-                setAddEmployeeIsOpen(false);
-            }else{
+                setErrorsName([]);
+                setErrorsEmail([]);
+
+                if (setEditEmployeeIsOpen !== undefined) {
+                    setEditEmployeeIsOpen(false);
+                }
+            } else {
                 if (res.errors) {
                     if (res.errors.name) {
                         setErrorsName(res.errors.name);
@@ -50,18 +62,18 @@ const AddEmployeeForm = ({ setAddEmployeeIsOpen }: addEmployeeFormProps) => {
                     if (res.errors.email) {
                         setErrorsEmail(res.errors.email);
                     }
-                    if (res.errors.password) {
-                        setErrorsPassword(res.errors.password);
-                    }
                 }
             }
-        }catch (e){
-            console.log(e)
+        } catch (e) {
+            console.log(e);
         }
+
     };
 
     return (
-        <form className={styles.form} onSubmit={handleAddEmployeeSubmit} autoComplete="off" >
+
+        <form className={styles.form} onSubmit={handleUpdateEmployeeSubmit}>
+
             <FormLabel text='Nombre' required />
             <input
                 onChange={(e) => { setName(e.target.value); setErrorsName([]) }}
@@ -88,27 +100,11 @@ const AddEmployeeForm = ({ setAddEmployeeIsOpen }: addEmployeeFormProps) => {
                 required
             />
             {errorsEmail?.map((errorEmail) => {
-                    return (
-                        <p key={errorEmail} className={styles.error}>{errorEmail}</p>
-                    )
+                return (
+                    <p key={errorEmail} className={styles.error}>{errorEmail}</p>
+                )
             })}
 
-            <FormLabel text='Password' required />
-            <input
-                onChange={(e) => { setPassword(e.target.value); setErrorsPassword([]) }}
-                className={styles.newInput}
-                value={password}
-                type='password'
-                placeholder='Contraseña'
-                autoComplete="new-password"
-                required
-            />
-            {errorsPassword?.map((errorPass) => {
-                    return (
-                        <p key={errorPass} className={styles.error}>{errorPass}</p>
-                    )
-            })}
-            
             <FormLabel text='Cargo' required />
             <select
                 onChange={(e) => { setRole(e.target.value); }}
@@ -122,9 +118,9 @@ const AddEmployeeForm = ({ setAddEmployeeIsOpen }: addEmployeeFormProps) => {
                 <option value="Mesero">Mesero</option>
                 <option value="Cocinero">Cocinero</option>
             </select>
-            <SubmitFormButton text='Crear Empleado' />
+            <SubmitFormButton text={'Guardar Cambios'} />
         </form>
     )
 }
 
-export default AddEmployeeForm;
+export default UpdateEmployeeForm;
