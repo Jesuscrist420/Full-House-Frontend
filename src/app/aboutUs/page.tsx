@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Footer from "../components/molecules/footer/Footer";
 import HomeHeader from "../components/molecules/homeHeader/HomeHeader";
 import PresentationCard from "../components/molecules/presentationCard/PresentationCard";
@@ -8,21 +9,32 @@ export default function Page() {
         <>
             <HomeHeader />
             <div className={styles.pageContainer}>
-                <h1 className={styles.titleMs}>Misión</h1>
-                <p className={styles.textMs}>
-                    Nuestra misión es proporcionar soluciones de software de alta calidad que permitan a los 
-                    restaurantes gestionar eficientemente sus procesos internos, incluyendo el manejo de cuentas 
-                    y mesas, las transacciones y el inventario. Nos esforzamos por entender las necesidades 
-                    específicas de nuestros clientes y ofrecer soluciones personalizadas que les permitan mejorar 
-                    su productividad y rentabilidad.
-                </p>
-                <h1 className={styles.titleVs}>Visión</h1>
-                <p className={styles.textVs}>
-                    Nuestra visión para 2025 es convertirnos en líderes en el mercado de desarrollo de software para la gestión de 
-                    restaurantes, ofreciendo las soluciones más innovadoras, eficientes y fiables del sector. Aspiramos a 
-                    ser el socio tecnológico de confianza para restaurantes de todo el mundo, ayudándoles a adaptarse a las 
-                    demandas cambiantes del mercado y a mantenerse a la vanguardia de la industria.
-                </p>
+                <div className={styles.infoContainer}>
+                    <div className={styles.textContainer}>
+                        <h1 className={styles.titleMs}>Misión</h1>
+                        <p className={styles.textMs}>
+                            Nuestra misión es proporcionar soluciones de software de alta calidad que permitan a los
+                            restaurantes gestionar eficientemente sus procesos internos, incluyendo el manejo de cuentas
+                            y mesas, las transacciones y el inventario. Nos esforzamos por entender las necesidades
+                            específicas de nuestros clientes y ofrecer soluciones personalizadas que les permitan mejorar
+                            su productividad y rentabilidad.
+                        </p>
+                    </div>
+                    <Image className={styles.img} src={"/Mision.JPG"} width={150} height={150} alt={""} />
+                </div>
+                <div className={styles.infoContainerVs}>
+                    <Image className={styles.img} src={"/Vision.JPG"} width={600} height={600} alt={""} />
+                    <div className={styles.textContainer}>
+                        <h1 className={styles.titleVs}>Visión</h1>
+                        <p className={styles.textVs}>
+                            Nuestra visión para 2025 es convertirnos en líderes en el mercado de desarrollo de software para la gestión de
+                            restaurantes, ofreciendo las soluciones más innovadoras, eficientes y fiables del sector. Aspiramos a
+                            ser el socio tecnológico de confianza para restaurantes de todo el mundo, ayudándoles a adaptarse a las
+                            demandas cambiantes del mercado y a mantenerse a la vanguardia de la industria.
+                        </p>
+                    </div>
+                </div>
+
                 <h1 className={styles.title}>¿Quiénes somos?</h1>
                 <p className={styles.text}>
                     Somos una startup dedicada a optimizar los procesos en su restaurante como lo son las
