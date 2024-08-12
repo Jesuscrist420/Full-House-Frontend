@@ -1,0 +1,87 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 0px 16px;
+    column-gap: 16px;
+    box-shadow: rgba(34, 38, 42, 0.05) 0.125rem 0.25rem 0.5rem;
+    border-radius: 0.75rem;
+    height: 5rem;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.balanceCard{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    column-gap: 16px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.logo{
+    width: 56px;
+    height: 56px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(92, 115, 137);
+    flex: 1 1 0%;
+}
+
+.title{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    font-style: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.content{
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(26, 39, 50);
+}
+
+.profit{
+    background: rgb(215, 244, 232);
+    color: rgb(16, 147, 92);
+}
+
+.profitText{
+    color: rgb(16, 147, 92);
+}
+
+.loss{
+    background: rgb(255, 226, 224);
+    color: rgb(204, 62, 51);
+}
+
+.lossText{
+    color: rgb(204, 62, 51);
+}
+
+.product{
+    background: rgb(243, 245, 247);;
+    color: rgb(135, 153, 171);
+}

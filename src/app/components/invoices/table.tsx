@@ -54,39 +54,39 @@ export default function Table({
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-white shadow-md overflow-hidden">
           <div className="max-h-96 overflow-y-auto"> {/* Contenedor scrollable */}
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="min-w-full divide-y divide-gray-250">
               <thead className="bg-gray-100 sticky top-0 z-10">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Table ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentario</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de apertura</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de cierre</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Table ID</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Comentario</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de apertura</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha de cierre</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-gray-250">
                 {accounts.map((account) => (
                   <tr key={account.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{account.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.table_id}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${account.status === 'open' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.comment}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDateToLocal(account.opening_timestamp)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.closing_timestamp ? formatDateToLocal(account.closing_timestamp) : ''}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{currency.format(account.total).replace('US$', '$')}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.user_id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-gray-900">{account.id}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.table_id}</td>
+                    <td className={`px-6 py-4 whitespace-nowrap text-sm text-center font-medium ${account.status === 'open' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.comment}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{formatDateToLocal(account.opening_timestamp)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.closing_timestamp ? formatDateToLocal(account.closing_timestamp) : ''}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{currency.format(account.total).replace('US$', '$')}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.user_id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2
                       ">
-                        <button className="flex items-center justify-center w-[120px] text-blue-500 hover:bg-blue-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleEdit(account)}>
-                          <FaPencilAlt />Editar
+                        <button className="flex items-center justify-center w-[40px] h-[40px] text-blue-500 hover:bg-blue-100 border-transparent bg-gray-100 rounded-md whitespace-nowrap gap-2" onClick={() => handleEdit(account)}>
+                          <FaPencilAlt size={15} />
                         </button>
-                        <button className="flex items-center justify-center w-[120px] text-red-500 hover:bg-red-100 border-transparent bg-gray-100 px-4 py-2 rounded-md whitespace-nowrap gap-2" onClick={() => handleDelete(account)}>
-                          <MdClose />  Cerrar
+                        <button className="flex items-center justify-center w-[40px] h-[40px] text-red-500 hover:bg-red-100 border-transparent bg-gray-100 rounded-md whitespace-nowrap gap-2" onClick={() => handleDelete(account)}>
+                          <MdClose size={15} />
                         </button>
                       </div>
                     </td>

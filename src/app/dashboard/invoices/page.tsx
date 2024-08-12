@@ -1,15 +1,16 @@
 'use client'
+import { useSession } from 'next-auth/react';
 import Table from '@/app/components/invoices/table';
-import CommonHeader from '@/app/components/atoms/commonHeader/CommonHeader';
-import Search from '@/app/components/molecules/search/Search';
 import { Suspense, useEffect, useState } from 'react';
-import CommonHeaderButton from '@/app/components/atoms/commonHeaderButton/CommonHeaderButton';
+import Search from '@/app/components/molecules/search/Search';
 import RightBar from '@/app/components/atoms/rightBar/RightBar';
 import { getAccounts } from '@/services/accounts/getAccounts.service';
-import { useSession } from 'next-auth/react';
-import AddAccountForm from '@/app/components/molecules/addAccountForm/AddAccountForm'
+import CommonHeader from '@/app/components/atoms/commonHeader/CommonHeader';
+import AddAccountForm from '@/app/components/molecules/addAccountForm/AddAccountForm';
+import CommonHeaderButton from '@/app/components/atoms/commonHeaderButton/CommonHeaderButton';
 import DeleteAccountForm from '@/app/components/molecules/deleteAccountForm/DeleteAccountForm';
 import UpdateAccountForm from '@/app/components/molecules/updateAccountForm/UpdateAccountForm';
+import TransactionsSummary from '@/app/components/molecules/transactionsSummary/TransactionsSummary';
 
 export interface Account {
     id: number;
@@ -43,6 +44,10 @@ export default function Page() {
     const [filteredAccounts, setFilteredAccounts] = useState<Account[]>([]);
     const [totalSales, setTotalSales] = useState(0);
     const [accountsNumber, setAccountsNumber] = useState(0);
+
+    const [totalPaidInvoices, setTotalPaidInvoices] = useState(0);
+    const [totalPendingInvoices, setTotalPendingInvoices] = useState(0);
+
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -53,6 +58,10 @@ export default function Page() {
                 const response: Account[] | undefined = await getAccounts(token);
                 if (response) {
                     console.log('calling fetchAccountsData');
+                    const totalPaid = response.filter(invoice => invoice.status === 'closed').reduce((sum, invoice) => sum + invoice.total, 0);
+                    const totalPending = response.filter(invoice => invoice.status === 'open').reduce((sum, invoice) => sum + invoice.total, 0);
+                    setTotalPaidInvoices(totalPaid);
+                    setTotalPendingInvoices(totalPending);
                     setAccounts(response);
                     setFilteredAccounts(response);
                     const total = response.reduce((sum, account) => sum + account.total, 0);
@@ -84,6 +93,8 @@ export default function Page() {
             <CommonHeader title='Cuentas'>
                 <CommonHeaderButton text='Crear Cuenta' handleClick={handleAddInvoice} />
             </CommonHeader>
+            <TransactionsSummary balance={totalSales} totalSales={totalPaidInvoices} totalExpenses={totalPendingInvoices} />
+            
             <RightBar isOpen={addInvoiceIsOpen} setIsOpen={setAddInvoiceIsOpen} title='Crear Cuenta'>
                 <AddAccountForm setAddAccountIsOpen={setAddInvoiceIsOpen} accounts={accounts} setAccounts={setAccounts} />
             </RightBar>
@@ -96,13 +107,6 @@ export default function Page() {
             <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
                 <Search placeholder="Buscar cuentas..." onSearch={handleSearch} />
             </div>
-            <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                <div className="flex items-center gap-2">
-                    <p>Total de ventas:</p>
-                    <p>${totalSales}</p>
-                    <p>Numero de cuentas: {accountsNumber}</p>
-                </div>
-            </div>
             {/*}
             <p> Cuentas pedidas: </p>
             {accounts.map((account) => {
@@ -114,9 +118,7 @@ export default function Page() {
             })}
             */}
             <div className="mt-5 flex w-full justify-center">
-
                 <Table accounts={filteredAccounts} handleDelete={handleDelete} handleEdit={handleEdit} />
-
             </div>
         </div>
     );
