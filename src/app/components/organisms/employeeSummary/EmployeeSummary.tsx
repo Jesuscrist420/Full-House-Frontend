@@ -39,10 +39,28 @@ const EmployeeSummary = ({ employee, setEmployeeSummaryIsOpen, setEmployeeDelete
         update();
     }
 
+    const employeeImg = (position: string | undefined) => {
+        var img = ''
+        switch (position) {
+            case 'Administrador':
+                img = '/employees/admin.JPG';
+                break;
+            case 'Cocinero':
+                img = '/employees/chef.JPG';
+                break;
+            case 'Mesero':
+                img = '/employees/waiter.JPG';
+                break;
+            default:
+                img = '/customers/evil-rabbit.png';
+        }
+        return img;
+    }
+
     return (
         <>
             <div className={styles.imgContainer}>
-                <Image className={styles.img} width={80} height={80} src={'/customers/evil-Rabbit.png'} alt={''} />
+                <Image className={styles.img} width={80} height={80} src={employeeImg(employee?.position)} alt={''} />
             </div>
             <h3 className={styles.employeeName}>{employee?.name}</h3>
             <section className={styles.sectionInfo}>

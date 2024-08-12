@@ -1,4 +1,4 @@
-.pageContainer{
+.pageContainer {
     padding: 16px 0px 28px 0px;
     border-radius: 0 0 20px 20px;
     background: rgba(255, 255, 255, .85);
@@ -6,13 +6,45 @@
     margin-top: 10px;
     height: -webkit-fill-available;
     overflow-y: scroll;
+    background: rgba(234, 233, 222, 0.7);
 }
 
-.pageContainer::-webkit-scrollbar{
+.pageContainer::-webkit-scrollbar {
     display: none;
+    align-items: center;
 }
 
-.titleDefault{
+.textContainer {
+    background: rgba(255, 255, 255, 1);
+    width: 50%;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.textContainerMain{
+    @extend .textContainer;
+    width: 75%;
+    margin: auto;
+}
+
+.infoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    margin-top: 24px;
+}
+
+.infoContainerVs {
+    @extend .infoContainer;
+}
+
+.titleDefault {
     margin-top: 8px;
     margin-bottom: 16px;
     font-size: 28px;
@@ -22,61 +54,101 @@
     display: flex;
 }
 
-.title{
+.title {
     @extend .titleDefault;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
-.titleMs{
+.titleMs {
     @extend .titleDefault;
-    padding-left: 64px;
     align-items: flex-start;
     justify-content: left;
     text-align: left;
+    padding-left: 48px;
 }
-.titleVs{
+
+.titleVs {
     @extend .titleDefault;
-    padding-right: 64px;
     align-items: flex-end;
     justify-content: right;
     text-align: right;
+    padding-right: 48px;
 }
 
-.textDefault{
+.textDefault {
     font-size: 20px;
     font-weight: 500;
     transition: 0.5s;
     display: flex;
+    margin-bottom: 16px;
 }
 
-.text{
+.text {
     @extend .textDefault;
-    width: 70%;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
-}
-
-.textMs{
-    @extend .textDefault;
-    width: 100%;
-    padding: 0px 64px;
     text-align: justify;
 }
 
-.textVs{
+.textMs {
     @extend .textDefault;
     width: 100%;
-    padding: 0px 64px;
+    padding: 0px 48px;
     text-align: justify;
 }
-.presentationCardsContainer{
+
+.textVs {
+    @extend .textDefault;
+    width: 100%;
+    padding: 0px 48px;
+    text-align: justify;
+}
+
+.img {
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    margin: 0px 48px;
+    object-fit: cover
+}
+
+.presentationCardsContainer {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 16px;
     padding: 16px;
+}
+
+@media (max-width: 925px) {
+    .img {
+        margin-top: 24px;
+        width: 250px;
+        height: 250px;
+    }
+
+    .titleVs {
+        justify-content: left;
+        padding-left: 48px;
+    }
+
+    .text {
+        width: 85%;
+    }
+
+    .textContainer {
+        width: 95%;
+    }
+
+    .textContainerMain{
+        width: 75%;
+    }
+
+    .infoContainerVs {
+        flex-direction: column-reverse;
+    }
 }

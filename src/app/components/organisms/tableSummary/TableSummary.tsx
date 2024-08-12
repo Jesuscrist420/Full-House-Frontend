@@ -47,7 +47,7 @@ const TableSummary = ({ table, setTableSummaryIsOpen, setDeleteTableIsOpen, setU
     return (
         <>
             <div className={styles.imgContainer}>
-                <Image className={styles.img} width={80} height={80} src={'/customers/evil-Rabbit.png'} alt={''} />
+                <Image className={styles.img} width={80} height={80} src={'/tables/table.JPG'} alt={''} />
             </div>
             <h3 className={styles.employeeName}>{table?.name}</h3>
             <section className={styles.sectionInfo}>
