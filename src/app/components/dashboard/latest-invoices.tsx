@@ -51,7 +51,7 @@ export default async function LatestInvoices({
                 <div className="flex items-center">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
-                      Factura #: {invoice.id}
+                      Factura # {invoice.id}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
                       {invoice.comment}
