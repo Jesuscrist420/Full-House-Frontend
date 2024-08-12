@@ -1,9 +1,9 @@
-import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { updateTable } from '@/services/updateTable.service';
-import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
-import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+import styles from './AddCategoryForm.module.scss';
+import FormLabel from '../../atoms/formLabel/FormLabel';
+import { updateTable } from '@/services/tables/updateTable.service';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 
 type updateTableFormProps = {
     setUpdateTableIsOpen: (val: boolean) => void,

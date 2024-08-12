@@ -1,13 +1,10 @@
-import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { Account, addAccount } from '@/services/accounts/getAccounts.service';
-import FormLabel from '../../atoms/formLabel/FormLabel';
+import { useSession } from 'next-auth/react';
 import styles from './AddCategoryForm.module.scss';
 import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import { useSession } from 'next-auth/react';
-import { set } from 'zod';
-import { getTables } from '@/services/getTables.service';
-
+import FormLabel from '../../atoms/formLabel/FormLabel';
+import { getTables } from '@/services/tables/getTables.service';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
+import { Account, addAccount } from '@/services/accounts/getAccounts.service';
 
 type AddAccountFormProps = {
     setAddAccountIsOpen: (val: boolean) => void,
