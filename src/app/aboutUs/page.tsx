@@ -53,7 +53,7 @@ export default function Page() {
                         linkedin={"https://www.linkedin.com/in/juanmperezor"}
                     />
                     <PresentationCard
-                        img={"/devs/jesus.jpg"}
+                        img={"/devs/jesus.png"}
                         name={"Jesús Quiñones"}
                         position={"Frontend Dev"}
                         github={"https://github.com/Jesuscrist420"}
