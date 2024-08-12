@@ -20,6 +20,14 @@ export default async function LatestInvoices({
 }: {
   latestInvoices: Invoice[];
 }) {
+  let currency = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
@@ -43,7 +51,7 @@ export default async function LatestInvoices({
                 <div className="flex items-center">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
-                      Factura Numero: {invoice.id}
+                      Factura #: {invoice.id}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
                       {invoice.comment}
@@ -53,7 +61,7 @@ export default async function LatestInvoices({
                 <p
                   className={`${lusitana.className} truncate text-sm font-medium md:text-base text-green-600`}
                 >
-                  {invoice.total}
+                  {currency.format(invoice.total).replace('US$', '$')}
                 </p>
               </div>
             );

@@ -40,6 +40,13 @@ export function Card({
   type: 'invoices' | 'customers' | 'pending' | 'collected';
 }) {
   const Icon = iconMap[type];
+  let currency = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
 
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
@@ -51,7 +58,7 @@ export function Card({
         className={`${lusitana.className}
           truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
       >
-        {value}
+        {currency.format(Number(value)).replace('US$', '$')}
       </p>
     </div>
   );

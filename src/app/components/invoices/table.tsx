@@ -42,6 +42,12 @@ export default function Table({
     user_id: number;
   }) => void;
 }) {
+  let currency = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
 
   return (
     <div className="mt-6">
@@ -67,11 +73,11 @@ export default function Table({
                   <tr key={account.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{account.id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.table_id}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${account.status === 'active' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
+                    <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${account.status === 'open' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.comment}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDateToLocal(account.opening_timestamp)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDateToLocal(account.closing_timestamp)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatCurrency(account.total)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.closing_timestamp ? formatDateToLocal(account.closing_timestamp) : ''}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{currency.format(account.total).replace('US$', '$')}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{account.user_id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2
