@@ -1,17 +1,17 @@
 'use client'
 
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Revenue } from '../lib/definitions';
 import { useSession } from 'next-auth/react';
 import { Card } from '@/app/components/dashboard/cards';
 import EmptyPage from '../components/atoms/emptyPage/EmptyPage';
 import RevenueChart from '@/app/components/dashboard/revenue-chart';
+import { getAccounts } from '@/services/accounts/getAccounts.service';
 import LatestInvoices from '@/app/components/dashboard/latest-invoices';
 import CommonHeader from '../components/atoms/commonHeader/CommonHeader';
-import { useRouter } from 'next/navigation';
-import { Revenue } from '../lib/definitions';
-import { useEffect, useState } from 'react';
-import { getAccounts } from '@/services/accounts/getAccounts.service';
 import { getEmployees } from '@/services/employees/getEmployees.service';
-const monthsNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
 export interface Account {
     id: number;
     closing_timestamp: string;
@@ -24,7 +24,7 @@ export interface Account {
     user_id: number;
 }
 
-const calculateRevenue = (invoices: Account[]) => {
+const calculateRevenue = (invoices: Account[], monthsNames: string[]) => {
     const revenue = invoices.reduce((acc, invoice) => {
         const month = new Date(invoice.opening_timestamp).getMonth();
         acc[month] = (acc[month] || 0) + invoice.total;
@@ -47,6 +47,7 @@ export default function Page() {
     const [numberOfCustomers, setNumberOfCustomers] = useState(0);
     const [revenue, setRevenue] = useState<Revenue[]>([]);
     const [latestInvoices, setLatestInvoices] = useState<Account[]>([]);
+    const monthsNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     const { data: session, status } = useSession();
     const token = session?.token;
 
@@ -61,7 +62,7 @@ export default function Page() {
                 const totalPendingInvoices = invoices.filter(invoice => invoice.status === 'open').reduce((sum, invoice) => sum + invoice.total, 0);
                 setTotalPendingInvoices(totalPendingInvoices);
                 setNumberOfInvoices(invoices.length);
-                const revenue = calculateRevenue(invoices);
+                const revenue = calculateRevenue(invoices, monthsNames);
                 setRevenue(revenue);
             } else {
                 const revenue = monthsNames.map((month) => ({ month, revenue: 0 }));
@@ -100,7 +101,7 @@ export default function Page() {
                         <Card title="Cuentas" value={numberOfInvoices} type="invoices" />
                         <Card title="Empleados" value={numberOfCustomers} type="customers" />
                     </div>
-                    <div className="mt-3 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+                    <div className="mt-1 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
                         <RevenueChart revenue={revenue} />
                         <LatestInvoices latestInvoices={latestInvoices} />
                     </div>
