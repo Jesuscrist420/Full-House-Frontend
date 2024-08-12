@@ -94,13 +94,13 @@ export default function Page() {
             <CommonHeader title='Dashboard' />
             {restaurantId ?
                 <>
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 p-2">
-                        <Card title="Cuentas Pagas" value={totalPaidInvoices} type="collected" />
-                        <Card title="Cuentas Por Pagar" value={totalPendingInvoices} type="pending" />
-                        <Card title="Total Cuentas" value={numberOfInvoices} type="invoices" />
-                        <Card title="Total Empleados" value={numberOfCustomers} type="customers" />
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 py-4">
+                        <Card title="Pago" value={totalPaidInvoices} type="collected" />
+                        <Card title="Por Pagar" value={totalPendingInvoices} type="pending" />
+                        <Card title="Cuentas" value={numberOfInvoices} type="invoices" />
+                        <Card title="Empleados" value={numberOfCustomers} type="customers" />
                     </div>
-                    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+                    <div className="mt-3 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
                         <RevenueChart revenue={revenue} />
                         <LatestInvoices latestInvoices={latestInvoices} />
                     </div>

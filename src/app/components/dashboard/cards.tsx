@@ -4,7 +4,8 @@ import {
   UserGroupIcon,
   InboxIcon,
 } from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/components/fonts';
+import classNames from 'classnames';
+import styles from './cards.module.scss';
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -47,15 +48,20 @@ export function Card({
     maximumFractionDigits: 0,
   });
 
+  const cardStyles = classNames("rounded-xl bg-gray-50 p-2 shadow-sm",{
+    [styles.collected]: type === 'collected',
+    [styles.pending]: type === 'pending',
+    [styles.default]: type === 'invoices' || type === 'customers',
+  })
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
+    <div className={cardStyles}>
       <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
+        {Icon ? <Icon className="h-5 w-5" /> : null}
+        <h3 className="ml-2 text-sm font-600">{title}</h3>
       </div>
       <p
-        className={`${lusitana.className}
+        className={`
           truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
       >
         {type === 'invoices' || type === 'customers' ? value : currency.format(Number(value)).replace('US$', '$')}
