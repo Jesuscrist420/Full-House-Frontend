@@ -4,11 +4,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Revenue } from '../lib/definitions';
 import { useSession } from 'next-auth/react';
-import { Card } from '@/app/components/dashboard/cards';
+import { Card } from '@/app/components/atoms/homeCard/cards';
 import EmptyPage from '../components/atoms/emptyPage/EmptyPage';
-import RevenueChart from '@/app/components/dashboard/revenue-chart';
+import RevenueChart from '@/app/components/atoms/revenueChart/revenue-chart';
 import { getAccounts } from '@/services/accounts/getAccounts.service';
-import LatestInvoices from '@/app/components/dashboard/latest-invoices';
+import LatestInvoices from '@/app/components/atoms/latestInvoices/latest-invoices';
 import CommonHeader from '../components/atoms/commonHeader/CommonHeader';
 import { getEmployees } from '@/services/employees/getEmployees.service';
 

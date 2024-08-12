@@ -3,7 +3,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/app/components/ui/accordion"
+} from "@/app/components/organisms/accordion/accordion"
 
 import styles from "./TablesAccordion.module.scss";
 import { MdDelete } from "react-icons/md";

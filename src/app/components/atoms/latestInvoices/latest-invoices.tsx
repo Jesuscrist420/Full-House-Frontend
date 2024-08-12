@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 import classNames from 'classnames';
-import styles from './cards.module.scss';
-import { lusitana } from '@/app/components/fonts';
-
+import styles from './latestInvoices.module.scss';
 
 export interface Invoice {
   id: number;

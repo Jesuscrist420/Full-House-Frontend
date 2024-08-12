@@ -1,0 +1,10 @@
+.font{
+    font-weight: 600;
+}
+
+.default{
+    @extend .font;
+    background: rgba(147, 197, 253, 0.20);
+    box-shadow: 0 8px 28px 0 rgba(31, 38, 135, 0.15);
+    color: rgb(0, 110, 255);
+}
