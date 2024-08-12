@@ -1,7 +1,6 @@
 'use client'
 
 import { useSession } from 'next-auth/react';
-import { fetchRevenue } from '@/app/lib/data';
 import { Card } from '@/app/components/dashboard/cards';
 import EmptyPage from '../components/atoms/emptyPage/EmptyPage';
 import RevenueChart from '@/app/components/dashboard/revenue-chart';
@@ -12,7 +11,7 @@ import { Revenue } from '../lib/definitions';
 import { useEffect, useState } from 'react';
 import { getAccounts } from '@/services/accounts/getAccounts.service';
 import { getEmployees } from '@/services/employees/getEmployees.service';
-
+const monthsNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 export interface Account {
     id: number;
     closing_timestamp: string;
@@ -25,31 +24,31 @@ export interface Account {
     user_id: number;
 }
 
+const calculateRevenue = (invoices: Account[]) => {
+    const revenue = invoices.reduce((acc, invoice) => {
+        const month = new Date(invoice.opening_timestamp).getMonth();
+        acc[month] = (acc[month] || 0) + invoice.total;
+        return acc;
+    }, {} as Record<number, number>);
+
+    const result = Array.from({ length: 12 }, (_, i) => ({
+        month: monthsNames[i],
+        revenue: revenue[i] || 0
+    }));
+    console.log("revenue result ", result);
+    return result;
+}
 export default function Page() {
-    const [invoices, setInvoices] = useState<Account[]>([]);
+
+    const [_, setInvoices] = useState<Account[]>([]);
     const [totalPaidInvoices, setTotalPaidInvoices] = useState(0);
     const [totalPendingInvoices, setTotalPendingInvoices] = useState(0);
     const [numberOfInvoices, setNumberOfInvoices] = useState(0);
     const [numberOfCustomers, setNumberOfCustomers] = useState(0);
-    const [revenue, setRevenue] = useState<Revenue[]>([
-        { month: 'Ene', revenue: 10000000 },
-        { month: 'Feb', revenue: 20000000 },
-        { month: 'Mar', revenue: 30000000 },
-        { month: 'Abr', revenue: 40000000 },
-        { month: 'May', revenue: 50000000 },
-        { month: 'Jun', revenue: 60000000 },
-        { month: 'Jul', revenue: 70000000 },
-        { month: 'Ago', revenue: 80000000 },
-        { month: 'Sep', revenue: 90000000 },
-        { month: 'Oct', revenue: 100000000 },
-        { month: 'Nov', revenue: 110000000 },
-        { month: 'Dic', revenue: 120000000 }
-    ]);
-    // last invoices
+    const [revenue, setRevenue] = useState<Revenue[]>([]);
     const [latestInvoices, setLatestInvoices] = useState<Account[]>([]);
     const { data: session, status } = useSession();
     const token = session?.token;
-
 
     useEffect(() => {
         const fetchInvoices = async () => {
@@ -62,27 +61,15 @@ export default function Page() {
                 const totalPendingInvoices = invoices.filter(invoice => invoice.status === 'open').reduce((sum, invoice) => sum + invoice.total, 0);
                 setTotalPendingInvoices(totalPendingInvoices);
                 setNumberOfInvoices(invoices.length);
-                /*
-                const lastYear = new Date();
-                lastYear.setFullYear(lastYear.getFullYear() - 1);
-                const lastYearInvoices = invoices.filter(invoice => new Date(invoice.opening_timestamp) >= lastYear);
-                const groupedInvoices = lastYearInvoices.reduce((acc, invoice) => {
-                    const month = new Date(invoice.opening_timestamp).toLocaleString('default', { month: 'short' });
-                    if (acc[month]) {
-                        acc[month] += invoice.total;
-                    } else {
-                        acc[month] = invoice.total;
-                    }
-                    return acc;
-                }, {} as Record<string, number>);
-                const revenue = Object.keys(groupedInvoices).map(month => ({
-                    month,
-                    revenue: groupedInvoices[month]
-                }));
+                const revenue = calculateRevenue(invoices);
                 setRevenue(revenue);
-                */
+            } else {
+                const revenue = monthsNames.map((month) => ({ month, revenue: 0 }));
+                setRevenue(revenue);
+
             }
         }
+
         const fetchEmployees = async () => {
             const employees = await getEmployees(token)
             if (employees) {
@@ -94,16 +81,13 @@ export default function Page() {
             fetchInvoices();
             fetchEmployees();
         }
-    }, [token]
-    )
+    }, [token])
 
     const router = useRouter();
 
     const user = session?.user;
     const userId = user?.id;
     const restaurantId = user?.restaurant_id;
-
-
 
     return (
         <>
