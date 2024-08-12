@@ -58,7 +58,7 @@ export function Card({
         className={`${lusitana.className}
           truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
       >
-        {currency.format(Number(value)).replace('US$', '$')}
+        {type === 'invoices' || type === 'customers' ? value : currency.format(Number(value)).replace('US$', '$')}
       </p>
     </div>
   );
