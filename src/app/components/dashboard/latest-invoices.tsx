@@ -1,11 +1,24 @@
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { lusitana } from '@/app/components/fonts';
-import { LatestInvoice } from '@/app/lib/definitions';
+
+
+export interface Invoice {
+  id: number;
+  closing_timestamp: string;
+  comment: string;
+  opening_timestamp: string;
+  restaurant_id: number;
+  status: string;
+  table_id: number;
+  total: number;
+  user_id: number;
+}
+
 export default async function LatestInvoices({
   latestInvoices,
 }: {
-  latestInvoices: LatestInvoice[];
+  latestInvoices: Invoice[];
 }) {
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -30,17 +43,17 @@ export default async function LatestInvoices({
                 <div className="flex items-center">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
-                      {invoice.name}
+                      Factura Numero: {invoice.id}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
-                      {invoice.email}
+                      {invoice.comment}
                     </p>
                   </div>
                 </div>
                 <p
                   className={`${lusitana.className} truncate text-sm font-medium md:text-base text-green-600`}
                 >
-                  {invoice.amount}
+                  {invoice.total}
                 </p>
               </div>
             );
