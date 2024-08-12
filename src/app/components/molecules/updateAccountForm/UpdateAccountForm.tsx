@@ -1,16 +1,15 @@
-import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { Account, updateAccount } from '@/services/accounts/getAccounts.service';
-import FormLabel from '../../atoms/formLabel/FormLabel';
-import formStyles from './UpdateAccountForm.module.scss';
-import styles from '../../organisms/tablesAccordion/TablesAccordion.module.scss';
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { getTables } from '@/services/getTables.service';
-import { FaPencilAlt, FaPlus } from 'react-icons/fa';
-import { MdClose } from 'react-icons/md';
 import AddDishForm from './AddDishForm';
+import { MdClose } from 'react-icons/md';
+import { useSession } from 'next-auth/react';
 import UpdateDishForm from './UpdateDishForm';
 import DeleteDishForm from './DeleteDishForm';
+import React, { useEffect, useState } from 'react';
+import { FaPencilAlt, FaPlus } from 'react-icons/fa';
+import FormLabel from '../../atoms/formLabel/FormLabel';
+import formStyles from './UpdateAccountForm.module.scss';
+import { getTables } from '@/services/tables/getTables.service';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
+import { Account, updateAccount } from '@/services/accounts/getAccounts.service';
 
 type UpdateAccountFormProps = {
     setUpdateAccountIsOpen: (val: boolean) => void,
