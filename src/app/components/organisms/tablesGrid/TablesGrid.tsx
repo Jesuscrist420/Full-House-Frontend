@@ -29,7 +29,7 @@ const TablesGrid = ({tablesList, hidden, setTableSelected, setTableSummaryIsOpen
                 {tablesList?.map((table) => (
                     <TableCard 
                         key={`table_${table.id}`} 
-                        img={'/customers/evil-Rabbit.png'} 
+                        img={'/tables/table.JPG'} 
                         name={table.name} 
                         available={table.available}
                         location={table.location}
