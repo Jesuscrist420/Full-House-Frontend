@@ -1,10 +1,9 @@
-import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { deleteTable } from '@/services/deleteTable.service';
-import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
-import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+import styles from './AddCategoryForm.module.scss';
+import { deleteTable } from '@/services/tables/deleteTable.service';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 
 type deleteTableFormProps = {
     setDeleteTableIsOpen: (val: boolean) => void,
@@ -40,10 +39,11 @@ const DeleteTableForm = ({ setDeleteTableIsOpen, tableSelected }: deleteTableFor
                 setDeleteTableIsOpen(false);
                 update();
             } else {
+                const text = await res.json();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Algo salió mal',
+                    text: text.detail,
                 });
             }
         } catch (e) {

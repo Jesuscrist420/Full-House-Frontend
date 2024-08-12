@@ -1,10 +1,9 @@
-import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { createTable } from '@/services/createTable.service';
-import FormLabel from '../../atoms/formLabel/FormLabel';
-import styles from './AddCategoryForm.module.scss';
 import React, { useState } from 'react';
-import Swal from 'sweetalert2';
 import { useSession } from 'next-auth/react';
+import styles from './AddCategoryForm.module.scss';
+import FormLabel from '../../atoms/formLabel/FormLabel';
+import { createTable } from '@/services/tables/createTable.service';
+import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 
 type addTableFormProps = {
     setAddTableIsOpen: (val: boolean) => void,
