@@ -20,11 +20,8 @@ export default function Page() {
                     <div className={styles.textContainer}>
                         <h1 className={styles.titleMs}>Misión</h1>
                         <p className={styles.textMs}>
-                            Nuestra misión es proporcionar soluciones de software de alta calidad que permitan a los
-                            restaurantes gestionar eficientemente sus procesos internos, incluyendo el manejo de cuentas
-                            y mesas, las transacciones y el inventario. Nos esforzamos por entender las necesidades
-                            específicas de nuestros clientes y ofrecer soluciones personalizadas que les permitan mejorar
-                            su productividad y rentabilidad.
+                            Desarrollar soluciones de software de alta calidad que optimicen la gestión de cuentas, mesas, transacciones e inventario de los restaurantes. Nos enfocamos en entender las necesidades específicas de nuestros clientes para ofrecer soluciones personalizadas, con el objetivo de mejorar su productividad y rentabilidad.
+
                         </p>
                     </div>
                     <Image className={styles.img} src={"/Mision.JPG"} width={100} height={100} alt={"People Cooking"} />
@@ -34,10 +31,7 @@ export default function Page() {
                     <div className={styles.textContainer}>
                         <h1 className={styles.titleVs}>Visión</h1>
                         <p className={styles.textVs}>
-                            Nuestra visión para 2025 es convertirnos en líderes en el mercado de desarrollo de software para la gestión de
-                            restaurantes, ofreciendo las soluciones más innovadoras, eficientes y fiables del sector. Aspiramos a
-                            ser el socio tecnológico de confianza para restaurantes de todo el mundo, ayudándoles a adaptarse a las
-                            demandas cambiantes del mercado y a mantenerse a la vanguardia de la industria.
+                            Ser líderes en el mercado del software para la gestión de restaurantes, proporcionando soluciones innovadoras y fiables. Aspiramos a convertirnos en el socio tecnológico preferido que, mediante nuestra tecnología, ayuda a los restaurantes a adaptarse y prosperar en un mercado cambiante.
                         </p>
                     </div>
                 </div>
