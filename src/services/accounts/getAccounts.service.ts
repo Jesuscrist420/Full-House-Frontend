@@ -123,15 +123,15 @@ export async function closeAccount(token: string | unknown, account: Account): P
 /* add dish with POST /accounts/{account_id}/dishes
 query dish_id and quantity
 */
-export async function addDish(token: string | unknown, account_id: number, dish_id: number, quantity: number): Promise<any> {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/?dish_id=${dish_id}&quantity=${quantity}`;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes`, {
+export async function addDish(token: string, account_id: number, dish_id: number, quantity: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes?dish_id=${dish_id}&quantity=${quantity}`;
+    const res = await fetch(url, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-    })
+    });
 
     if (res.ok) {
         return res.json();
@@ -139,17 +139,43 @@ export async function addDish(token: string | unknown, account_id: number, dish_
 
     return undefined;
 }
+
 /* update dish in account with PUT /accounts/{account_id}/dishes/{dish_id}
 query quantity
 */
-export async function updateDish(token: string | unknown, account_id: number, dish_id: number, quantity: number): Promise<any> {
+export async function updateDish(
+    token: string | unknown,
+    account_id: number,
+    dish_id: number,
+    quantity: number
+): Promise<any> {
     const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/${dish_id}?quantity=${quantity}`;
+
     const res = await fetch(url, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
+    });
+
+    if (res.ok) {
+        return res.json();
+    }
+
+    return undefined;
+}
+
+/* delete dish in account with DELETE /accounts/{account_id}/dishes/{dish_id}
+*/
+export async function deleteDish(token: string | unknown, account_id: number, dish_id: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/${dish_id}`;
+    const res = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
     })
 
     if (res.ok) {
@@ -158,12 +184,39 @@ export async function updateDish(token: string | unknown, account_id: number, di
 
     return undefined;
 }
-/* delete dish in account with DELETE /accounts/{account_id}/dishes/{dish_id}
+// get Account by Id with dishes
+/* /accounts/{id}
+response example 
+{
+  "account": {
+    "closing_timestamp": 1715916942,
+    "comment": "No comment",
+    "opening_timestamp": 1715916942,
+    "restaurant_id": 1,
+    "status": "open",
+    "table_id": 1,
+    "total": 0,
+    "user_id": 1
+  },
+  "dishes": [
+    {
+      "category_id": 1,
+      "description": "Spaghetti with eggs, cheese, bacon, and black pepper",
+      "id": 1,
+      "in_stock": true,
+      "name": "Spaghetti Carbonara",
+      "nutrition_info": "Calories: 450, Proteins: 20g, Carbs: 50g, Fats: 20g",
+      "preparation_time": 30,
+      "price": 12.5,
+      "restaurant_id": 1
+    }
+  ]
+}
 */
-export async function deleteDish(token: string | unknown, account_id: number, dish_id: number): Promise<any> {
-    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}/dishes/${dish_id}`;
+export async function getAccount(token: string | unknown, account_id: number): Promise<any> {
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/accounts/${account_id}`;
     const res = await fetch(url, {
-        method: 'DELETE',
+        method: 'GET',
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`

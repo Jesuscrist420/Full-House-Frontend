@@ -9,8 +9,28 @@ import FormLabel from '../../atoms/formLabel/FormLabel';
 import formStyles from './UpdateAccountForm.module.scss';
 import { getTables } from '@/services/tables/getTables.service';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
-import { Account, updateAccount } from '@/services/accounts/getAccounts.service';
+import { Account, getAccount, updateAccount } from '@/services/accounts/getAccounts.service';
+import { getProducts } from '@/services/products/getProducts.service';
 
+interface Dish {
+    category_id: number;
+    description: string;
+    id: number;
+    in_stock: boolean;
+    name: string;
+    nutrition_info: string;
+    preparation_time: number;
+    price: number;
+    restaurant_id: number;
+}
+interface DishWithQuantity {
+    dish: Dish;
+    quantity: number;
+}
+interface ApiResponse {
+    account: Account;
+    dishes: DishWithQuantity[];
+}
 type UpdateAccountFormProps = {
     setUpdateAccountIsOpen: (val: boolean) => void,
     accountSelected: Account | null,
@@ -26,15 +46,39 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
     const [errorsComment, setErrorsComment] = useState<string[]>([]);
     const [errorsTotal, setErrorsTotal] = useState<string[]>([]);
     const [tables, setTables] = useState<{ id: string, name: string }[]>([]);
-
+    const [products, setProducts] = useState<{
+        id: number,
+        category_id: number,
+        description: string,
+        in_stock: boolean,
+        name: string,
+        preparation_time: number,
+        price: number
+    }[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<{
+        id: number,
+        category_id: number,
+        description: string,
+        in_stock: boolean,
+        name: string,
+        preparation_time: number,
+        price: number
+    } | null>(null);
     const { data: session, status, update } = useSession();
     const token = session?.token as string;
-
+    const [account, setAccount] = useState<ApiResponse | null>(null);
     useEffect(() => {
         if (accountSelected) {
             setComment(accountSelected.comment || '');
             setTableId(accountSelected.table_id || 0);
             setTotal(accountSelected.total || 0);
+            const fetchAccountProducts = async () => {
+                if (token) {
+                    const account: ApiResponse = await getAccount(token, accountSelected.id);
+                    setAccount(account);
+                }
+            }
+            fetchAccountProducts();
         }
     }, [accountSelected]);
 
@@ -46,6 +90,13 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                 setTables(tablesList || []);
             }
         };
+        const fetchProducts = async () => {
+            if (token) {
+                const products = await getProducts(token);
+                setProducts(products || []);
+            }
+        }
+        fetchProducts();
         fetchTables();
     }, [token]);
 
@@ -182,6 +233,31 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                     <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
                 )
             }
+
+            <div className="mt-4">
+                <p className="text-lg font-semibold text-gray-600">Platos de la Cuenta:</p>
+                {account?.dishes.map((dish) => {
+                    return <div key={dish.dish.id} className='
+                        bg-gray-100
+                        p-4
+                        rounded-md
+                        shadow-md
+                        my-2
+                        flex
+                        justify-between
+                        items-center
+                    '>
+                        <p className='
+                            text-gray-600
+                            text-lg
+                        '> {dish.dish.name} </p>
+                        <p className='
+                            text-gray-600
+                            text-lg
+                        '> {dish.quantity} </p>
+                    </div>;
+                })}
+            </div>
         </>
     );
 }

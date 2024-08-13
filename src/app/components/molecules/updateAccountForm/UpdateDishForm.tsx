@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import FormLabel from '../../atoms/formLabel/FormLabel';
 import styles from './UpdateAccountForm.module.scss';
-import { updateDish } from '@/services/accounts/getAccounts.service';
+import { Account, getAccount, updateDish } from '@/services/accounts/getAccounts.service';
 
 type UpdateDishFormProps = {
     accountId: number;
@@ -12,10 +12,46 @@ type UpdateDishFormProps = {
     token: string;
 };
 
+interface Dish {
+    category_id: number;
+    description: string;
+    id: number;
+    in_stock: boolean;
+    name: string;
+    nutrition_info: string;
+    preparation_time: number;
+    price: number;
+    restaurant_id: number;
+}
+
+interface DishWithQuantity {
+    dish: Dish;
+    quantity: number;
+}
+
+interface ApiResponse {
+    account: Account;
+    dishes: DishWithQuantity[];
+}
+
 const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token }: UpdateDishFormProps) => {
     const [newDishId, setNewDishId] = useState<number>(dishId);
     const [quantity, setQuantity] = useState<number>(initialQuantity);
     const [errors, setErrors] = useState<string[]>([]);
+    const [dishes, setDishes] = useState<DishWithQuantity[]>([]);
+
+    useEffect(() => {
+        // Fetch existing dishes for the account
+        const fetchAccountDishes = async () => {
+            if (token) {
+                const accountData: ApiResponse = await getAccount(token, accountId);
+                setDishes(accountData.dishes || []);
+            }
+        };
+
+        fetchAccountDishes();
+    }, [token, accountId
+    ]);
 
     const handleUpdateDishSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -41,28 +77,33 @@ const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token }
 
     return (
         <form className={styles.form} onSubmit={handleUpdateDishSubmit}>
-            <FormLabel text="ID del Plato" required />
-            <input
+            <FormLabel text="Select Dish" required />
+            <select
                 onChange={(e) => setNewDishId(parseInt(e.target.value))}
                 className={styles.newInput}
-                type="number"
                 value={newDishId}
-                placeholder="ID del Plato"
                 required
-            />
-            <FormLabel text="Cantidad" required />
+            >
+                <option value={0} disabled>Select a dish</option>
+                {dishes.map((dishWithQuantity) => (
+                    <option key={dishWithQuantity.dish.id} value={dishWithQuantity.dish.id}>
+                        {dishWithQuantity.dish.name}
+                    </option>
+                ))}
+            </select>
+            <FormLabel text="Quantity" required />
             <input
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
                 className={styles.newInput}
                 type="number"
                 value={quantity}
-                placeholder="Cantidad"
+                placeholder="Quantity"
                 required
             />
             {errors.map((error, index) => (
                 <p key={index} className={styles.error}>{error}</p>
             ))}
-            <SubmitFormButton text="Actualizar Plato" />
+            <SubmitFormButton text="Update Dish" />
         </form>
     );
 };
