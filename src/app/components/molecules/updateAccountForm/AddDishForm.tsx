@@ -9,9 +9,10 @@ type AddDishFormProps = {
     accountId: number;
     setIsOpen: (val: boolean) => void;
     token: string;
+    fetchAccountDishes: () => void;
 };
 
-const AddDishForm = ({ accountId, setIsOpen, token }: AddDishFormProps) => {
+const AddDishForm = ({ accountId, setIsOpen, token, fetchAccountDishes }: AddDishFormProps) => {
     const [dishId, setDishId] = useState<number | undefined>();
     const [quantity, setQuantity] = useState<number>(1);
     const [errors, setErrors] = useState<string[]>([]);
@@ -47,6 +48,7 @@ const AddDishForm = ({ accountId, setIsOpen, token }: AddDishFormProps) => {
         try {
             const res = await addDish(token, accountId, dishId, quantity);
             if (res) {
+                await fetchAccountDishes();
                 setIsOpen(false);
                 setErrors([]);
             } else {

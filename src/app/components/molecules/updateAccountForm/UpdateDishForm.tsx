@@ -10,6 +10,7 @@ type UpdateDishFormProps = {
     initialQuantity: number;
     setIsOpen: (val: boolean) => void;
     token: string;
+    fetchAccountDishes: () => void;
 };
 
 interface Dish {
@@ -34,7 +35,7 @@ interface ApiResponse {
     dishes: DishWithQuantity[];
 }
 
-const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token }: UpdateDishFormProps) => {
+const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token, fetchAccountDishes }: UpdateDishFormProps) => {
     const [newDishId, setNewDishId] = useState<number>(dishId);
     const [quantity, setQuantity] = useState<number>(initialQuantity);
     const [errors, setErrors] = useState<string[]>([]);
@@ -64,6 +65,7 @@ const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token }
         try {
             const res = await updateDish(token, accountId, newDishId, quantity);
             if (res) {
+                await fetchAccountDishes();
                 setIsOpen(false);
                 setErrors([]);
             } else {

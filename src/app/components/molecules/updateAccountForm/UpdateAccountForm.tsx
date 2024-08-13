@@ -48,18 +48,18 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
     const { data: session, status, update } = useSession();
     const token = session?.token as string;
     const [account, setAccount] = useState<ApiResponse | null>(null);
+    const fetchAccountDishes = async () => {
+        if (token && accountSelected) {
+            const accountData: ApiResponse = await getAccount(token, accountSelected.id);
+            setAccount(accountData);
+        }
+    };
     useEffect(() => {
         if (accountSelected) {
             setComment(accountSelected.comment || '');
             setTableId(accountSelected.table_id || 0);
             setTotal(accountSelected.total || 0);
-            const fetchAccountProducts = async () => {
-                if (token) {
-                    const account: ApiResponse = await getAccount(token, accountSelected.id);
-                    setAccount(account);
-                }
-            }
-            fetchAccountProducts();
+            fetchAccountDishes();
         }
     }, [accountSelected]);
 
@@ -194,17 +194,17 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                 </button>
             </div >
             {openForm === 'add' && (
-                <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+                <AddDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} fetchAccountDishes={fetchAccountDishes} />
             )
             }
             {
                 openForm === 'update' && (
-                    <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} />
+                    <UpdateDishForm accountId={accountSelected?.id || 0} dishId={selectedDishId || 0} initialQuantity={selectedDishQuantity} setIsOpen={() => setOpenForm(null)} token={token} fetchAccountDishes={fetchAccountDishes} />
                 )
             }
             {
                 openForm === 'delete' && (
-                    <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} />
+                    <DeleteDishForm accountId={accountSelected?.id || 0} setIsOpen={() => setOpenForm(null)} token={token} fetchAccountDishes={fetchAccountDishes} />
                 )
             }
 

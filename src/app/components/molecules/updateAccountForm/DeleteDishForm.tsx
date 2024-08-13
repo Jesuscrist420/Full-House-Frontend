@@ -8,6 +8,7 @@ type DeleteDishFormProps = {
     accountId: number;
     setIsOpen: (val: boolean) => void;
     token: string;
+    fetchAccountDishes: () => void;
 };
 
 interface Dish {
@@ -32,7 +33,7 @@ interface ApiResponse {
     dishes: DishWithQuantity[];
 }
 
-const DeleteDishForm = ({ accountId, setIsOpen, token }: DeleteDishFormProps) => {
+const DeleteDishForm = ({ accountId, setIsOpen, token, fetchAccountDishes }: DeleteDishFormProps) => {
     const [dishId, setDishId] = useState<number | undefined>();
     const [errors, setErrors] = useState<string[]>([]);
     const [dishes, setDishes] = useState<DishWithQuantity[]>([]);
@@ -60,6 +61,7 @@ const DeleteDishForm = ({ accountId, setIsOpen, token }: DeleteDishFormProps) =>
         try {
             const res = await deleteDish(token, accountId, dishId);
             if (res) {
+                await fetchAccountDishes();
                 setIsOpen(false);
                 setErrors([]);
             } else {
