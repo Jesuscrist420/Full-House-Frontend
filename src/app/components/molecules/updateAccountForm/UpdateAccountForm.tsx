@@ -10,7 +10,6 @@ import formStyles from './UpdateAccountForm.module.scss';
 import { getTables } from '@/services/tables/getTables.service';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import { Account, getAccount, updateAccount } from '@/services/accounts/getAccounts.service';
-import { getProducts } from '@/services/products/getProducts.service';
 
 interface Dish {
     category_id: number;
@@ -46,24 +45,6 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
     const [errorsComment, setErrorsComment] = useState<string[]>([]);
     const [errorsTotal, setErrorsTotal] = useState<string[]>([]);
     const [tables, setTables] = useState<{ id: string, name: string }[]>([]);
-    const [products, setProducts] = useState<{
-        id: number,
-        category_id: number,
-        description: string,
-        in_stock: boolean,
-        name: string,
-        preparation_time: number,
-        price: number
-    }[]>([]);
-    const [selectedProduct, setSelectedProduct] = useState<{
-        id: number,
-        category_id: number,
-        description: string,
-        in_stock: boolean,
-        name: string,
-        preparation_time: number,
-        price: number
-    } | null>(null);
     const { data: session, status, update } = useSession();
     const token = session?.token as string;
     const [account, setAccount] = useState<ApiResponse | null>(null);
@@ -90,13 +71,6 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                 setTables(tablesList || []);
             }
         };
-        const fetchProducts = async () => {
-            if (token) {
-                const products = await getProducts(token);
-                setProducts(products || []);
-            }
-        }
-        fetchProducts();
         fetchTables();
     }, [token]);
 

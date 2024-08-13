@@ -1,8 +1,8 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SubmitFormButton from '../../atoms/submitFormButton/SubmitFormButton';
 import FormLabel from '../../atoms/formLabel/FormLabel';
 import styles from './UpdateAccountForm.module.scss';
-import { addDish, getAccount } from '@/services/accounts/getAccounts.service';
+import { addDish } from '@/services/accounts/getAccounts.service';
 import { getProducts } from '@/services/products/getProducts.service';
 
 type AddDishFormProps = {
