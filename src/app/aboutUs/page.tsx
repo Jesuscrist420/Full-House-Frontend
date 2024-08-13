@@ -31,7 +31,7 @@ export default function Page() {
                     <div className={styles.textContainer}>
                         <h1 className={styles.titleVs}>Visión</h1>
                         <p className={styles.textVs}>
-                            Ser líderes en el mercado del software para la gestión de restaurantes, proporcionando soluciones innovadoras y fiables. Aspiramos a convertirnos en el socio tecnológico preferido que, mediante nuestra tecnología, ayuda a los restaurantes a adaptarse y prosperar en un mercado cambiante.
+                            Ser líderes en el mercado del software para la gestión de restaurantes, proporcionando soluciones innovadoras y fiables. Aspiramos a convertirnos en el socio tecnológico preferido que, mediante nuestra tecnología, ayuda a los restaurantes a adaptarse y prosperar en un mercado cambiante. Para el año 2026
                         </p>
                     </div>
                 </div>
