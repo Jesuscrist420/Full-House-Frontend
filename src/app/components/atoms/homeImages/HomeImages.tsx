@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const HomeImages = () => {
     return (
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-25 md:py-12">
             <Image
                 src="/full-house-desktop.JPG"
                 width={1000}
