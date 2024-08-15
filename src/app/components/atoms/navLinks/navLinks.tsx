@@ -18,11 +18,11 @@ import { UrlObject } from 'url';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Inicio', href: '/dashboard', icon: HomeIcon },
   { name: 'Menu', href: '/dashboard/menu', icon: DocumentArrowUpIcon },
   { name: 'Empleados', href: '/dashboard/employees', icon: UserGroupIcon },
   { name: 'Mesas', href: '/dashboard/tables', icon: MdOutlineTableBar },
-  { name: 'Facturas', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
+  { name: 'Cuentas', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
 ];
 
 export default function NavLinks() {

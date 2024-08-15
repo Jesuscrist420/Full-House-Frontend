@@ -31,7 +31,7 @@ export default async function LatestInvoices({
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl font-semibold`}>
-        Latest Invoices
+        Ultimas Facturas
       </h2>
       <div className={bgStyles}>
         <div className="bg-white px-6 rounded-xl">

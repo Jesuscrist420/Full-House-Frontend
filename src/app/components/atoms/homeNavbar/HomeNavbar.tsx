@@ -22,7 +22,7 @@ const HomeNavbar = ({ showDropdown }: homeNavbarProps) => {
     const isLogged = session ? true : false;
 
     const links = [
-        { name: 'Home', value: 'Home', href: '/' },
+        { name: 'Home', value: 'Inicio', href: '/' },
         { name: 'About Us', value: '¿Quiénes Somos?', href: '/aboutUs' },
         { name: 'Contact Us', value: 'Contáctanos', href: '/contactUs' },
         { name: 'Dashboard', value: 'Dashboard', href: '/dashboard' },
