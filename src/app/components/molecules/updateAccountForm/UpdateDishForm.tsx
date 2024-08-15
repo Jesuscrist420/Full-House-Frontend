@@ -79,7 +79,7 @@ const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token, 
 
     return (
         <form className={styles.form} onSubmit={handleUpdateDishSubmit}>
-            <FormLabel text="Select Dish" required />
+            <FormLabel text="Seleccionar Plato" required />
             <select
                 onChange={(e) => setNewDishId(parseInt(e.target.value))}
                 className={styles.newInput}
@@ -93,19 +93,19 @@ const UpdateDishForm = ({ accountId, dishId, initialQuantity, setIsOpen, token, 
                     </option>
                 ))}
             </select>
-            <FormLabel text="Quantity" required />
+            <FormLabel text="Cantidad" required />
             <input
                 onChange={(e) => setQuantity(parseInt(e.target.value))}
                 className={styles.newInput}
                 type="number"
                 value={quantity}
-                placeholder="Quantity"
+                placeholder="Cantidad"
                 required
             />
             {errors.map((error, index) => (
                 <p key={index} className={styles.error}>{error}</p>
             ))}
-            <SubmitFormButton text="Update Dish" />
+            <SubmitFormButton text="Actualizar Plato" />
         </form>
     );
 };
