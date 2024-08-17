@@ -90,15 +90,6 @@ const AddAccountForm = ({ setAddAccountIsOpen, accounts, setAccounts }: AddAccou
                     </option>
                 ))}
             </select>
-            <FormLabel text='Total' required />
-            <input
-                onChange={(e) => { setTotal(parseFloat(e.target.value)); setErrorsTotal([]); }}
-                className={styles.newInput}
-                value={total}
-                type='number'
-                placeholder='Total'
-                required
-            />
             {errorsTotal?.map((errorTotal) => (
                 <p key={errorTotal} className={styles.error}>{errorTotal}</p>
             ))}
