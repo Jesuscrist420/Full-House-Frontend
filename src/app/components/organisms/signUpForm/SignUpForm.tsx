@@ -28,7 +28,7 @@ const SignUpForm = () => {
                 if (res.errors) {
                     if (res.errors.email) {
                         setErrorsEmail(res.errors.email);
-                    } else if (res.errors.password){
+                    } else if (res.errors.password) {
                         setErrorsPass(res.errors.password);
                     }
                 }
@@ -73,6 +73,10 @@ const SignUpForm = () => {
                         <p key={errorPass} className={styles.error}>{errorPass}</p>
                     )
                 })}
+                <div className='flex items-center justify-center'>
+                    <input type='checkbox' required />
+                    <p className='w-[75%]'>Estoy de acuerdo con los <a href="./terminosycondiciones.pdf" className='text-blue-500' target="_blank">términos y condiciones</a></p>
+                </div>
                 <button className={styles.signUpFormButton}>¡Comenzar!</button>
             </form>
         </div>
