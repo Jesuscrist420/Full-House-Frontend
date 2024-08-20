@@ -167,14 +167,7 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
                     ))}
                 </select>
                 <FormLabel text='Total' required />
-                <input
-                    onChange={(e) => { setTotal(parseFloat(e.target.value)); setErrorsTotal([]); }}
-                    className={formStyles.newInput}
-                    value={total}
-                    type='number'
-                    placeholder='Total'
-                    required
-                />
+
                 {errorsTotal.map((errorTotal, index) => (
                     <p key={index} className={formStyles.error}>{errorTotal}</p>
                 ))}
