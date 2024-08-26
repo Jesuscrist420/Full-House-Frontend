@@ -13,7 +13,7 @@ type AddDishFormProps = {
 };
 
 const AddDishForm = ({ accountId, setIsOpen, token, fetchAccountDishes }: AddDishFormProps) => {
-    const [dishId, setDishId] = useState<number | undefined>();
+    const [dishId, setDishId] = useState<number>(0);
     const [quantity, setQuantity] = useState<number>(1);
     const [errors, setErrors] = useState<string[]>([]);
     const [products, setProducts] = useState<{

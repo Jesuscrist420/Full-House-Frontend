@@ -34,7 +34,7 @@ interface ApiResponse {
 }
 
 const DeleteDishForm = ({ accountId, setIsOpen, token, fetchAccountDishes }: DeleteDishFormProps) => {
-    const [dishId, setDishId] = useState<number | undefined>();
+    const [dishId, setDishId] = useState<number>(0);
     const [errors, setErrors] = useState<string[]>([]);
     const [dishes, setDishes] = useState<DishWithQuantity[]>([]);
 

@@ -115,7 +115,7 @@ const UpdateAccountForm = ({ setUpdateAccountIsOpen, accountSelected, setAccount
 
     // State to track which dish form is currently open
     const [openForm, setOpenForm] = useState<'add' | 'update' | 'delete' | null>(null);
-    const [selectedDishId, setSelectedDishId] = useState<number | null>(null);
+    const [selectedDishId, setSelectedDishId] = useState<number>(0);
     const [selectedDishQuantity, setSelectedDishQuantity] = useState<number>(1);
 
     const toggleForm = (formType: 'add' | 'update' | 'delete') => {
