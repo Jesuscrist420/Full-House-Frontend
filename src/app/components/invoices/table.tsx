@@ -73,7 +73,7 @@ export default function Table({
                   <tr key={account.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center font-medium text-gray-900">{account.id}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.table_id}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-sm text-center font-medium ${account.status === 'open' ? 'text-green-500' : 'text-red-500'}`}>{account.status}</td>
+                    <td className={`px-6 py-4 whitespace-nowrap text-sm text-center font-medium ${account.status === 'open' ? 'text-green-500' : 'text-red-500'}`}>{account.status === 'open' ? 'abierta' : 'cerrada'}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.comment}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{formatDateToLocal(account.opening_timestamp)}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">{account.closing_timestamp ? formatDateToLocal(account.closing_timestamp) : ''}</td>

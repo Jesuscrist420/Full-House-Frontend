@@ -80,10 +80,12 @@ const DeleteAccountForm = ({ setDeleteAccountIsOpen, accountSelected }: DeleteAc
     }
     return (
         <>
-            <form className={styles.form} onSubmit={handleCloseAccountSubmit}>
-                <p>¿Estás seguro de que quieres cerrar la cuenta con el comentario <strong>{comment}</strong>, para la mesa con ID <strong>{tableId}</strong>, y un total de <strong>{total}</strong>?</p>
-                <SubmitFormButton text='Cerrar Cuenta' />
-            </form>
+            {accountSelected && accountSelected.status === 'open' && (
+                <form className={styles.form} onSubmit={handleCloseAccountSubmit}>
+                    <p>¿Estás seguro de que quieres cerrar la cuenta con el comentario <strong>{comment}</strong>, para la mesa con ID <strong>{tableId}</strong>, y un total de <strong>{total}</strong>?</p>
+                    <SubmitFormButton text='Cerrar Cuenta' />
+                </form>
+            )}
             <hr className="p-2  " />
             <form className={styles.form} onSubmit={handleDeleteAccountSubmit}>
                 <p>¿Estás seguro de que quieres eliminar la cuenta con el comentario <strong>{comment}</strong>, para la mesa con ID <strong>{tableId}</strong>, y un total de <strong>{total}</strong>?</p>
