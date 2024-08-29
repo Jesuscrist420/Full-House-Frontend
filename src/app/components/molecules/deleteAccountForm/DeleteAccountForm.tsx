@@ -85,13 +85,11 @@ const DeleteAccountForm = ({ setDeleteAccountIsOpen, accountSelected }: DeleteAc
                 <SubmitFormButton text='Cerrar Cuenta' />
             </form>
             <hr className="p-2  " />
-            {/* Delete Account 
             <form className={styles.form} onSubmit={handleDeleteAccountSubmit}>
                 <p>¿Estás seguro de que quieres eliminar la cuenta con el comentario <strong>{comment}</strong>, para la mesa con ID <strong>{tableId}</strong>, y un total de <strong>{total}</strong>?</p>
                 <SubmitFormButton text='Eliminar Cuenta' />
 
             </form>
-            */}
         </>
     )
 }
